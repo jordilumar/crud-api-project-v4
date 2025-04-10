@@ -9,7 +9,7 @@ export default function CarList({ cars, onEdit, onDelete }) {
           car={car}
           index={index}
           onEdit={onEdit}
-          onDelete={() => onDelete(car.id)} // Cambiar aquí
+          onDelete={() => onDelete(car.id)}
         />
       ))}
     </div>

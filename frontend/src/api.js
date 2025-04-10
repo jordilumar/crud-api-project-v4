@@ -16,7 +16,7 @@ export const createCar = async (car) => {
 };
 
 export const updateCar = async (index, car) => {
-  console.log('Datos enviados al backend:', car); // Agregar este log
+  console.log('Datos enviados al backend:', car);
   await fetch(`/cars/${index}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },

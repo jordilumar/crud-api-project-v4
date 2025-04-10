@@ -45,7 +45,6 @@ export default function SalesDetail({ initialViewAnnualSales = false }) {
       const res = await fetch(`/sales?model=${model}`);
       const data = await res.json();
 
-      // Procesar los datos para el gráfico
       // Agrupar ventas del modelo por año y sumar unidades
       const grouped = {};
 

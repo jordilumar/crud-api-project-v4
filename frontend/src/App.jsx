@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { Search, Car, BarChart, ArrowLeft } from 'lucide-react'; // Importar BarChart
+import { Search, Car, BarChart, ArrowLeft } from 'lucide-react';
 import SalesCharts from './pages/SalesCharts';
 import CarForm from './components/CarForm';
 import CarList from './components/CarList';
