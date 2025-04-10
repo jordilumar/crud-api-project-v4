@@ -1,0 +1,1022 @@
+[
+    {
+        "year": 2020,
+        "model": "Corolla",
+        "country": "USA",
+        "units_sold": 150000
+    },
+    {
+        "year": 2020,
+        "model": "Corolla",
+        "country": "Canada",
+        "units_sold": 50000
+    },
+    {
+        "year": 2021,
+        "model": "Civic",
+        "country": "UK",
+        "units_sold": 30000
+    },
+    {
+        "year": 2022,
+        "model": "Civic",
+        "country": "Germany",
+        "units_sold": 20000
+    },
+    {
+        "year": 2021,
+        "model": "Focus",
+        "country": "Japan",
+        "units_sold": 40000
+    },
+    {
+        "year": 2023,
+        "model": "Focus",
+        "country": "France",
+        "units_sold": 10000
+    },
+    {
+        "year": 2020,
+        "model": "Malibu",
+        "country": "Italy",
+        "units_sold": 25000
+    },
+    {
+        "year": 2021,
+        "model": "Malibu",
+        "country": "USA",
+        "units_sold": 18000
+    },
+    {
+        "year": 2022,
+        "model": "Altima",
+        "country": "Netherlands",
+        "units_sold": 22000
+    },
+    {
+        "year": 2023,
+        "model": "Altima",
+        "country": "South Korea",
+        "units_sold": 35000
+    },
+    {
+        "year": 2020,
+        "model": "3 Series",
+        "country": "Mexico",
+        "units_sold": 27000
+    },
+    {
+        "year": 2021,
+        "model": "3 Series",
+        "country": "Australia",
+        "units_sold": 32000
+    },
+    {
+        "year": 2022,
+        "model": "A4",
+        "country": "New Zealand",
+        "units_sold": 15000
+    },
+    {
+        "year": 2023,
+        "model": "A4",
+        "country": "China",
+        "units_sold": 500000
+    },
+    {
+        "year": 2020,
+        "model": "C-Class",
+        "country": "Sweden",
+        "units_sold": 12000
+    },
+    {
+        "year": 2021,
+        "model": "C-Class",
+        "country": "India",
+        "units_sold": 8000
+    },
+    {
+        "year": 2022,
+        "model": "Passat",
+        "country": "Thailand",
+        "units_sold": 9000
+    },
+    {
+        "year": 2023,
+        "model": "Passat",
+        "country": "Switzerland",
+        "units_sold": 7000
+    },
+    {
+        "year": 2021,
+        "model": "Elantra",
+        "country": "Brazil",
+        "units_sold": 11000
+    },
+    {
+        "year": 2022,
+        "model": "Elantra",
+        "country": "Argentina",
+        "units_sold": 9500
+    },
+    {
+        "year": 2020,
+        "model": "C-Class",
+        "country": "Argentina",
+        "units_sold": 165114
+    },
+    {
+        "year": 2015,
+        "model": "Focus",
+        "country": "India",
+        "units_sold": 58698
+    },
+    {
+        "year": 2023,
+        "model": "Model X",
+        "country": "Japan",
+        "units_sold": 212701
+    },
+    {
+        "year": 2001,
+        "model": "Altima",
+        "country": "Australia",
+        "units_sold": 9102
+    },
+    {
+        "year": 2005,
+        "model": "Model Y",
+        "country": "Thailand",
+        "units_sold": 487930
+    },
+    {
+        "year": 2009,
+        "model": "Malibu",
+        "country": "China",
+        "units_sold": 342436
+    },
+    {
+        "year": 2005,
+        "model": "Malibu",
+        "country": "India",
+        "units_sold": 105872
+    },
+    {
+        "year": 2019,
+        "model": "A4",
+        "country": "New Zealand",
+        "units_sold": 392600
+    },
+    {
+        "year": 2012,
+        "model": "Civic",
+        "country": "New Zealand",
+        "units_sold": 204512
+    },
+    {
+        "year": 2007,
+        "model": "Corolla",
+        "country": "India",
+        "units_sold": 140792
+    },
+    {
+        "year": 2000,
+        "model": "Civic",
+        "country": "France",
+        "units_sold": 302855
+    },
+    {
+        "year": 2010,
+        "model": "Elantra",
+        "country": "India",
+        "units_sold": 90580
+    },
+    {
+        "year": 2002,
+        "model": "Model Y",
+        "country": "Thailand",
+        "units_sold": 252978
+    },
+    {
+        "year": 2018,
+        "model": "C-Class",
+        "country": "China",
+        "units_sold": 253881
+    },
+    {
+        "year": 2011,
+        "model": "Focus",
+        "country": "UK",
+        "units_sold": 491356
+    },
+    {
+        "year": 2009,
+        "model": "Model Y",
+        "country": "Thailand",
+        "units_sold": 39254
+    },
+    {
+        "year": 2009,
+        "model": "Civic",
+        "country": "Switzerland",
+        "units_sold": 320608
+    },
+    {
+        "year": 2005,
+        "model": "Model 3",
+        "country": "France",
+        "units_sold": 183550
+    },
+    {
+        "year": 2005,
+        "model": "Model 3",
+        "country": "Italy",
+        "units_sold": 256549
+    },
+    {
+        "year": 2003,
+        "model": "Sportage",
+        "country": "Brazil",
+        "units_sold": 143683
+    },
+    {
+        "year": 2019,
+        "model": "3 Series",
+        "country": "Japan",
+        "units_sold": 136720
+    },
+    {
+        "year": 2006,
+        "model": "Model 3",
+        "country": "China",
+        "units_sold": 266267
+    },
+    {
+        "year": 2024,
+        "model": "Passat",
+        "country": "Netherlands",
+        "units_sold": 377633
+    },
+    {
+        "year": 2024,
+        "model": "Model 3",
+        "country": "Mexico",
+        "units_sold": 219339
+    },
+    {
+        "year": 2020,
+        "model": "Model Y",
+        "country": "France",
+        "units_sold": 272892
+    },
+    {
+        "year": 2011,
+        "model": "Model Y",
+        "country": "China",
+        "units_sold": 82547
+    },
+    {
+        "year": 2021,
+        "model": "Corolla",
+        "country": "USA",
+        "units_sold": 496644
+    },
+    {
+        "year": 2009,
+        "model": "Model Y",
+        "country": "India",
+        "units_sold": 252832
+    },
+    {
+        "year": 2007,
+        "model": "Civic",
+        "country": "Switzerland",
+        "units_sold": 370224
+    },
+    {
+        "year": 2011,
+        "model": "Model S",
+        "country": "Canada",
+        "units_sold": 246028
+    },
+    {
+        "year": 2001,
+        "model": "Malibu",
+        "country": "Japan",
+        "units_sold": 452204
+    },
+    {
+        "year": 2015,
+        "model": "Civic",
+        "country": "Switzerland",
+        "units_sold": 55089
+    },
+    {
+        "year": 2002,
+        "model": "Model X",
+        "country": "Italy",
+        "units_sold": 303163
+    },
+    {
+        "year": 2001,
+        "model": "Model Y",
+        "country": "Netherlands",
+        "units_sold": 35657
+    },
+    {
+        "year": 2012,
+        "model": "Model S",
+        "country": "Germany",
+        "units_sold": 88769
+    },
+    {
+        "year": 2025,
+        "model": "Model 3",
+        "country": "Netherlands",
+        "units_sold": 229187
+    },
+    {
+        "year": 2003,
+        "model": "Altima",
+        "country": "Switzerland",
+        "units_sold": 284766
+    },
+    {
+        "year": 2018,
+        "model": "Sportage",
+        "country": "Brazil",
+        "units_sold": 100032
+    },
+    {
+        "year": 2014,
+        "model": "A4",
+        "country": "Netherlands",
+        "units_sold": 153055
+    },
+    {
+        "year": 2005,
+        "model": "Corolla",
+        "country": "Switzerland",
+        "units_sold": 439926
+    },
+    {
+        "year": 2017,
+        "model": "Model Y",
+        "country": "India",
+        "units_sold": 269042
+    },
+    {
+        "year": 2010,
+        "model": "A4",
+        "country": "Germany",
+        "units_sold": 95854
+    },
+    {
+        "year": 2024,
+        "model": "Model 3",
+        "country": "Japan",
+        "units_sold": 7870
+    },
+    {
+        "year": 2009,
+        "model": "Altima",
+        "country": "India",
+        "units_sold": 322377
+    },
+    {
+        "year": 2021,
+        "model": "Civic",
+        "country": "China",
+        "units_sold": 286866
+    },
+    {
+        "year": 2018,
+        "model": "A4",
+        "country": "Germany",
+        "units_sold": 212250
+    },
+    {
+        "year": 2018,
+        "model": "Model X",
+        "country": "Brazil",
+        "units_sold": 441889
+    },
+    {
+        "year": 2000,
+        "model": "Elantra",
+        "country": "Mexico",
+        "units_sold": 150828
+    },
+    {
+        "year": 2012,
+        "model": "Model X",
+        "country": "India",
+        "units_sold": 315402
+    },
+    {
+        "year": 2005,
+        "model": "3 Series",
+        "country": "Brazil",
+        "units_sold": 494736
+    },
+    {
+        "year": 2025,
+        "model": "C-Class",
+        "country": "Netherlands",
+        "units_sold": 238627
+    },
+    {
+        "year": 2025,
+        "model": "Altima",
+        "country": "Netherlands",
+        "units_sold": 199041
+    },
+    {
+        "year": 2001,
+        "model": "Civic",
+        "country": "Switzerland",
+        "units_sold": 124487
+    },
+    {
+        "year": 2019,
+        "model": "Model Y",
+        "country": "China",
+        "units_sold": 218852
+    },
+    {
+        "year": 2022,
+        "model": "Model S",
+        "country": "Sweden",
+        "units_sold": 356563
+    },
+    {
+        "year": 2017,
+        "model": "3 Series",
+        "country": "Thailand",
+        "units_sold": 375305
+    },
+    {
+        "year": 2023,
+        "model": "Malibu",
+        "country": "Canada",
+        "units_sold": 384386
+    },
+    {
+        "year": 2023,
+        "model": "Civic",
+        "country": "Argentina",
+        "units_sold": 340928
+    },
+    {
+        "year": 2020,
+        "model": "Passat",
+        "country": "Sweden",
+        "units_sold": 127422
+    },
+    {
+        "year": 2007,
+        "model": "C-Class",
+        "country": "Germany",
+        "units_sold": 311562
+    },
+    {
+        "year": 2002,
+        "model": "Altima",
+        "country": "Netherlands",
+        "units_sold": 225557
+    },
+    {
+        "year": 2005,
+        "model": "Passat",
+        "country": "France",
+        "units_sold": 344271
+    },
+    {
+        "year": 2005,
+        "model": "Model Y",
+        "country": "South Korea",
+        "units_sold": 479786
+    },
+    {
+        "year": 2015,
+        "model": "3 Series",
+        "country": "Netherlands",
+        "units_sold": 410442
+    },
+    {
+        "year": 2010,
+        "model": "Passat",
+        "country": "USA",
+        "units_sold": 462062
+    },
+    {
+        "year": 2020,
+        "model": "Civic",
+        "country": "UK",
+        "units_sold": 329295
+    },
+    {
+        "year": 2017,
+        "model": "Malibu",
+        "country": "Italy",
+        "units_sold": 187046
+    },
+    {
+        "year": 2006,
+        "model": "Corolla",
+        "country": "China",
+        "units_sold": 209887
+    },
+    {
+        "year": 2013,
+        "model": "Model X",
+        "country": "Brazil",
+        "units_sold": 116806
+    },
+    {
+        "year": 2020,
+        "model": "C-Class",
+        "country": "France",
+        "units_sold": 98256
+    },
+    {
+        "year": 2021,
+        "model": "Model X",
+        "country": "Canada",
+        "units_sold": 320942
+    },
+    {
+        "year": 2008,
+        "model": "Model S",
+        "country": "Brazil",
+        "units_sold": 397178
+    },
+    {
+        "year": 2017,
+        "model": "Malibu",
+        "country": "Argentina",
+        "units_sold": 62876
+    },
+    {
+        "year": 2024,
+        "model": "Corolla",
+        "country": "Germany",
+        "units_sold": 309945
+    },
+    {
+        "year": 2007,
+        "model": "Civic",
+        "country": "UK",
+        "units_sold": 361661
+    },
+    {
+        "year": 2025,
+        "model": "Focus",
+        "country": "South Korea",
+        "units_sold": 243066
+    },
+    {
+        "year": 2001,
+        "model": "Model 3",
+        "country": "China",
+        "units_sold": 44851
+    },
+    {
+        "year": 2009,
+        "model": "Passat",
+        "country": "Italy",
+        "units_sold": 78724
+    },
+    {
+        "year": 2014,
+        "model": "Model Y",
+        "country": "South Korea",
+        "units_sold": 388051
+    },
+    {
+        "year": 2011,
+        "model": "3 Series",
+        "country": "Thailand",
+        "units_sold": 217047
+    },
+    {
+        "year": 2025,
+        "model": "Sportage",
+        "country": "Netherlands",
+        "units_sold": 17537
+    },
+    {
+        "year": 2022,
+        "model": "Focus",
+        "country": "UK",
+        "units_sold": 131750
+    },
+    {
+        "year": 2012,
+        "model": "Model S",
+        "country": "Brazil",
+        "units_sold": 310426
+    },
+    {
+        "year": 2025,
+        "model": "Malibu",
+        "country": "UK",
+        "units_sold": 78711
+    },
+    {
+        "year": 2008,
+        "model": "Malibu",
+        "country": "China",
+        "units_sold": 294071
+    },
+    {
+        "year": 2001,
+        "model": "Passat",
+        "country": "Mexico",
+        "units_sold": 295041
+    },
+    {
+        "year": 2016,
+        "model": "C-Class",
+        "country": "Germany",
+        "units_sold": 289123
+    },
+    {
+        "year": 2012,
+        "model": "Elantra",
+        "country": "Germany",
+        "units_sold": 179838
+    },
+    {
+        "year": 2014,
+        "model": "Corolla",
+        "country": "Sweden",
+        "units_sold": 448114
+    },
+    {
+        "year": 2007,
+        "model": "Malibu",
+        "country": "Thailand",
+        "units_sold": 226924
+    },
+    {
+        "year": 2005,
+        "model": "Model 3",
+        "country": "Netherlands",
+        "units_sold": 46447
+    },
+    {
+        "year": 2024,
+        "model": "Civic",
+        "country": "Switzerland",
+        "units_sold": 201192
+    },
+    {
+        "year": 2009,
+        "model": "Model 3",
+        "country": "Mexico",
+        "units_sold": 351557
+    },
+    {
+        "year": 2014,
+        "model": "Altima",
+        "country": "Australia",
+        "units_sold": 95874
+    },
+    {
+        "year": 2016,
+        "model": "3 Series",
+        "country": "Japan",
+        "units_sold": 41181
+    },
+    {
+        "year": 2020,
+        "model": "Sportage",
+        "country": "Brazil",
+        "units_sold": 194372
+    },
+    {
+        "year": 2010,
+        "model": "Elantra",
+        "country": "Mexico",
+        "units_sold": 208038
+    },
+    {
+        "year": 2023,
+        "model": "C-Class",
+        "country": "Canada",
+        "units_sold": 352404
+    },
+    {
+        "year": 2021,
+        "model": "Altima",
+        "country": "India",
+        "units_sold": 36219
+    },
+    {
+        "year": 2000,
+        "model": "Corolla",
+        "country": "Japan",
+        "units_sold": 353064
+    },
+    {
+        "year": 2025,
+        "model": "Sportage",
+        "country": "UK",
+        "units_sold": 323653
+    },
+    {
+        "year": 2014,
+        "model": "Altima",
+        "country": "Mexico",
+        "units_sold": 286047
+    },
+    {
+        "year": 2024,
+        "model": "Civic",
+        "country": "India",
+        "units_sold": 73068
+    },
+    {
+        "year": 2004,
+        "model": "A4",
+        "country": "New Zealand",
+        "units_sold": 324384
+    },
+    {
+        "year": 2014,
+        "model": "Passat",
+        "country": "South Korea",
+        "units_sold": 173670
+    },
+    {
+        "year": 2010,
+        "model": "Sportage",
+        "country": "Thailand",
+        "units_sold": 456893
+    },
+    {
+        "year": 2021,
+        "model": "Corolla",
+        "country": "Italy",
+        "units_sold": 305222
+    },
+    {
+        "year": 2018,
+        "model": "Corolla",
+        "country": "USA",
+        "units_sold": 115894
+    },
+    {
+        "year": 2020,
+        "model": "Altima",
+        "country": "Canada",
+        "units_sold": 32358
+    },
+    {
+        "year": 2022,
+        "model": "Passat",
+        "country": "USA",
+        "units_sold": 475622
+    },
+    {
+        "year": 2018,
+        "model": "Corolla",
+        "country": "Argentina",
+        "units_sold": 284055
+    },
+    {
+        "year": 2010,
+        "model": "3 Series",
+        "country": "New Zealand",
+        "units_sold": 401313
+    },
+    {
+        "year": 2004,
+        "model": "Focus",
+        "country": "Germany",
+        "units_sold": 377943
+    },
+    {
+        "year": 2011,
+        "model": "Civic",
+        "country": "Germany",
+        "units_sold": 196905
+    },
+    {
+        "year": 2002,
+        "model": "Corolla",
+        "country": "UK",
+        "units_sold": 239772
+    },
+    {
+        "year": 2014,
+        "model": "3 Series",
+        "country": "Germany",
+        "units_sold": 50070
+    },
+    {
+        "year": 2017,
+        "model": "Sportage",
+        "country": "Switzerland",
+        "units_sold": 174482
+    },
+    {
+        "year": 2023,
+        "model": "Model Y",
+        "country": "France",
+        "units_sold": 54495
+    },
+    {
+        "year": 2003,
+        "model": "3 Series",
+        "country": "Switzerland",
+        "units_sold": 420000
+    },
+    {
+        "year": 2017,
+        "model": "Model X",
+        "country": "France",
+        "units_sold": 34725
+    },
+    {
+        "year": 2017,
+        "model": "Model X",
+        "country": "Switzerland",
+        "units_sold": 404881
+    },
+    {
+        "year": 2003,
+        "model": "Model Y",
+        "country": "Sweden",
+        "units_sold": 372923
+    },
+    {
+        "year": 2014,
+        "model": "Corolla",
+        "country": "Switzerland",
+        "units_sold": 298599
+    },
+    {
+        "year": 2015,
+        "model": "Model 3",
+        "country": "South Korea",
+        "units_sold": 172767
+    },
+    {
+        "year": 2024,
+        "model": "Model 3",
+        "country": "Sweden",
+        "units_sold": 94492
+    },
+    {
+        "year": 2009,
+        "model": "Altima",
+        "country": "Thailand",
+        "units_sold": 162120
+    },
+    {
+        "year": 2025,
+        "model": "Model 3",
+        "country": "South Korea",
+        "units_sold": 380519
+    },
+    {
+        "year": 2003,
+        "model": "3 Series",
+        "country": "Mexico",
+        "units_sold": 189395
+    },
+    {
+        "year": 2023,
+        "model": "3 Series",
+        "country": "Italy",
+        "units_sold": 449813
+    },
+    {
+        "year": 2014,
+        "model": "Corolla",
+        "country": "Netherlands",
+        "units_sold": 353808
+    },
+    {
+        "year": 2002,
+        "model": "Civic",
+        "country": "Brazil",
+        "units_sold": 186511
+    },
+    {
+        "year": 2006,
+        "model": "Focus",
+        "country": "Canada",
+        "units_sold": 71387
+    },
+    {
+        "year": 2007,
+        "model": "Civic",
+        "country": "New Zealand",
+        "units_sold": 478403
+    },
+    {
+        "year": 2025,
+        "model": "3 Series",
+        "country": "Thailand",
+        "units_sold": 407965
+    },
+    {
+        "year": 2021,
+        "model": "Model Y",
+        "country": "Japan",
+        "units_sold": 144827
+    },
+    {
+        "year": 2023,
+        "model": "A4",
+        "country": "Brazil",
+        "units_sold": 91920
+    },
+    {
+        "year": 2015,
+        "model": "Elantra",
+        "country": "Netherlands",
+        "units_sold": 290745
+    },
+    {
+        "year": 2024,
+        "model": "Model 3",
+        "country": "Mexico",
+        "units_sold": 93136
+    },
+    {
+        "year": 2017,
+        "model": "Sportage",
+        "country": "Switzerland",
+        "units_sold": 45690
+    },
+    {
+        "year": 2002,
+        "model": "Model 3",
+        "country": "Argentina",
+        "units_sold": 439850
+    },
+    {
+        "year": 2006,
+        "model": "Corolla",
+        "country": "Australia",
+        "units_sold": 480165
+    },
+    {
+        "year": 2020,
+        "model": "Model Y",
+        "country": "Australia",
+        "units_sold": 333839
+    },
+    {
+        "year": 2002,
+        "model": "Focus",
+        "country": "South Korea",
+        "units_sold": 11469
+    },
+    {
+        "year": 2017,
+        "model": "Model S",
+        "country": "Argentina",
+        "units_sold": 153057
+    },
+    {
+        "year": 2024,
+        "model": "Passat",
+        "country": "UK",
+        "units_sold": 77435
+    },
+    {
+        "year": 2025,
+        "model": "C-Class",
+        "country": "South Korea",
+        "units_sold": 497962
+    },
+    {
+        "year": 2013,
+        "model": "Sportage",
+        "country": "Netherlands",
+        "units_sold": 463861
+    },
+    {
+        "year": 2013,
+        "model": "Model X",
+        "country": "Argentina",
+        "units_sold": 459913
+    },
+    {
+        "year": 2014,
+        "model": "Model Y",
+        "country": "Australia",
+        "units_sold": 113631
+    },
+    {
+        "year": 2021,
+        "model": "A4",
+        "country": "Netherlands",
+        "units_sold": 194236
+    }
+]

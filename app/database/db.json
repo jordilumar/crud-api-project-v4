@@ -1,0 +1,1762 @@
+[
+    {
+        "id": 1,
+        "make": "Toyota",
+        "model": "Corolla",
+        "year": 2020,
+        "features": [
+            "Bluetooth",
+            "Air Conditioning",
+            "Backup Camera"
+        ]
+    },
+    {
+        "id": 2,
+        "make": "Honda",
+        "model": "Civic",
+        "year": 2019,
+        "features": [
+            "Cruise Control",
+            "Heated Seats",
+            "Sunroof"
+        ]
+    },
+    {
+        "id": 3,
+        "make": "Ford",
+        "model": "Focus",
+        "year": 2021,
+        "features": [
+            "Navigation System",
+            "Blind Spot Monitor",
+            "Apple CarPlay"
+        ]
+    },
+    {
+        "id": 4,
+        "make": "Chevrolet",
+        "model": "Malibu",
+        "year": 2022,
+        "features": [
+            "Wi-Fi Hotspot",
+            "Lane Departure Warning",
+            "Remote Start"
+        ]
+    },
+    {
+        "id": 5,
+        "make": "Nissan",
+        "model": "Altima",
+        "year": 2021,
+        "features": [
+            "ProPILOT Assist",
+            "All-Wheel Drive",
+            "Android Auto"
+        ]
+    },
+    {
+        "id": 6,
+        "make": "BMW",
+        "model": "3 Series",
+        "year": 2023,
+        "features": [
+            "Gesture Control",
+            "Harman Kardon Sound System",
+            "Heads-Up Display"
+        ]
+    },
+    {
+        "id": 7,
+        "make": "Audi",
+        "model": "A4",
+        "year": 2020,
+        "features": [
+            "Virtual Cockpit",
+            "Quattro AWD",
+            "LED Headlights"
+        ]
+    },
+    {
+        "id": 8,
+        "make": "Mercedes-Benz",
+        "model": "C-Class",
+        "year": 2021,
+        "features": [
+            "MBUX System",
+            "Panoramic Roof",
+            "Ambient Lighting"
+        ]
+    },
+    {
+        "id": 9,
+        "make": "Volkswagen",
+        "model": "Passat",
+        "year": 2022,
+        "features": [
+            "Digital Cockpit",
+            "Adaptive Cruise Control",
+            "Park Assist"
+        ]
+    },
+    {
+        "id": 10,
+        "make": "Hyundai",
+        "model": "Elantra",
+        "year": 2023,
+        "features": [
+            "Wireless Charging",
+            "SmartSense",
+            "Bose Premium Audio"
+        ]
+    },
+    {
+        "id": 11,
+        "make": "Jeep",
+        "model": "A4",
+        "year": 2014,
+        "features": [
+            "Adaptive Cruise Control",
+            "Remote Start",
+            "Heads-Up Display"
+        ]
+    },
+    {
+        "id": 12,
+        "make": "Toyota",
+        "model": "3 Series",
+        "year": 2022,
+        "features": [
+            "Sunroof",
+            "Bluetooth",
+            "Harman Kardon Sound System"
+        ]
+    },
+    {
+        "id": 13,
+        "make": "Volkswagen",
+        "model": "Corolla",
+        "year": 2007,
+        "features": [
+            "Gesture Control",
+            "Heads-Up Display",
+            "SmartSense"
+        ]
+    },
+    {
+        "id": 14,
+        "make": "Audi",
+        "model": "Malibu",
+        "year": 2021,
+        "features": [
+            "Backup Camera",
+            "Remote Start",
+            "MBUX System"
+        ]
+    },
+    {
+        "id": 15,
+        "make": "Nissan",
+        "model": "Model Y",
+        "year": 2011,
+        "features": [
+            "Bose Premium Audio",
+            "Heads-Up Display",
+            "Sunroof"
+        ]
+    },
+    {
+        "id": 16,
+        "make": "Toyota",
+        "model": "Civic",
+        "year": 2009,
+        "features": [
+            "MBUX System",
+            "Blind Spot Monitor",
+            "All-Wheel Drive"
+        ]
+    },
+    {
+        "id": 17,
+        "make": "Ford",
+        "model": "Altima",
+        "year": 2002,
+        "features": [
+            "Panoramic Roof",
+            "Bose Premium Audio",
+            "Heads-Up Display"
+        ]
+    },
+    {
+        "id": 18,
+        "make": "Audi",
+        "model": "Sportage",
+        "year": 2012,
+        "features": [
+            "Wireless Charging",
+            "Apple CarPlay",
+            "All-Wheel Drive"
+        ]
+    },
+    {
+        "id": 19,
+        "make": "BMW",
+        "model": "Sportage",
+        "year": 2015,
+        "features": [
+            "LED Headlights",
+            "Quattro AWD",
+            "Blind Spot Monitor"
+        ]
+    },
+    {
+        "id": 20,
+        "make": "Toyota",
+        "model": "Model Y",
+        "year": 2020,
+        "features": [
+            "Quattro AWD",
+            "Remote Start",
+            "Adaptive Cruise Control"
+        ]
+    },
+    {
+        "id": 21,
+        "make": "Tesla",
+        "model": "Focus",
+        "year": 2014,
+        "features": [
+            "Gesture Control",
+            "Heads-Up Display",
+            "ProPILOT Assist"
+        ]
+    },
+    {
+        "id": 22,
+        "make": "Volkswagen",
+        "model": "Elantra",
+        "year": 2007,
+        "features": [
+            "Air Conditioning",
+            "Bose Premium Audio",
+            "Digital Cockpit"
+        ]
+    },
+    {
+        "id": 23,
+        "make": "Jeep",
+        "model": "Elantra",
+        "year": 2018,
+        "features": [
+            "Apple CarPlay",
+            "Adaptive Cruise Control",
+            "Sunroof"
+        ]
+    },
+    {
+        "id": 24,
+        "make": "Kia",
+        "model": "Model 3",
+        "year": 2003,
+        "features": [
+            "ProPILOT Assist",
+            "Heads-Up Display",
+            "Air Conditioning"
+        ]
+    },
+    {
+        "id": 25,
+        "make": "Chevrolet",
+        "model": "Elantra",
+        "year": 2010,
+        "features": [
+            "Quattro AWD",
+            "Bluetooth",
+            "SmartSense"
+        ]
+    },
+    {
+        "id": 26,
+        "make": "Hyundai",
+        "model": "Sportage",
+        "year": 2008,
+        "features": [
+            "LED Headlights",
+            "Backup Camera",
+            "Bluetooth"
+        ]
+    },
+    {
+        "id": 27,
+        "make": "Tesla",
+        "model": "Model X",
+        "year": 2008,
+        "features": [
+            "Harman Kardon Sound System",
+            "Bose Premium Audio",
+            "Remote Start"
+        ]
+    },
+    {
+        "id": 28,
+        "make": "Chevrolet",
+        "model": "Malibu",
+        "year": 2004,
+        "features": [
+            "Sunroof",
+            "Park Assist",
+            "Apple CarPlay"
+        ]
+    },
+    {
+        "id": 29,
+        "make": "BMW",
+        "model": "Passat",
+        "year": 2017,
+        "features": [
+            "Lane Departure Warning",
+            "Blind Spot Monitor",
+            "Adaptive Cruise Control"
+        ]
+    },
+    {
+        "id": 30,
+        "make": "Mercedes-Benz",
+        "model": "Civic",
+        "year": 2000,
+        "features": [
+            "Gesture Control",
+            "Lane Departure Warning",
+            "Bose Premium Audio"
+        ]
+    },
+    {
+        "id": 31,
+        "make": "Audi",
+        "model": "Corolla",
+        "year": 2012,
+        "features": [
+            "Lane Departure Warning",
+            "Bose Premium Audio",
+            "Wi-Fi Hotspot"
+        ]
+    },
+    {
+        "id": 32,
+        "make": "Mercedes-Benz",
+        "model": "A4",
+        "year": 2000,
+        "features": [
+            "Sunroof",
+            "Apple CarPlay",
+            "Bluetooth"
+        ]
+    },
+    {
+        "id": 33,
+        "make": "Tesla",
+        "model": "Model Y",
+        "year": 2002,
+        "features": [
+            "Panoramic Roof",
+            "Quattro AWD",
+            "ProPILOT Assist"
+        ]
+    },
+    {
+        "id": 34,
+        "make": "Kia",
+        "model": "Altima",
+        "year": 2015,
+        "features": [
+            "Air Conditioning",
+            "Digital Cockpit",
+            "Lane Departure Warning"
+        ]
+    },
+    {
+        "id": 35,
+        "make": "Mazda",
+        "model": "Model Y",
+        "year": 2003,
+        "features": [
+            "Air Conditioning",
+            "Blind Spot Monitor",
+            "Android Auto"
+        ]
+    },
+    {
+        "id": 36,
+        "make": "Nissan",
+        "model": "Model Y",
+        "year": 2001,
+        "features": [
+            "Digital Cockpit",
+            "Bluetooth",
+            "Heads-Up Display"
+        ]
+    },
+    {
+        "id": 37,
+        "make": "Tesla",
+        "model": "Model 3",
+        "year": 2001,
+        "features": [
+            "Adaptive Cruise Control",
+            "Heads-Up Display",
+            "Bose Premium Audio"
+        ]
+    },
+    {
+        "id": 38,
+        "make": "Toyota",
+        "model": "Model Y",
+        "year": 2005,
+        "features": [
+            "Gesture Control",
+            "Bluetooth",
+            "Lane Departure Warning"
+        ]
+    },
+    {
+        "id": 39,
+        "make": "Subaru",
+        "model": "Civic",
+        "year": 2011,
+        "features": [
+            "Android Auto",
+            "Adaptive Cruise Control",
+            "All-Wheel Drive"
+        ]
+    },
+    {
+        "id": 40,
+        "make": "Tesla",
+        "model": "Focus",
+        "year": 2002,
+        "features": [
+            "Navigation System",
+            "Remote Start",
+            "Digital Cockpit"
+        ]
+    },
+    {
+        "id": 41,
+        "make": "Kia",
+        "model": "Model S",
+        "year": 2017,
+        "features": [
+            "Heated Seats",
+            "Heads-Up Display",
+            "Bose Premium Audio"
+        ]
+    },
+    {
+        "id": 42,
+        "make": "Mazda",
+        "model": "Focus",
+        "year": 2022,
+        "features": [
+            "Backup Camera",
+            "Adaptive Cruise Control",
+            "Wireless Charging"
+        ]
+    },
+    {
+        "id": 43,
+        "make": "Toyota",
+        "model": "Sportage",
+        "year": 2014,
+        "features": [
+            "Navigation System",
+            "All-Wheel Drive",
+            "Harman Kardon Sound System"
+        ]
+    },
+    {
+        "id": 44,
+        "make": "Tesla",
+        "model": "Corolla",
+        "year": 2016,
+        "features": [
+            "Remote Start",
+            "Virtual Cockpit",
+            "Wi-Fi Hotspot"
+        ]
+    },
+    {
+        "id": 45,
+        "make": "Hyundai",
+        "model": "Focus",
+        "year": 2007,
+        "features": [
+            "Digital Cockpit",
+            "SmartSense",
+            "Quattro AWD"
+        ]
+    },
+    {
+        "id": 46,
+        "make": "Ford",
+        "model": "Corolla",
+        "year": 2000,
+        "features": [
+            "Adaptive Cruise Control",
+            "Navigation System",
+            "Backup Camera"
+        ]
+    },
+    {
+        "id": 47,
+        "make": "Hyundai",
+        "model": "Elantra",
+        "year": 2008,
+        "features": [
+            "Blind Spot Monitor",
+            "LED Headlights",
+            "Apple CarPlay"
+        ]
+    },
+    {
+        "id": 48,
+        "make": "Toyota",
+        "model": "Focus",
+        "year": 2011,
+        "features": [
+            "All-Wheel Drive",
+            "Navigation System",
+            "Gesture Control"
+        ]
+    },
+    {
+        "id": 49,
+        "make": "Volkswagen",
+        "model": "Passat",
+        "year": 2006,
+        "features": [
+            "Wireless Charging",
+            "Air Conditioning",
+            "Heads-Up Display"
+        ]
+    },
+    {
+        "id": 50,
+        "make": "Toyota",
+        "model": "Altima",
+        "year": 2015,
+        "features": [
+            "LED Headlights",
+            "Cruise Control",
+            "Panoramic Roof"
+        ]
+    },
+    {
+        "id": 51,
+        "make": "Honda",
+        "model": "Model X",
+        "year": 2017,
+        "features": [
+            "Backup Camera",
+            "Blind Spot Monitor",
+            "Adaptive Cruise Control"
+        ]
+    },
+    {
+        "id": 52,
+        "make": "Mercedes-Benz",
+        "model": "Sportage",
+        "year": 2017,
+        "features": [
+            "Lane Departure Warning",
+            "MBUX System",
+            "Remote Start"
+        ]
+    },
+    {
+        "id": 53,
+        "make": "Mercedes-Benz",
+        "model": "Model S",
+        "year": 2017,
+        "features": [
+            "Heads-Up Display",
+            "Wireless Charging",
+            "Heated Seats"
+        ]
+    },
+    {
+        "id": 54,
+        "make": "Mazda",
+        "model": "Civic",
+        "year": 2002,
+        "features": [
+            "SmartSense",
+            "Wi-Fi Hotspot",
+            "Blind Spot Monitor"
+        ]
+    },
+    {
+        "id": 55,
+        "make": "Chevrolet",
+        "model": "Sportage",
+        "year": 2009,
+        "features": [
+            "Virtual Cockpit",
+            "Heated Seats",
+            "Park Assist"
+        ]
+    },
+    {
+        "id": 56,
+        "make": "Mazda",
+        "model": "Sportage",
+        "year": 2013,
+        "features": [
+            "Wi-Fi Hotspot",
+            "All-Wheel Drive",
+            "Lane Departure Warning"
+        ]
+    },
+    {
+        "id": 57,
+        "make": "Kia",
+        "model": "A4",
+        "year": 2008,
+        "features": [
+            "All-Wheel Drive",
+            "Ambient Lighting",
+            "MBUX System"
+        ]
+    },
+    {
+        "id": 58,
+        "make": "Audi",
+        "model": "Malibu",
+        "year": 2018,
+        "features": [
+            "Bose Premium Audio",
+            "Backup Camera",
+            "Lane Departure Warning"
+        ]
+    },
+    {
+        "id": 59,
+        "make": "Honda",
+        "model": "Corolla",
+        "year": 2005,
+        "features": [
+            "MBUX System",
+            "Air Conditioning",
+            "Lane Departure Warning"
+        ]
+    },
+    {
+        "id": 60,
+        "make": "Mazda",
+        "model": "Corolla",
+        "year": 2009,
+        "features": [
+            "LED Headlights",
+            "Quattro AWD",
+            "MBUX System"
+        ]
+    },
+    {
+        "id": 61,
+        "make": "Jeep",
+        "model": "Corolla",
+        "year": 2024,
+        "features": [
+            "Wireless Charging",
+            "Wi-Fi Hotspot",
+            "MBUX System"
+        ]
+    },
+    {
+        "id": 62,
+        "make": "Volkswagen",
+        "model": "Passat",
+        "year": 2005,
+        "features": [
+            "Panoramic Roof",
+            "Heated Seats",
+            "Apple CarPlay"
+        ]
+    },
+    {
+        "id": 63,
+        "make": "Mercedes-Benz",
+        "model": "Model X",
+        "year": 2023,
+        "features": [
+            "Apple CarPlay",
+            "Quattro AWD",
+            "Park Assist"
+        ]
+    },
+    {
+        "id": 64,
+        "make": "BMW",
+        "model": "Model S",
+        "year": 2025,
+        "features": [
+            "ProPILOT Assist",
+            "Bluetooth",
+            "Cruise Control"
+        ]
+    },
+    {
+        "id": 65,
+        "make": "Hyundai",
+        "model": "Sportage",
+        "year": 2013,
+        "features": [
+            "Ambient Lighting",
+            "Remote Start",
+            "Quattro AWD"
+        ]
+    },
+    {
+        "id": 66,
+        "make": "Jeep",
+        "model": "Model S",
+        "year": 2023,
+        "features": [
+            "Digital Cockpit",
+            "All-Wheel Drive",
+            "Android Auto"
+        ]
+    },
+    {
+        "id": 67,
+        "make": "Chevrolet",
+        "model": "Focus",
+        "year": 2007,
+        "features": [
+            "Remote Start",
+            "SmartSense",
+            "Panoramic Roof"
+        ]
+    },
+    {
+        "id": 68,
+        "make": "Honda",
+        "model": "C-Class",
+        "year": 2020,
+        "features": [
+            "Virtual Cockpit",
+            "Blind Spot Monitor",
+            "SmartSense"
+        ]
+    },
+    {
+        "id": 69,
+        "make": "Jeep",
+        "model": "3 Series",
+        "year": 2004,
+        "features": [
+            "Harman Kardon Sound System",
+            "Air Conditioning",
+            "Ambient Lighting"
+        ]
+    },
+    {
+        "id": 70,
+        "make": "Mercedes-Benz",
+        "model": "Altima",
+        "year": 2004,
+        "features": [
+            "Android Auto",
+            "Panoramic Roof",
+            "Harman Kardon Sound System"
+        ]
+    },
+    {
+        "id": 71,
+        "make": "Nissan",
+        "model": "Focus",
+        "year": 2001,
+        "features": [
+            "Lane Departure Warning",
+            "Heads-Up Display",
+            "Heated Seats"
+        ]
+    },
+    {
+        "id": 72,
+        "make": "Mazda",
+        "model": "Altima",
+        "year": 2007,
+        "features": [
+            "Heads-Up Display",
+            "Panoramic Roof",
+            "All-Wheel Drive"
+        ]
+    },
+    {
+        "id": 73,
+        "make": "Honda",
+        "model": "Elantra",
+        "year": 2011,
+        "features": [
+            "Sunroof",
+            "Panoramic Roof",
+            "Cruise Control"
+        ]
+    },
+    {
+        "id": 74,
+        "make": "Mazda",
+        "model": "Corolla",
+        "year": 2023,
+        "features": [
+            "Android Auto",
+            "Bose Premium Audio",
+            "Navigation System"
+        ]
+    },
+    {
+        "id": 75,
+        "make": "Kia",
+        "model": "Elantra",
+        "year": 2006,
+        "features": [
+            "Gesture Control",
+            "Heads-Up Display",
+            "Blind Spot Monitor"
+        ]
+    },
+    {
+        "id": 76,
+        "make": "Audi",
+        "model": "Model Y",
+        "year": 2020,
+        "features": [
+            "LED Headlights",
+            "Digital Cockpit",
+            "Ambient Lighting"
+        ]
+    },
+    {
+        "id": 77,
+        "make": "Tesla",
+        "model": "Altima",
+        "year": 2002,
+        "features": [
+            "Heated Seats",
+            "Ambient Lighting",
+            "Sunroof"
+        ]
+    },
+    {
+        "id": 78,
+        "make": "Subaru",
+        "model": "Passat",
+        "year": 2000,
+        "features": [
+            "Virtual Cockpit",
+            "Park Assist",
+            "Digital Cockpit"
+        ]
+    },
+    {
+        "id": 79,
+        "make": "Subaru",
+        "model": "Sportage",
+        "year": 2009,
+        "features": [
+            "Backup Camera",
+            "Blind Spot Monitor",
+            "Panoramic Roof"
+        ]
+    },
+    {
+        "id": 80,
+        "make": "Volkswagen",
+        "model": "3 Series",
+        "year": 2014,
+        "features": [
+            "Heads-Up Display",
+            "Air Conditioning",
+            "Heated Seats"
+        ]
+    },
+    {
+        "id": 81,
+        "make": "Honda",
+        "model": "Corolla",
+        "year": 2020,
+        "features": [
+            "Heated Seats",
+            "Bose Premium Audio",
+            "Gesture Control"
+        ]
+    },
+    {
+        "id": 82,
+        "make": "Toyota",
+        "model": "A4",
+        "year": 2002,
+        "features": [
+            "SmartSense",
+            "Cruise Control",
+            "All-Wheel Drive"
+        ]
+    },
+    {
+        "id": 83,
+        "make": "Hyundai",
+        "model": "A4",
+        "year": 2016,
+        "features": [
+            "Blind Spot Monitor",
+            "Adaptive Cruise Control",
+            "Panoramic Roof"
+        ]
+    },
+    {
+        "id": 84,
+        "make": "Mazda",
+        "model": "Passat",
+        "year": 2025,
+        "features": [
+            "Android Auto",
+            "Backup Camera",
+            "Sunroof"
+        ]
+    },
+    {
+        "id": 85,
+        "make": "Volkswagen",
+        "model": "Passat",
+        "year": 2003,
+        "features": [
+            "Wi-Fi Hotspot",
+            "Digital Cockpit",
+            "ProPILOT Assist"
+        ]
+    },
+    {
+        "id": 86,
+        "make": "Nissan",
+        "model": "Civic",
+        "year": 2025,
+        "features": [
+            "Ambient Lighting",
+            "All-Wheel Drive",
+            "Remote Start"
+        ]
+    },
+    {
+        "id": 87,
+        "make": "Honda",
+        "model": "Malibu",
+        "year": 2002,
+        "features": [
+            "Park Assist",
+            "All-Wheel Drive",
+            "Sunroof"
+        ]
+    },
+    {
+        "id": 88,
+        "make": "Toyota",
+        "model": "Sportage",
+        "year": 2007,
+        "features": [
+            "LED Headlights",
+            "Panoramic Roof",
+            "Bose Premium Audio"
+        ]
+    },
+    {
+        "id": 89,
+        "make": "Chevrolet",
+        "model": "Elantra",
+        "year": 2007,
+        "features": [
+            "Heads-Up Display",
+            "Ambient Lighting",
+            "Lane Departure Warning"
+        ]
+    },
+    {
+        "id": 90,
+        "make": "Honda",
+        "model": "Altima",
+        "year": 2003,
+        "features": [
+            "Bluetooth",
+            "Wi-Fi Hotspot",
+            "Gesture Control"
+        ]
+    },
+    {
+        "id": 91,
+        "make": "Mazda",
+        "model": "C-Class",
+        "year": 2023,
+        "features": [
+            "All-Wheel Drive",
+            "Wi-Fi Hotspot",
+            "Navigation System"
+        ]
+    },
+    {
+        "id": 92,
+        "make": "Honda",
+        "model": "C-Class",
+        "year": 2025,
+        "features": [
+            "Backup Camera",
+            "ProPILOT Assist",
+            "Ambient Lighting"
+        ]
+    },
+    {
+        "id": 93,
+        "make": "Jeep",
+        "model": "Model S",
+        "year": 2008,
+        "features": [
+            "Ambient Lighting",
+            "All-Wheel Drive",
+            "Navigation System"
+        ]
+    },
+    {
+        "id": 94,
+        "make": "Subaru",
+        "model": "Civic",
+        "year": 2018,
+        "features": [
+            "Blind Spot Monitor",
+            "All-Wheel Drive",
+            "Bose Premium Audio"
+        ]
+    },
+    {
+        "id": 95,
+        "make": "Jeep",
+        "model": "Altima",
+        "year": 2003,
+        "features": [
+            "SmartSense",
+            "Remote Start",
+            "Heated Seats"
+        ]
+    },
+    {
+        "id": 96,
+        "make": "Subaru",
+        "model": "Passat",
+        "year": 2016,
+        "features": [
+            "Blind Spot Monitor",
+            "LED Headlights",
+            "Bose Premium Audio"
+        ]
+    },
+    {
+        "id": 97,
+        "make": "Tesla",
+        "model": "Model Y",
+        "year": 2025,
+        "features": [
+            "Apple CarPlay",
+            "Sunroof",
+            "Air Conditioning"
+        ]
+    },
+    {
+        "id": 98,
+        "make": "Mazda",
+        "model": "Corolla",
+        "year": 2014,
+        "features": [
+            "Heads-Up Display",
+            "Apple CarPlay",
+            "Panoramic Roof"
+        ]
+    },
+    {
+        "id": 99,
+        "make": "Chevrolet",
+        "model": "Malibu",
+        "year": 2023,
+        "features": [
+            "Blind Spot Monitor",
+            "Virtual Cockpit",
+            "Gesture Control"
+        ]
+    },
+    {
+        "id": 100,
+        "make": "Honda",
+        "model": "Malibu",
+        "year": 2012,
+        "features": [
+            "Lane Departure Warning",
+            "Android Auto",
+            "Blind Spot Monitor"
+        ]
+    },
+    {
+        "id": 101,
+        "make": "Mazda",
+        "model": "Model 3",
+        "year": 2016,
+        "features": [
+            "SmartSense",
+            "Lane Departure Warning",
+            "Blind Spot Monitor"
+        ]
+    },
+    {
+        "id": 102,
+        "make": "BMW",
+        "model": "Model X",
+        "year": 2014,
+        "features": [
+            "Wireless Charging",
+            "Navigation System",
+            "Apple CarPlay"
+        ]
+    },
+    {
+        "id": 103,
+        "make": "Chevrolet",
+        "model": "Civic",
+        "year": 2002,
+        "features": [
+            "Virtual Cockpit",
+            "SmartSense",
+            "Digital Cockpit"
+        ]
+    },
+    {
+        "id": 104,
+        "make": "Jeep",
+        "model": "A4",
+        "year": 2013,
+        "features": [
+            "Wi-Fi Hotspot",
+            "Digital Cockpit",
+            "Bose Premium Audio"
+        ]
+    },
+    {
+        "id": 105,
+        "make": "Tesla",
+        "model": "Model Y",
+        "year": 2024,
+        "features": [
+            "Cruise Control",
+            "Heated Seats",
+            "Remote Start"
+        ]
+    },
+    {
+        "id": 106,
+        "make": "BMW",
+        "model": "Altima",
+        "year": 2010,
+        "features": [
+            "Virtual Cockpit",
+            "Panoramic Roof",
+            "Android Auto"
+        ]
+    },
+    {
+        "id": 107,
+        "make": "Toyota",
+        "model": "Model S",
+        "year": 2023,
+        "features": [
+            "Digital Cockpit",
+            "Park Assist",
+            "Virtual Cockpit"
+        ]
+    },
+    {
+        "id": 108,
+        "make": "Chevrolet",
+        "model": "Elantra",
+        "year": 2015,
+        "features": [
+            "Park Assist",
+            "Wi-Fi Hotspot",
+            "Adaptive Cruise Control"
+        ]
+    },
+    {
+        "id": 109,
+        "make": "Jeep",
+        "model": "Focus",
+        "year": 2014,
+        "features": [
+            "Panoramic Roof",
+            "Lane Departure Warning",
+            "Bose Premium Audio"
+        ]
+    },
+    {
+        "id": 110,
+        "make": "Ford",
+        "model": "3 Series",
+        "year": 2003,
+        "features": [
+            "Wireless Charging",
+            "Ambient Lighting",
+            "Harman Kardon Sound System"
+        ]
+    },
+    {
+        "id": 111,
+        "make": "Toyota",
+        "model": "Focus",
+        "year": 2013,
+        "features": [
+            "Digital Cockpit",
+            "LED Headlights",
+            "Panoramic Roof"
+        ]
+    },
+    {
+        "id": 112,
+        "make": "Mercedes-Benz",
+        "model": "Altima",
+        "year": 2011,
+        "features": [
+            "Cruise Control",
+            "Adaptive Cruise Control",
+            "Backup Camera"
+        ]
+    },
+    {
+        "id": 113,
+        "make": "Nissan",
+        "model": "Elantra",
+        "year": 2006,
+        "features": [
+            "Backup Camera",
+            "Bose Premium Audio",
+            "Gesture Control"
+        ]
+    },
+    {
+        "id": 114,
+        "make": "Hyundai",
+        "model": "Malibu",
+        "year": 2023,
+        "features": [
+            "Gesture Control",
+            "Blind Spot Monitor",
+            "Wi-Fi Hotspot"
+        ]
+    },
+    {
+        "id": 115,
+        "make": "Volkswagen",
+        "model": "C-Class",
+        "year": 2018,
+        "features": [
+            "Heads-Up Display",
+            "Remote Start",
+            "Panoramic Roof"
+        ]
+    },
+    {
+        "id": 116,
+        "make": "Nissan",
+        "model": "Model 3",
+        "year": 2014,
+        "features": [
+            "Wireless Charging",
+            "LED Headlights",
+            "Wi-Fi Hotspot"
+        ]
+    },
+    {
+        "id": 117,
+        "make": "Tesla",
+        "model": "Model Y",
+        "year": 2018,
+        "features": [
+            "MBUX System",
+            "Remote Start",
+            "Wireless Charging"
+        ]
+    },
+    {
+        "id": 118,
+        "make": "Kia",
+        "model": "Altima",
+        "year": 2014,
+        "features": [
+            "Gesture Control",
+            "Blind Spot Monitor",
+            "Wi-Fi Hotspot"
+        ]
+    },
+    {
+        "id": 119,
+        "make": "Hyundai",
+        "model": "Model Y",
+        "year": 2003,
+        "features": [
+            "Bose Premium Audio",
+            "All-Wheel Drive",
+            "Harman Kardon Sound System"
+        ]
+    },
+    {
+        "id": 120,
+        "make": "Hyundai",
+        "model": "Model X",
+        "year": 2009,
+        "features": [
+            "LED Headlights",
+            "Lane Departure Warning",
+            "Gesture Control"
+        ]
+    },
+    {
+        "id": 121,
+        "make": "Chevrolet",
+        "model": "Elantra",
+        "year": 2021,
+        "features": [
+            "Bluetooth",
+            "Cruise Control",
+            "Virtual Cockpit"
+        ]
+    },
+    {
+        "id": 122,
+        "make": "Volkswagen",
+        "model": "Model Y",
+        "year": 2006,
+        "features": [
+            "Adaptive Cruise Control",
+            "Backup Camera",
+            "Gesture Control"
+        ]
+    },
+    {
+        "id": 123,
+        "make": "Honda",
+        "model": "Civic",
+        "year": 2024,
+        "features": [
+            "Heated Seats",
+            "Virtual Cockpit",
+            "Bose Premium Audio"
+        ]
+    },
+    {
+        "id": 124,
+        "make": "Subaru",
+        "model": "Model 3",
+        "year": 2005,
+        "features": [
+            "Ambient Lighting",
+            "Wi-Fi Hotspot",
+            "Cruise Control"
+        ]
+    },
+    {
+        "id": 125,
+        "make": "Jeep",
+        "model": "Passat",
+        "year": 2003,
+        "features": [
+            "Backup Camera",
+            "Quattro AWD",
+            "Virtual Cockpit"
+        ]
+    },
+    {
+        "id": 126,
+        "make": "Mazda",
+        "model": "A4",
+        "year": 2000,
+        "features": [
+            "Cruise Control",
+            "Quattro AWD",
+            "ProPILOT Assist"
+        ]
+    },
+    {
+        "id": 127,
+        "make": "Subaru",
+        "model": "Model Y",
+        "year": 2019,
+        "features": [
+            "Panoramic Roof",
+            "Virtual Cockpit",
+            "Ambient Lighting"
+        ]
+    },
+    {
+        "id": 128,
+        "make": "Kia",
+        "model": "Sportage",
+        "year": 2003,
+        "features": [
+            "Ambient Lighting",
+            "Bluetooth",
+            "Virtual Cockpit"
+        ]
+    },
+    {
+        "id": 129,
+        "make": "Tesla",
+        "model": "Sportage",
+        "year": 2003,
+        "features": [
+            "Gesture Control",
+            "Park Assist",
+            "Apple CarPlay"
+        ]
+    },
+    {
+        "id": 130,
+        "make": "Nissan",
+        "model": "Model S",
+        "year": 2017,
+        "features": [
+            "Quattro AWD",
+            "SmartSense",
+            "MBUX System"
+        ]
+    },
+    {
+        "id": 131,
+        "make": "Nissan",
+        "model": "Focus",
+        "year": 2018,
+        "features": [
+            "Virtual Cockpit",
+            "Adaptive Cruise Control",
+            "Bose Premium Audio"
+        ]
+    },
+    {
+        "id": 132,
+        "make": "Toyota",
+        "model": "Sportage",
+        "year": 2022,
+        "features": [
+            "Air Conditioning",
+            "Navigation System",
+            "Gesture Control"
+        ]
+    },
+    {
+        "id": 133,
+        "make": "Ford",
+        "model": "Malibu",
+        "year": 2021,
+        "features": [
+            "Wireless Charging",
+            "Virtual Cockpit",
+            "Panoramic Roof"
+        ]
+    },
+    {
+        "id": 134,
+        "make": "Kia",
+        "model": "3 Series",
+        "year": 2021,
+        "features": [
+            "Panoramic Roof",
+            "Ambient Lighting",
+            "Apple CarPlay"
+        ]
+    },
+    {
+        "id": 135,
+        "make": "Subaru",
+        "model": "3 Series",
+        "year": 2009,
+        "features": [
+            "Park Assist",
+            "Backup Camera",
+            "Sunroof"
+        ]
+    },
+    {
+        "id": 136,
+        "make": "Mazda",
+        "model": "Elantra",
+        "year": 2008,
+        "features": [
+            "Bluetooth",
+            "All-Wheel Drive",
+            "ProPILOT Assist"
+        ]
+    },
+    {
+        "id": 137,
+        "make": "Honda",
+        "model": "Model X",
+        "year": 2008,
+        "features": [
+            "Virtual Cockpit",
+            "Lane Departure Warning",
+            "Blind Spot Monitor"
+        ]
+    },
+    {
+        "id": 138,
+        "make": "Volkswagen",
+        "model": "C-Class",
+        "year": 2009,
+        "features": [
+            "All-Wheel Drive",
+            "Android Auto",
+            "Heads-Up Display"
+        ]
+    },
+    {
+        "id": 139,
+        "make": "Toyota",
+        "model": "C-Class",
+        "year": 2002,
+        "features": [
+            "Navigation System",
+            "Park Assist",
+            "ProPILOT Assist"
+        ]
+    },
+    {
+        "id": 140,
+        "make": "Volkswagen",
+        "model": "Altima",
+        "year": 2006,
+        "features": [
+            "Digital Cockpit",
+            "LED Headlights",
+            "Park Assist"
+        ]
+    },
+    {
+        "id": 141,
+        "make": "Honda",
+        "model": "A4",
+        "year": 2009,
+        "features": [
+            "ProPILOT Assist",
+            "Heads-Up Display",
+            "Heated Seats"
+        ]
+    },
+    {
+        "id": 142,
+        "make": "Tesla",
+        "model": "Passat",
+        "year": 2025,
+        "features": [
+            "Lane Departure Warning",
+            "Heads-Up Display",
+            "Navigation System"
+        ]
+    },
+    {
+        "id": 143,
+        "make": "Honda",
+        "model": "Model 3",
+        "year": 2007,
+        "features": [
+            "Heads-Up Display",
+            "Air Conditioning",
+            "Wireless Charging"
+        ]
+    },
+    {
+        "id": 144,
+        "make": "Chevrolet",
+        "model": "Elantra",
+        "year": 2008,
+        "features": [
+            "Virtual Cockpit",
+            "Heads-Up Display",
+            "Bose Premium Audio"
+        ]
+    },
+    {
+        "id": 145,
+        "make": "Jeep",
+        "model": "Model Y",
+        "year": 2013,
+        "features": [
+            "Cruise Control",
+            "Wireless Charging",
+            "All-Wheel Drive"
+        ]
+    },
+    {
+        "id": 146,
+        "make": "Hyundai",
+        "model": "Corolla",
+        "year": 2014,
+        "features": [
+            "MBUX System",
+            "Lane Departure Warning",
+            "Ambient Lighting"
+        ]
+    },
+    {
+        "id": 147,
+        "make": "Hyundai",
+        "model": "A4",
+        "year": 2008,
+        "features": [
+            "Android Auto",
+            "All-Wheel Drive",
+            "Wi-Fi Hotspot"
+        ]
+    },
+    {
+        "id": 148,
+        "make": "Hyundai",
+        "model": "Focus",
+        "year": 2016,
+        "features": [
+            "Heated Seats",
+            "Sunroof",
+            "MBUX System"
+        ]
+    },
+    {
+        "id": 149,
+        "make": "Audi",
+        "model": "Passat",
+        "year": 2002,
+        "features": [
+            "Android Auto",
+            "ProPILOT Assist",
+            "SmartSense"
+        ]
+    },
+    {
+        "id": 150,
+        "make": "Jeep",
+        "model": "Model S",
+        "year": 2018,
+        "features": [
+            "Air Conditioning",
+            "SmartSense",
+            "Digital Cockpit"
+        ]
+    },
+    {
+        "id": 151,
+        "make": "Nissan",
+        "model": "Model 3",
+        "year": 2018,
+        "features": [
+            "MBUX System",
+            "Heads-Up Display",
+            "Wi-Fi Hotspot"
+        ]
+    },
+    {
+        "id": 152,
+        "make": "Tesla",
+        "model": "Model S",
+        "year": 2002,
+        "features": [
+            "Navigation System",
+            "Lane Departure Warning",
+            "Gesture Control"
+        ]
+    },
+    {
+        "id": 153,
+        "make": "Volkswagen",
+        "model": "Civic",
+        "year": 2005,
+        "features": [
+            "Blind Spot Monitor",
+            "Lane Departure Warning",
+            "Heated Seats"
+        ]
+    },
+    {
+        "id": 154,
+        "make": "Ford",
+        "model": "Elantra",
+        "year": 2007,
+        "features": [
+            "Panoramic Roof",
+            "Heads-Up Display",
+            "MBUX System"
+        ]
+    },
+    {
+        "id": 155,
+        "make": "Nissan",
+        "model": "Model Y",
+        "year": 2017,
+        "features": [
+            "Ambient Lighting",
+            "Wi-Fi Hotspot",
+            "Adaptive Cruise Control"
+        ]
+    },
+    {
+        "id": 156,
+        "make": "Chevrolet",
+        "model": "Passat",
+        "year": 2009,
+        "features": [
+            "ProPILOT Assist",
+            "Park Assist",
+            "Blind Spot Monitor"
+        ]
+    },
+    {
+        "id": 157,
+        "make": "Hyundai",
+        "model": "Model Y",
+        "year": 2000,
+        "features": [
+            "Digital Cockpit",
+            "Lane Departure Warning",
+            "ProPILOT Assist"
+        ]
+    },
+    {
+        "id": 158,
+        "make": "BMW",
+        "model": "C-Class",
+        "year": 2014,
+        "features": [
+            "Cruise Control",
+            "Backup Camera",
+            "Wi-Fi Hotspot"
+        ]
+    },
+    {
+        "id": 159,
+        "make": "Mercedes-Benz",
+        "model": "Model S",
+        "year": 2021,
+        "features": [
+            "Panoramic Roof",
+            "Lane Departure Warning",
+            "MBUX System"
+        ]
+    },
+    {
+        "id": 160,
+        "make": "BMW",
+        "model": "Passat",
+        "year": 2014,
+        "features": [
+            "Park Assist",
+            "Adaptive Cruise Control",
+            "Cruise Control"
+        ]
+    }
+]
