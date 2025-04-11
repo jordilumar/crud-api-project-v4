@@ -22,7 +22,7 @@ import '../styles/animations.css';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 // Componente principal
-export default function SalesCharts({ initialViewAnnualSales = false }) {
+export default function SalesCharts() {
   // Extraemos el modelo desde la URL (si se pasa)
   const { model } = useParams();
   const navigate = useNavigate();
@@ -30,10 +30,10 @@ export default function SalesCharts({ initialViewAnnualSales = false }) {
   // Estados
   const [sales, setSales] = useState([]); // Ventas del modelo seleccionado
   const [loading, setLoading] = useState(true); // Mostrar spinner de carga
-  const [viewAnnualSales, setViewAnnualSales] = useState(initialViewAnnualSales); // Ver resumen general o individual
   const [showModal, setShowModal] = useState(false); // Controla si se muestra el modal
   const [models, setModels] = useState([]); // Lista de modelos disponibles
   const [selectedModel, setSelectedModel] = useState(model || ''); // Modelo actualmente seleccionado
+  const [viewAnnualSales, setViewAnnualSales] = useState((model === "" || model === undefined) ? true : false); // Ver resumen general o individual
   const [topModels, setTopModels] = useState([]); // Modelos más vendidos
   const [salesByYear, setSalesByYear] = useState([]); // Ventas agrupadas por año
   const [salesByCountry, setSalesByCountry] = useState([]); // Ventas agrupadas por país
@@ -44,7 +44,8 @@ export default function SalesCharts({ initialViewAnnualSales = false }) {
 
   // useEffect que se dispara cuando cambia el modo de vista o el modelo seleccionado
   useEffect(() => {
-    if (viewAnnualSales) {
+    console.log('Cambiando vista de ventas...');
+    if (selectedModel === "" || selectedModel === undefined) {
       // Cargar datos generales si se activa la vista de ventas generales
       fetchAnnualSales();
       fetchTopModels();
@@ -53,7 +54,7 @@ export default function SalesCharts({ initialViewAnnualSales = false }) {
       // Cargar datos del modelo seleccionado si se activa la vista de ventas por modelo
       fetchModelSales(selectedModel);
     }
-  }, [viewAnnualSales, selectedModel]); // Asegurarse de que este efecto se ejecute al cambiar `viewAnnualSales` o `selectedModel`
+  }, [selectedModel]); // Asegurarse de que este efecto se ejecute al cambiar `viewAnnualSales` o `selectedModel`
 
   // Carga los modelos disponibles (para el modal)
   useEffect(() => {
@@ -215,13 +216,6 @@ export default function SalesCharts({ initialViewAnnualSales = false }) {
     },
   };
 
-  // Cuando el usuario selecciona un modelo desde el modal
-  const handleModelSelection = (model) => {
-    setSelectedModel(model);
-    setViewAnnualSales(false);
-    setShowModal(false);
-  };
-
   // Función para cambiar el gráfico con animación
   const handleChartChange = (chart) => {
     setAnimationClass('animate-fade-up'); // Reinicia la animación
@@ -246,12 +240,7 @@ export default function SalesCharts({ initialViewAnnualSales = false }) {
           <button
             className={`btn ${viewAnnualSales ? 'btn-outline-success' : 'btn-outline-primary'} d-flex align-items-center shadow-sm hover-scale`}
             onClick={() => {
-              if (viewAnnualSales) {
-                setShowModal(true); // Mostrar modal para seleccionar modelo
-              } else {
-                setViewAnnualSales(true); // Cambiar a vista general
-                setSelectedModel(''); // Limpiar modelo seleccionado
-              }
+              setShowModal(true);
             }}
           >
             {viewAnnualSales ? 'Ver Ventas por Modelo' : 'Ventas Generales'}
@@ -291,7 +280,7 @@ export default function SalesCharts({ initialViewAnnualSales = false }) {
         </div>
       ) : (
         <div>
-          {!viewAnnualSales && selectedModel ? (
+          {selectedModel ? (
             <>
               <h3 className="text-secondary mb-3">Ventas del Modelo: {selectedModel}</h3>
               <div className="bg-white p-4 rounded shadow animate-fade-up mb-4">
@@ -322,7 +311,10 @@ export default function SalesCharts({ initialViewAnnualSales = false }) {
               <button
                 key={model}
                 className="list-group-item list-group-item-action"
-                onClick={() => handleModelSelection(model)}
+                onClick={() => {
+                  setSelectedModel(model)
+                  setShowModal(false)
+                }}
               >
                 {model}
               </button>

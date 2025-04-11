@@ -96,3 +96,28 @@ def get_total_sales_by_year():
     formatted_sales.sort(key=lambda x: x["year"])  # Ordenar por año
 
     return jsonify(formatted_sales), 200
+
+@sales_bp.route('/sales/model/<model_name>', methods=['GET'])
+def get_sales_by_model(model_name):
+    sales = read_file(SALES_FILE)
+
+    # Filtrar ventas por el modelo especificado
+    model_sales = [sale for sale in sales if sale['model'].lower() == model_name.lower()]
+
+    if not model_sales:
+        return jsonify({"error": f"No sales found for model '{model_name}'"}), 404
+
+    # Agrupar ventas por año
+    grouped_sales = {}
+    for sale in model_sales:
+        year = sale['year']
+        units = sale['units_sold']
+        grouped_sales[year] = grouped_sales.get(year, 0) + units
+
+    # Formatear los datos para el frontend
+    formatted_sales = [{"year": year, "units_sold": units} for year, units in grouped_sales.items()]
+    formatted_sales.sort(key=lambda x: x["year"])  # Ordenar por año
+
+    return jsonify({"model": model_name, "sales": formatted_sales}), 200
+
+

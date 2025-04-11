@@ -55,17 +55,6 @@
         ]
     },
     {
-        "id": 6,
-        "make": "Nissan",
-        "model": "Pathfinder",
-        "year": 2003,
-        "features": [
-            "Sunroof",
-            "ProPILOT Assist",
-            "Blind Spot Monitor"
-        ]
-    },
-    {
         "id": 7,
         "make": "Tesla",
         "model": "Model 3",

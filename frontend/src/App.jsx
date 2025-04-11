@@ -323,11 +323,9 @@ function App() {
             </div>
           }
         />
-        <Route path="/sales/:model" element={<SalesCharts />} />
         <Route 
-          path="/annual-sales" 
-          element={<SalesCharts initialViewAnnualSales={true}/>} />
-
+          path="/annual-sales/:model?" 
+          element={<SalesCharts />} />
       </Routes>
     </Router>
   );

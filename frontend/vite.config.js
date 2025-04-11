@@ -5,9 +5,9 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/sales': 'http://127.0.0.1:5000',
-      '/cars': 'http://127.0.0.1:5000',
+      '^/sales.*': 'http://127.0.0.1:5000',
+      '^/cars.*': 'http://127.0.0.1:5000',
     },
-    historyApiFallback: true, // Redirige todas las rutas al index.html
+    historyApiFallback: true
   },
 });

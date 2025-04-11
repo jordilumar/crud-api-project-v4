@@ -61,14 +61,13 @@
 }
 
 .btn-success {
-  background-color: #28a745 !important; /* Verde Bootstrap */
-  border-color: #28a745 !important;
+  background-color: #1e7e34 !important; /* Verde Bootstrap */
   color: #fff !important;
 }
 
 .btn-success:hover {
-  background-color: #218838 !important; /* Verde más oscuro */
-  border-color: #1e7e34 !important;
+  background-color: #006015 !important; /* Verde más oscuro */
+  border-color: #006015 !important;
 }
 
 .hover-scale:hover {
