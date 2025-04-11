@@ -10,11 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "bootstrap": "^5.3.5",
     "framer-motion": "^12.6.3",
+    "lucide": "^0.487.0",
+    "lucide-react": "^0.487.0",
     "react": "^19.0.0",
     "react-bootstrap": "^2.10.9",
+    "react-chartjs-2": "^5.3.0",
     "react-dom": "^19.0.0",
-    "react-modal": "^3.16.3"
+    "react-modal": "^3.16.3",
+    "react-router-dom": "^7.5.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

@@ -25,24 +25,25 @@ def write_db(data):
 
 def validate_car_data(car_data, cars):
     for car in cars:
-        # Excluir el coche actual (si tiene el mismo ID)
         if car.get('id') == car_data.get('id'):
             continue
 
         if car['model'] == car_data['model'] and car['year'] == car_data['year']:
             return "Car with the same model and year already exists."
 
-        # Modelo: empieza con mayúscula y permite letras, números, espacios y guiones
-        if not re.match(r'^[A-Za-z][A-Za-z0-9\s\-]*$', car_data['make']):
-            return "Make must start with a letter and contain only letters, numbers, spaces or hyphens."
+    # Validar que la marca no contenga números
+    if any(char.isdigit() for char in car_data['make']):
+        return "Make cannot contain numbers. Please enter a valid make."
 
-        # Marca: igual que modelo
-        if not re.match(r'^[A-Za-z][A-Za-z0-9\s\-]*$', car_data['model']):
-            return "Model must start with a letter and contain only letters, numbers, spaces or hyphens."
+    # Validar que la marca comience con una letra mayúscula
+    if not re.match(r'^[A-Z][A-Za-z\s\-]*$', car_data['make']):
+        return "Make must start with an uppercase letter and contain only letters, spaces, or hyphens."
 
-        # Año debe ser número
-        if not isinstance(car_data['year'], int):
-            return "Year must be a numeric value."
+    if not re.match(r'^[A-Za-z][A-Za-z0-9\s\-]*$', car_data['model']):
+        return "Model must start with a letter and can contain letters, numbers, spaces, or hyphens."
+
+    if not isinstance(car_data['year'], int):
+        return "Year must be a numeric value."
 
     return None
 
@@ -77,10 +78,8 @@ def create_car():
     new_car = request.json
     cars = read_db()
 
-    # Asignar un id incremental
     new_car['id'] = max([car['id'] for car in cars], default=0) + 1
 
-    # Validar los datos del coche
     error = validate_car_data(new_car, cars)
     if error:
         return jsonify({'error': error}), 400

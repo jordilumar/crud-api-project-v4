@@ -6,7 +6,18 @@ import CarList from './components/CarList';
 import { useEffect, useState, useRef } from 'react';
 import { createCar, updateCar, deleteCar, getCars } from './api';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/base.css';
+import './styles/navbar.css';
+import './styles/car-list.css';
+import './styles/pagination.css';
+import './styles/animations.css';
+import './styles/buttons.css';
+import './styles/cards.css';
+import './styles/search-bar.css';
+import './styles/features-preview.css';
 import './App.css';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 function App() {
   const [cars, setCars] = useState([]);
@@ -16,17 +27,26 @@ function App() {
   const [isSearching, setIsSearching] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const searchTimeout = useRef(null);
+
+  // Estado para la paginación
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const limit = 6;
 
-  useEffect(() => {
-    loadCars();
-  }, [page]);
+  // Estado para el modal de confirmación
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [carToDelete, setCarToDelete] = useState(null);
 
-  const loadCars = async (model = '') => {
+
+  // Efecto para recargar coches al cambiar de página
+  useEffect(() => {
+    loadCars(search); // Carga los coches con el término de búsqueda actual
+  }, [page, search]); // Ejecuta este efecto cuando cambie la página o el término de búsqueda
+
+  // Función para cargar coches desde la API
+  const loadCars = async (model = search) => {
     try {
-      const { data, total } = await getCars(model, page, limit);
+      const { data, total } = await getCars(model, page, limit); // Incluye el término de búsqueda
       setCars(data);
       setTotal(total);
     } catch (error) {
@@ -43,22 +63,32 @@ function App() {
     }
 
     searchTimeout.current = setTimeout(() => {
-      loadCars(text).then(() => {
-        setIsSearching(false);
-      });
+      setPage(1); // Reinicia a la primera página
+      loadCars(text); // Carga los coches filtrados desde la página 1
+      setIsSearching(false);
     }, 1000);
   };
 
   const handleCreate = async (car) => {
-    if (editIndex !== null) {
-      await updateCar(car.id, car);
-      setEditIndex(null);
-    } else {
-      await createCar(car);
+    try {
+      if (editIndex !== null) {
+        await updateCar(car.id, car);
+        setEditIndex(null);
+      } else {
+        await createCar(car);
+      }
+      setEditingCar(null);
+      setShowForm(false);
+      loadCars(search);
+    } catch (error) {
+      const errorMessage = await error.response.json();
+      if (errorMessage.error === "Make cannot contain numbers. Please enter a valid make.") {
+        alert("No se pueden introducir números en la marca. Por favor, corrige el error.");
+        setShowForm(true); // Redirigir al formulario de creación
+      } else {
+        console.error("Error al crear el coche:", errorMessage.error);
+      }
     }
-    setEditingCar(null);
-    setShowForm(false);
-    loadCars(search);
   };
 
   const handleEdit = (car, index) => {
@@ -67,20 +97,36 @@ function App() {
     setShowForm(true);
   };
 
-  const handleDelete = async (id) => {
-    const confirmed = window.confirm('¿Estás seguro de que quieres borrar este coche?');
-    if (!confirmed) return;
+  const handleDelete = async () => {
+    if (!carToDelete) return;
 
-    await deleteCar(id);
+    await deleteCar(carToDelete.id);
+    setShowDeleteModal(false);
+    setCarToDelete(null);
     loadCars(search); // Recargar la lista de coches después de eliminar
   };
 
+  const confirmDelete = (car) => {
+    setCarToDelete(car);
+    setShowDeleteModal(true);
+  };
+
   const handleNextPage = () => {
-    if (page * limit < total) setPage(page + 1);
+    if (page * limit < total) {
+      setTimeout(() => {
+        setPage((prevPage) => prevPage + 1);
+        loadCars(search); // Carga los coches con el término de búsqueda actual
+      }, 400);
+    }
   };
 
   const handlePrevPage = () => {
-    if (page > 1) setPage(page - 1);
+    if (page > 1) {
+      setTimeout(() => {
+        setPage((prevPage) => prevPage - 1);
+        loadCars(search); // Carga los coches con el término de búsqueda actual
+      }, 400);
+    }
   };
 
   return (
@@ -103,29 +149,20 @@ function App() {
                   {/* Centro absoluto: Buscador */}
                   {!showForm && (
                     <form
-                      className="position-absolute start-50 translate-middle-x animate-fade-up"
-                      style={{ width: '700px', zIndex: 1 }}
+                      className="search-bar-container"
+                      style={{ width: '500px', margin: '0 auto' }}
                     >
                       <div className="input-group shadow-sm">
                         <span className="input-group-text bg-light">
-                          <Search />
+                          <Search size={18} className="text-muted" />
                         </span>
                         <input
                           type="text"
-                          className="form-control form-control-lg fw-semibold"
-                          style={{ height: '56px', fontSize: '1.1rem' }}
+                          className="form-control search-bar"
                           placeholder="Buscar por modelo..."
                           value={search}
                           onChange={(e) => handleSearch(e.target.value)}
                         />
-                        {isSearching && (
-                          <div className="d-flex align-items-center ms-3 animate-fade-in" style={{ animationDuration: '0.4s' }}>
-                            <div className="spinner-border text-primary me-2" role="status">
-                              <span className="visually-hidden">Buscando...</span>
-                            </div>
-                            <span className="text-primary fw-medium">Buscando coches...</span>
-                          </div>
-                        )}
                       </div>
                     </form>
                   )}
@@ -152,7 +189,7 @@ function App() {
                           Crea tu Coche
                         </button>
                         <button
-                          className="btn btn-outline-primary d-flex align-items-center"
+                          className="btn btn-success d-flex align-items-center"
                           onClick={() => window.location.href = '/annual-sales'}
                         >
                           <BarChart className="me-2" size={20} />
@@ -171,7 +208,8 @@ function App() {
                   </div>
                 ) : (
                   <div className="animate-fade-up">
-                    <CarList cars={cars} onEdit={handleEdit} onDelete={handleDelete} />
+                    <CarList cars={cars} onEdit={handleEdit} onDelete={confirmDelete}/>
+                    {/* Botones para cambiar de pagina */}
                     <div className="pagination animate-slide-in-bottom">
                       <button onClick={handlePrevPage} disabled={page === 1}>
                         Anterior
@@ -184,6 +222,24 @@ function App() {
                   </div>
                 )}
               </div>
+
+              {/* Modal de confirmación */}
+              <Modal show={showDeleteModal} onHide={() => setShowDeleteModal(false)} centered>
+                <Modal.Header closeButton>
+                  <Modal.Title>Confirmar Eliminación</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  ¿Estás seguro de que deseas eliminar el coche <strong>{carToDelete?.make} {carToDelete?.model}</strong>?
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={() => setShowDeleteModal(false)}>
+                    Cancelar
+                  </Button>
+                  <Button variant="danger" onClick={handleDelete}>
+                    Eliminar
+                  </Button>
+                </Modal.Footer>
+              </Modal>
             </div>
           }
         />

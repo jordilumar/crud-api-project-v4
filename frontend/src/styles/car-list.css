@@ -1,0 +1,40 @@
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 1.5rem;
+  justify-content: center;
+  padding: 0 1rem;
+}
+
+.card.car-card {
+  height: 280px;
+  min-height: 270px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card.car-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-title {
+  font-size: 1.1rem;
+  color: #0d6efd;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  font-size: 0.9rem;
+  color: #495057;
+  line-height: 1.5;
+  flex-grow: 1;
+}

@@ -1,15 +1,15 @@
 import CarItem from './CarItem';
 
-export default function CarList({ cars, onEdit, onDelete }) {
+export default function CarList({ cars, onEdit, onDelete}) {
   return (
-    <div className="car-grid animate-fade-up">
-      {[...cars].reverse().map((car, index) => (
+    <div className={'car-grid'}>
+      {cars.map((car, index) => (
         <CarItem
           key={car.id}
           car={car}
           index={index}
           onEdit={onEdit}
-          onDelete={() => onDelete(car.id)}
+          onDelete={() => onDelete(car)}
         />
       ))}
     </div>

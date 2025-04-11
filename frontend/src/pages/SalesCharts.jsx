@@ -1,72 +1,81 @@
+// Importaciones necesarias desde React y librerías externas
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
-import { ArrowLeft } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+import { useParams } from 'react-router-dom'; // Para obtener parámetros de la URL (ej. modelo)
+import { Bar } from 'react-chartjs-2'; // Componente de gráfico de barras de Chart.js
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+} from 'chart.js'; // Elementos que debemos registrar en Chart.js
+import { ArrowLeft } from 'lucide-react'; // Ícono de flecha
+import { createIcons, icons } from 'lucide';
+import { useNavigate } from 'react-router-dom'; // Para navegar entre rutas
+import Modal from 'react-bootstrap/Modal'; // Modal de Bootstrap
+import Button from 'react-bootstrap/Button'; // Botón de Bootstrap
+import '../styles/animations.css';
 
+// Registramos los componentes de Chart.js que vamos a usar
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
+// Componente principal
 export default function SalesDetail({ initialViewAnnualSales = false }) {
+  // Extraemos el modelo desde la URL (si se pasa)
   const { model } = useParams();
   const navigate = useNavigate();
-  const [sales, setSales] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [viewAnnualSales, setViewAnnualSales] = useState(initialViewAnnualSales);
-  const [showModal, setShowModal] = useState(false);
-  const [models, setModels] = useState([]);
-  const [selectedModel, setSelectedModel] = useState(model || '');
-  const [topModels, setTopModels] = useState([]);
-  const [salesByYear, setSalesByYear] = useState([]);
-  const [salesByCountry, setSalesByCountry] = useState([]);
 
+  // Estados
+  const [sales, setSales] = useState([]); // Ventas del modelo seleccionado
+  const [loading, setLoading] = useState(true); // Mostrar spinner de carga
+  const [viewAnnualSales, setViewAnnualSales] = useState(initialViewAnnualSales); // Ver resumen general o individual
+  const [showModal, setShowModal] = useState(false); // Controla si se muestra el modal
+  const [models, setModels] = useState([]); // Lista de modelos disponibles
+  const [selectedModel, setSelectedModel] = useState(model || ''); // Modelo actualmente seleccionado
+  const [topModels, setTopModels] = useState([]); // Modelos más vendidos
+  const [salesByYear, setSalesByYear] = useState([]); // Ventas agrupadas por año
+  const [salesByCountry, setSalesByCountry] = useState([]); // Ventas agrupadas por país
+  const [activeChart, setActiveChart] = useState('year'); // Estado para el gráfico activo
+  const [animationClass, setAnimationClass] = useState('animate-fade-up'); // Clase de animación
+
+  createIcons({ icons });
+
+  // useEffect que se dispara cuando cambia el modo de vista o el modelo seleccionado
   useEffect(() => {
     if (viewAnnualSales) {
-      // Solo cargar todos los gráficos si NO estás en modo modelo individual
-      if (!model) {
-        fetchAnnualSales();
-        fetchTopModels();
-        fetchTotalSalesByYear();
-      }
+      // Cargar datos generales si se activa la vista de ventas generales
+      fetchAnnualSales();
+      fetchTopModels();
+      fetchTotalSalesByYear();
     } else if (selectedModel) {
+      // Cargar datos del modelo seleccionado si se activa la vista de ventas por modelo
       fetchModelSales(selectedModel);
     }
-  }, [viewAnnualSales, selectedModel]);
+  }, [viewAnnualSales, selectedModel]); // Asegurarse de que este efecto se ejecute al cambiar `viewAnnualSales` o `selectedModel`
 
+  // Carga los modelos disponibles (para el modal)
   useEffect(() => {
     fetchAvailableModels();
   }, []);
 
+  // Llama al backend para obtener ventas de un modelo específico y las agrupa por año
   const fetchModelSales = async (model) => {
     try {
       setLoading(true);
       const res = await fetch(`/sales?model=${model}`);
       const data = await res.json();
 
-      // Agrupar ventas del modelo por año y sumar unidades
+      // Agrupar por año y sumar las unidades vendidas
       const grouped = {};
-
       data.data.forEach((item) => {
         const year = item.year;
         const units = item.units_sold;
-
-        if (grouped[year]) {
-          grouped[year] += units;
-        } else {
-          grouped[year] = units;
-        }
+        grouped[year] = (grouped[year] || 0) + units;
       });
 
-      const processedData = Object.entries(grouped).map(([year, units]) => ({
-        year,
-        units,
-      }));
-
-      setSales(processedData);
-
-
+      const processedData = Object.entries(grouped).map(([year, units]) => ({ year, units }));
       setSales(processedData);
       setLoading(false);
     } catch (error) {
@@ -75,18 +84,16 @@ export default function SalesDetail({ initialViewAnnualSales = false }) {
     }
   };
 
+  // Llama al backend para obtener ventas por país
   const fetchAnnualSales = async () => {
     try {
       setLoading(true);
       const res = await fetch('/sales/annual');
       const data = await res.json();
-
-      // Procesar los datos para el gráfico
       const processedData = data.map((item) => ({
         country: item.country,
         units: item.total_units,
       }));
-
       setSalesByCountry(processedData);
       setLoading(false);
     } catch (error) {
@@ -95,6 +102,7 @@ export default function SalesDetail({ initialViewAnnualSales = false }) {
     }
   };
 
+  // Llama al backend para obtener todos los modelos
   const fetchAvailableModels = async () => {
     try {
       const res = await fetch('/cars');
@@ -106,19 +114,16 @@ export default function SalesDetail({ initialViewAnnualSales = false }) {
     }
   };
 
-
+  // Llama al backend para obtener ventas totales por año
   const fetchTotalSalesByYear = async () => {
     try {
       setLoading(true);
       const res = await fetch('/sales/total-by-year');
       const data = await res.json();
-
-      // Procesar los datos para el gráfico
       const processedData = data.map((item) => ({
         year: item.year,
         units: item.total_units,
       }));
-
       setSalesByYear(processedData);
       setLoading(false);
     } catch (error) {
@@ -127,18 +132,16 @@ export default function SalesDetail({ initialViewAnnualSales = false }) {
     }
   };
 
+  // Llama al backend para obtener los modelos más vendidos
   const fetchTopModels = async () => {
     try {
       setLoading(true);
       const res = await fetch('/sales/top-models');
       const data = await res.json();
-
-      // Procesar los datos para el gráfico
       const processedData = data.map((item) => ({
         model: item.model,
         units: item.total_units,
       }));
-
       setTopModels(processedData);
       setLoading(false);
     } catch (error) {
@@ -147,8 +150,9 @@ export default function SalesDetail({ initialViewAnnualSales = false }) {
     }
   };
 
+  // Datos del gráfico de modelos más vendidos
   const topModelsData = {
-    labels: topModels.map((m) => m.model || "Modelo desconocido"),
+    labels: topModels.map((m) => m.model),
     datasets: [
       {
         label: 'Unidades vendidas',
@@ -159,8 +163,9 @@ export default function SalesDetail({ initialViewAnnualSales = false }) {
     ],
   };
 
+  // Datos del gráfico de ventas por año
   const salesByYearData = {
-    labels: salesByYear.map((y) => y.year || "Año desconocido"),
+    labels: salesByYear.map((y) => y.year),
     datasets: [
       {
         label: 'Unidades vendidas por año',
@@ -171,8 +176,9 @@ export default function SalesDetail({ initialViewAnnualSales = false }) {
     ],
   };
 
+  // Datos del gráfico de ventas por país
   const salesByCountryData = {
-    labels: salesByCountry.map((c) => c.country || "País desconocido"),
+    labels: salesByCountry.map((c) => c.country),
     datasets: [
       {
         label: 'Unidades vendidas por país',
@@ -183,8 +189,9 @@ export default function SalesDetail({ initialViewAnnualSales = false }) {
     ],
   };
 
+  // Datos del gráfico de ventas del modelo actual
   const modelSalesData = {
-    labels: sales.map((s) => s.year || "Año desconocido"),
+    labels: sales.map((s) => s.year),
     datasets: [
       {
         label: `Unidades vendidas (${selectedModel})`,
@@ -195,6 +202,7 @@ export default function SalesDetail({ initialViewAnnualSales = false }) {
     ],
   };
 
+  // Configuración general del gráfico
   const chartOptions = {
     responsive: true,
     plugins: {
@@ -207,18 +215,28 @@ export default function SalesDetail({ initialViewAnnualSales = false }) {
     },
   };
 
+  // Cuando el usuario selecciona un modelo desde el modal
   const handleModelSelection = (model) => {
     setSelectedModel(model);
     setViewAnnualSales(false);
     setShowModal(false);
   };
 
+  // Función para cambiar el gráfico con animación
+  const handleChartChange = (chart) => {
+    setAnimationClass('animate-fade-up'); // Reinicia la animación
+    setActiveChart(chart); // Cambia el gráfico activo
+  };
+
   return (
     <div className="container py-5 animate-fade-in">
-      {/* Título + botones */}
+      {/* Encabezado de la sección */}
       <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
-        <h2 className="text-primary mb-3 mb-md-0">📊 Ventas</h2>
+        <h1 className="page-title">
+          <i className="bi bi-bar-chart-fill me-2" data-lucide="badge-euro"></i> Página de Ventas
+        </h1>
         <div className="d-flex gap-2">
+          {/* Botón para volver al inicio */}
           <button
             className="btn btn-outline-primary d-flex align-items-center shadow-sm hover-scale"
             onClick={() => navigate('/')}
@@ -226,22 +244,53 @@ export default function SalesDetail({ initialViewAnnualSales = false }) {
             <ArrowLeft className="me-2" size={18} />
             Volver al garaje
           </button>
+
+          {/* Botón para cambiar entre modo global y por modelo */}
           <button
             className={`btn ${viewAnnualSales ? 'btn-outline-success' : 'btn-outline-primary'} d-flex align-items-center shadow-sm hover-scale`}
             onClick={() => {
               if (viewAnnualSales) {
+                // Cambiar a la vista de ventas por modelo
                 setShowModal(true);
               } else {
+                // Cambiar a la vista de ventas generales
                 setViewAnnualSales(true);
+                setSelectedModel(''); // Limpiar el modelo seleccionado
               }
             }}
           >
-            {viewAnnualSales ? 'Ver Ventas por Modelo' : ' Ventas Generales'}
+            {viewAnnualSales ? 'Ver Ventas por Modelo' : 'Ventas Generales'}
           </button>
         </div>
       </div>
 
-      {/* Estado de carga */}
+      {/* Botones para cambiar de gráfico */}
+      <div className="d-flex justify-content-center gap-3 mb-4">
+        {(!selectedModel && viewAnnualSales) && (
+          <>
+            <button
+              className={`btn ${activeChart === 'year' ? 'btn-primary' : 'btn-outline-primary'}`}
+              onClick={() => handleChartChange('year')}
+            >
+              Ventas Totales p/Año
+            </button>
+            <button
+              className={`btn ${activeChart === 'country' ? 'btn-primary' : 'btn-outline-primary'}`}
+              onClick={() => handleChartChange('country')}
+            >
+              Ventas Totales por País
+            </button>
+            <button
+              className={`btn ${activeChart === 'models' ? 'btn-primary' : 'btn-outline-primary'}`}
+              onClick={() => handleChartChange('models')}
+            >
+              Modelos Más Vendidos
+            </button>
+          </>
+        )}
+      </div>
+
+      {/* Mostrar spinner mientras se carga */}
       {loading ? (
         <div className="text-center text-muted">
           <div className="spinner-border text-primary mb-3" role="status" />
@@ -249,7 +298,7 @@ export default function SalesDetail({ initialViewAnnualSales = false }) {
         </div>
       ) : (
         <div>
-          {/* Si estás viendo un modelo específico */}
+          {/* Si se está viendo un modelo individual */}
           {!viewAnnualSales && selectedModel ? (
             <>
               <h3 className="text-secondary mb-3">Ventas del Modelo: {selectedModel}</h3>
@@ -259,30 +308,18 @@ export default function SalesDetail({ initialViewAnnualSales = false }) {
             </>
           ) : (
             <>
-              {/* Gráfico de ventas totales por año */}
-              <h3 className="text-secondary mb-3">Ventas Totales por Año</h3>
-              <div className="bg-white p-4 rounded shadow animate-fade-up mb-4">
-                <Bar data={salesByYearData} options={{ ...chartOptions, title: { text: 'Ventas Totales por Año' } }} />
-              </div>
-
-              {/* Gráfico de ventas totales por país */}
-              <h3 className="text-secondary mb-3">Ventas Totales por País</h3>
-              <div className="bg-white p-4 rounded shadow animate-fade-up mb-4">
-                <Bar data={salesByCountryData} options={{ ...chartOptions, title: { text: 'Ventas Totales por País' } }} />
-              </div>
-
-              {/* Gráfico de modelos más vendidos */}
-              <h3 className="text-secondary mb-3">Modelos Más Vendidos</h3>
-              <div className="bg-white p-4 rounded shadow animate-fade-up">
-                <Bar data={topModelsData} options={{ ...chartOptions, title: { text: 'Modelos Más Vendidos' } }} />
+              {/* Contenedor del gráfico con animación */}
+              <div className={`bg-white p-4 rounded shadow ${animationClass}`}>
+                {activeChart === 'year' && <Bar data={salesByYearData} options={{ responsive: true }} />}
+                {activeChart === 'country' && <Bar data={salesByCountryData} options={{ responsive: true }} />}
+                {activeChart === 'models' && <Bar data={topModelsData} options={{ responsive: true }} />}
               </div>
             </>
           )}
         </div>
       )}
 
-
-      {/* Modal para seleccionar modelo */}
+      {/* Modal para elegir modelo */}
       <Modal show={showModal} onHide={() => setShowModal(false)} centered>
         <Modal.Header closeButton>
           <Modal.Title>Seleccionar Modelo</Modal.Title>

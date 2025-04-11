@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #f0f4f8, #d9e8fc);
+  min-height: 100vh;
+}
+
+
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+#root {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.content-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 120px; /* Ajuste por navbar fija */
+}
+
+input::placeholder {
+  color: #bbb;
+}
+
+/* Spinner */
+.spinner-border {
+    width: 2rem;
+    height: 2rem;
+    border-width: 0.3rem;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    position: relative;
+}

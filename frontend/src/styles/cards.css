@@ -1,0 +1,59 @@
+.car-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-bottom: 3.5rem; /* espacio reservado para los botones */
+}
+
+.card .d-flex {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    gap: 1rem; /* Espaciado horizontal entre los botones */
+}
+
+.car-year {
+  display: inline-block;
+  background-color: #ffffff; /* Verde Bootstrap */
+  color: #0d6efd; /* Texto blanco */
+  border: #0d6efd solid 2px; /* Borde del mismo color que el fondo */
+  font-size: 1rem; /* Tamaño de fuente más grande */
+  font-weight: bold; /* Negrita */
+  padding: 0.3rem 0.8rem; /* Más espaciado interno */
+  border-radius: 16px; /* Bordes más redondeados */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+  margin-left: 0.6rem; /* Espaciado a la izquierda */
+  vertical-align: middle; /* Alinear con el texto */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.car-year:hover {
+  transform: scale(1.15); /* Efecto de zoom más pronunciado */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25); /* Sombra más intensa */
+}
+
+/* Botones dentro de las tarjetas */
+.card .btn {
+    text-align: center;
+    padding: 0.5rem 1rem; /* Espaciado interno */
+}
+  
+.card .btn-sm {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+}
+  
+.card .btn-outline-primary,
+.card .btn-outline-danger {
+    width: 48%; /* Asegura que los botones "Editar" y "Borrar" ocupen la mitad del ancho */
+}
+  
+.card .btn-outline-success {
+    width: 100%; /* Asegura que el botón "Ver Ventas" ocupe todo el ancho */
+    margin-top: 0.5rem; /* Espaciado superior para separar de los otros botones */
+}
+
+
+
