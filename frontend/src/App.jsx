@@ -37,6 +37,14 @@ function App() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [carToDelete, setCarToDelete] = useState(null);
 
+  const [animationClass, setAnimationClass] = useState(''); // Estado para la animación
+  const [isLoading, setIsLoading] = useState(false); // Nuevo estado para controlar la carga
+
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false); // Controla la visibilidad del modal
+  const [createdCar, setCreatedCar] = useState(null); // Almacena los detalles del coche creado
+
+  const [showEditModal, setShowEditModal] = useState(false); // Controla la visibilidad del modal de edición
+  const [editedCar, setEditedCar] = useState(null); // Almacena los detalles del coche editado
 
   // Efecto para recargar coches al cambiar de página
   useEffect(() => {
@@ -44,9 +52,9 @@ function App() {
   }, [page, search]); // Ejecuta este efecto cuando cambie la página o el término de búsqueda
 
   // Función para cargar coches desde la API
-  const loadCars = async (model = search) => {
+  const loadCars = async (model = search, pageToLoad = page) => {
     try {
-      const { data, total } = await getCars(model, page, limit); // Incluye el término de búsqueda
+      const { data, total } = await getCars(model, pageToLoad, limit); // Incluye el término de búsqueda
       setCars(data);
       setTotal(total);
     } catch (error) {
@@ -74,8 +82,12 @@ function App() {
       if (editIndex !== null) {
         await updateCar(car.id, car);
         setEditIndex(null);
+        setEditedCar(car); // Almacena los detalles del coche editado
+        setShowEditModal(true); // Muestra el modal de edición
       } else {
         await createCar(car);
+        setCreatedCar(car); // Almacena los detalles del coche creado
+        setShowConfirmationModal(true); // Muestra el modal de confirmación
       }
       setEditingCar(null);
       setShowForm(false);
@@ -86,7 +98,7 @@ function App() {
         alert("No se pueden introducir números en la marca. Por favor, corrige el error.");
         setShowForm(true); // Redirigir al formulario de creación
       } else {
-        console.error("Error al crear el coche:", errorMessage.error);
+        console.error("Error al crear o editar el coche:", errorMessage.error);
       }
     }
   };
@@ -113,9 +125,15 @@ function App() {
 
   const totalPages = Math.ceil(total / limit);
 
-  const handlePageChange = (newPage) => {
+  const handlePageChange = async (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
-      setPage(newPage);
+      setAnimationClass('animate-fade-out'); // Aplica la animación de desvanecimiento
+
+      setTimeout(async () => {
+        await loadCars(search, newPage); // Carga los datos de la nueva página
+        setPage(newPage); // Cambia la página
+        setAnimationClass('animate-fade-in'); // Aplica la animación de aparición
+      }, 500); // Duración de la animación de desvanecimiento
     }
   };
 
@@ -259,14 +277,22 @@ function App() {
                 </div>
               </nav>
               {/* Contenido */}
-              <div className="content-container mt-5 pt-4 animate-fade-up">
+              <div className={`content-container mt-5 pt-4 ${animationClass}`}>
                 {showForm ? (
                   <div className="form-container animate-bounce">
                     <CarForm onSubmit={handleCreate} editingCar={editingCar} />
                   </div>
                 ) : (
-                  <div className="animate-fade-up">
-                    <CarList cars={cars} onEdit={handleEdit} onDelete={confirmDelete}/>
+                  <div className={`animate-fade-up ${animationClass}`}>
+                    {isLoading ? (
+                      <div className="text-center my-5">
+                        <div className="spinner-border text-primary" role="status">
+                          <span className="visually-hidden">Cargando...</span>
+                        </div>
+                      </div>
+                    ) : (
+                      <CarList cars={cars} onEdit={handleEdit} onDelete={confirmDelete} />
+                    )}
                     {/* Botones para cambiar de pagina */}
                     <div className="pagination animate-slide-in-bottom">
                       <button
@@ -317,6 +343,50 @@ function App() {
                   </Button>
                   <Button variant="danger" onClick={handleDelete}>
                     Eliminar
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+
+              {/* Modal de confirmación de creación */}
+              <Modal show={showConfirmationModal} onHide={() => setShowConfirmationModal(false)} centered>
+                <Modal.Header closeButton>
+                  <Modal.Title>¡Coche Creado!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  {createdCar && (
+                    <div>
+                      <p><strong>Marca:</strong> {createdCar.make}</p>
+                      <p><strong>Modelo:</strong> {createdCar.model}</p>
+                      <p><strong>Año:</strong> {createdCar.year}</p>
+                      <p><strong>Características:</strong> {createdCar.features?.join(', ')}</p>
+                    </div>
+                  )}
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="primary" onClick={() => setShowConfirmationModal(false)}>
+                    OK
+                  </Button>
+                </Modal.Footer>
+              </Modal>
+
+              {/* Modal de confirmación de edición */}
+              <Modal show={showEditModal} onHide={() => setShowEditModal(false)} centered>
+                <Modal.Header closeButton>
+                  <Modal.Title>¡Coche Editado!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  {editedCar && (
+                    <div>
+                      <p><strong>Marca:</strong> {editedCar.make}</p>
+                      <p><strong>Modelo:</strong> {editedCar.model}</p>
+                      <p><strong>Año:</strong> {editedCar.year}</p>
+                      <p><strong>Características:</strong> {editedCar.features?.join(', ')}</p>
+                    </div>
+                  )}
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="primary" onClick={() => setShowEditModal(false)}>
+                    OK
                   </Button>
                 </Modal.Footer>
               </Modal>

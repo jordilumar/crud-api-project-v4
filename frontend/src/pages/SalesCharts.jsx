@@ -30,8 +30,9 @@ export default function SalesCharts() {
   // Estados
   const [sales, setSales] = useState([]); // Ventas del modelo seleccionado
   const [loading, setLoading] = useState(true); // Mostrar spinner de carga
-  const [showModal, setShowModal] = useState(false); // Controla si se muestra el modal
   const [models, setModels] = useState([]); // Lista de modelos disponibles
+  const [showModal, setShowModal] = useState(false); // Controla si se muestra el modal
+
   const [selectedModel, setSelectedModel] = useState(model || ''); // Modelo actualmente seleccionado
   const [viewAnnualSales, setViewAnnualSales] = useState((model === "" || model === undefined) ? true : false); // Ver resumen general o individual
   const [topModels, setTopModels] = useState([]); // Modelos más vendidos
@@ -44,7 +45,6 @@ export default function SalesCharts() {
 
   // useEffect que se dispara cuando cambia el modo de vista o el modelo seleccionado
   useEffect(() => {
-    console.log('Cambiando vista de ventas...');
     if (selectedModel === "" || selectedModel === undefined) {
       // Cargar datos generales si se activa la vista de ventas generales
       fetchAnnualSales();
@@ -240,7 +240,16 @@ export default function SalesCharts() {
           <button
             className={`btn ${viewAnnualSales ? 'btn-outline-success' : 'btn-outline-primary'} d-flex align-items-center shadow-sm hover-scale`}
             onClick={() => {
-              setShowModal(true);
+              if (viewAnnualSales) {
+                // Cambiar a "Ventas por Modelo"
+                setViewAnnualSales(false);
+                setShowModal(true); // Mostrar el modal para seleccionar un modelo
+              } else {
+                // Cambiar a "Ventas Generales"
+                setViewAnnualSales(true);
+                setSelectedModel(''); // Reiniciar el modelo seleccionado
+                fetchAnnualSales(); // Cargar datos generales
+              }
             }}
           >
             {viewAnnualSales ? 'Ver Ventas por Modelo' : 'Ventas Generales'}
@@ -252,19 +261,34 @@ export default function SalesCharts() {
       {!selectedModel && (
         <div className="d-flex justify-content-center gap-3 mb-4">
           <button
-            className={`btn ${activeChart === 'year' ? 'btn-primary' : 'btn-outline-primary'}`}
+            className={`btn ${activeChart === 'year' ? 'text-white' : ''}`}
+            style={{
+              backgroundColor: activeChart === 'year' ? 'rgba(255, 159, 64, 0.7)' : 'transparent',
+              borderColor: 'rgba(255, 159, 64, 0.7)',
+              color: activeChart === 'year' ? '#fff' : 'rgba(255, 159, 64, 0.7)',
+            }}
             onClick={() => handleChartChange('year')}
           >
-            Ventas Totales p/Año
+            Ventas Totales por Año
           </button>
           <button
-            className={`btn ${activeChart === 'country' ? 'btn-primary' : 'btn-outline-primary'}`}
+            className={`btn ${activeChart === 'country' ? 'text-white' : ''}`}
+            style={{
+              backgroundColor: activeChart === 'country' ? 'rgba(153, 102, 255, 0.7)' : 'transparent',
+              borderColor: 'rgba(153, 102, 255, 0.7)',
+              color: activeChart === 'country' ? '#fff' : 'rgba(153, 102, 255, 0.7)',
+            }}
             onClick={() => handleChartChange('country')}
           >
             Ventas Totales por País
           </button>
           <button
-            className={`btn ${activeChart === 'models' ? 'btn-primary' : 'btn-outline-primary'}`}
+            className={`btn ${activeChart === 'models' ? 'text-white' : ''}`}
+            style={{
+              backgroundColor: activeChart === 'models' ? 'rgba(75, 192, 192, 0.7)' : 'transparent',
+              borderColor: 'rgba(75, 192, 192, 0.7)',
+              color: activeChart === 'models' ? '#fff' : 'rgba(75, 192, 192, 0.7)',
+            }}
             onClick={() => handleChartChange('models')}
           >
             Modelos Más Vendidos
@@ -312,8 +336,11 @@ export default function SalesCharts() {
                 key={model}
                 className="list-group-item list-group-item-action"
                 onClick={() => {
-                  setSelectedModel(model)
-                  setShowModal(false)
+                  setSelectedModel(model); // Establecer el modelo seleccionado
+                  setViewAnnualSales(false); // Cambiar a vista de modelo
+                  setShowModal(false); // Cerrar el modal
+                  fetchModelSales(model); // Cargar datos del modelo seleccionado
+                  navigate(`/annual-sales/${model}`); // Actualizar la URL con el modelo seleccionado
                 }}
               >
                 {model}
