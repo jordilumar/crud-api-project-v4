@@ -26,7 +26,7 @@ export default function CarItem({ car, index, onEdit, onDelete }) {
           </div>
           <button
             className="btn btn-sm btn-outline-success w-100"
-            onClick={() => navigate(`/sales/${car.model.toLowerCase()}`)}
+            onClick={() => navigate(`/sales/${car.model.toLowerCase()}`)} // Convierte el modelo a minúsculas
           >
             <BarChart size={16} className="me-1" />
             Ver Ventas

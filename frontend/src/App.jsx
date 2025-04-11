@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { Search, Car, BarChart, ArrowLeft } from 'lucide-react';
+import { Search, Car, BarChart, ArrowLeft, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from 'lucide-react';
 import SalesCharts from './pages/SalesCharts';
 import CarForm from './components/CarForm';
 import CarList from './components/CarList';
@@ -111,22 +111,80 @@ function App() {
     setShowDeleteModal(true);
   };
 
-  const handleNextPage = () => {
-    if (page * limit < total) {
-      setTimeout(() => {
-        setPage((prevPage) => prevPage + 1);
-        loadCars(search); // Carga los coches con el término de búsqueda actual
-      }, 400);
+  const totalPages = Math.ceil(total / limit);
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setPage(newPage);
     }
   };
 
-  const handlePrevPage = () => {
-    if (page > 1) {
-      setTimeout(() => {
-        setPage((prevPage) => prevPage - 1);
-        loadCars(search); // Carga los coches con el término de búsqueda actual
-      }, 400);
+  const renderPaginationButtons = () => {
+    const buttons = [];
+    const maxVisibleButtons = 5;
+
+    // Siempre mostrar el botón para la página 1
+    buttons.push(
+      <button
+        key="page-1"
+        className={`pagination-button ${page === 1 ? "active" : ""}`}
+        onClick={() => handlePageChange(1)}
+      >
+        1
+      </button>
+    );
+
+    if (totalPages > maxVisibleButtons) {
+      if (page > 3) {
+        buttons.push(<span key="dots-left" className="pagination-dots">...</span>);
+      }
+
+      const startPage = Math.max(2, page - 1);
+      const endPage = Math.min(totalPages - 1, page + 1);
+
+      for (let i = startPage; i <= endPage; i++) {
+        buttons.push(
+          <button
+            key={`page-${i}`} // Clave única para cada botón
+            className={`pagination-button ${page === i ? "active" : ""}`}
+            onClick={() => handlePageChange(i)}
+          >
+            {i}
+          </button>
+        );
+      }
+
+      if (page < totalPages - 2) {
+        buttons.push(<span key="dots-right" className="pagination-dots">...</span>);
+      }
+    } else {
+      for (let i = 2; i <= totalPages; i++) {
+        buttons.push(
+          <button
+            key={`page-${i}`} // Clave única para cada botón
+            className={`pagination-button ${page === i ? "active" : ""}`}
+            onClick={() => handlePageChange(i)}
+          >
+            {i}
+          </button>
+        );
+      }
     }
+
+    // Siempre mostrar el botón para la última página
+    if (totalPages > 1) {
+      buttons.push(
+        <button
+          key={`page-${totalPages}`} // Clave única para la última página
+          className={`pagination-button ${page === totalPages ? "active" : ""}`}
+          onClick={() => handlePageChange(totalPages)}
+        >
+          {totalPages}
+        </button>
+      );
+    }
+
+    return buttons;
   };
 
   return (
@@ -211,12 +269,34 @@ function App() {
                     <CarList cars={cars} onEdit={handleEdit} onDelete={confirmDelete}/>
                     {/* Botones para cambiar de pagina */}
                     <div className="pagination animate-slide-in-bottom">
-                      <button onClick={handlePrevPage} disabled={page === 1}>
-                        Anterior
+                      <button
+                        className="pagination-arrow"
+                        onClick={() => handlePageChange(1)}
+                        disabled={page === 1}
+                      >
+                        <ChevronsLeft />
                       </button>
-                      <span>Página {page}</span>
-                      <button onClick={handleNextPage} disabled={page * limit >= total}>
-                        Siguiente
+                      <button
+                        className="pagination-arrow"
+                        onClick={() => handlePageChange(page - 1)}
+                        disabled={page === 1}
+                      >
+                        <ChevronLeft />
+                      </button>
+                      {renderPaginationButtons()}
+                      <button
+                        className="pagination-arrow"
+                        onClick={() => handlePageChange(page + 1)}
+                        disabled={page === totalPages}
+                      >
+                        <ChevronRight />
+                      </button>
+                      <button
+                        className="pagination-arrow"
+                        onClick={() => handlePageChange(totalPages)}
+                        disabled={page === totalPages}
+                      >
+                        <ChevronsRight />
                       </button>
                     </div>
                   </div>

@@ -22,17 +22,15 @@ def read_sales_db():
 
 @sales_bp.route('/sales', methods=['GET'])
 def get_sales():
-    model = request.args.get('model')  # Obtener el parámetro 'model' de la URL
+    model = request.args.get('model')
     sales = read_sales_db()
 
-    # Filtrar por modelo si se proporciona
     if model:
-        sales = [sale for sale in sales if sale['model'].lower() == model.lower()]  # Filtrar por modelo
+        sales = [sale for sale in sales if sale['model'].lower() == model.lower()]
+        if not sales:
+            return jsonify({"error": f"No sales found for model '{model}'"}), 404
 
-    return jsonify({
-        "data": sales,
-        "total": len(sales),
-    }), 200
+    return jsonify({"data": sales, "total": len(sales)}), 200
 
 @sales_bp.route('/sales/annual', methods=['GET'])
 def get_annual_sales():

@@ -22,7 +22,7 @@ import '../styles/animations.css';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 // Componente principal
-export default function SalesDetail({ initialViewAnnualSales = false }) {
+export default function SalesCharts({ initialViewAnnualSales = false }) {
   // Extraemos el modelo desde la URL (si se pasa)
   const { model } = useParams();
   const navigate = useNavigate();
@@ -233,10 +233,9 @@ export default function SalesDetail({ initialViewAnnualSales = false }) {
       {/* Encabezado de la sección */}
       <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4">
         <h1 className="page-title">
-          <i className="bi bi-bar-chart-fill me-2" data-lucide="badge-euro"></i> Página de Ventas
+          <i className="bi bi-bar-chart-fill me-2" datalucide="badge-euro"></i> Página de Ventas
         </h1>
         <div className="d-flex gap-2">
-          {/* Botón para volver al inicio */}
           <button
             className="btn btn-outline-primary d-flex align-items-center shadow-sm hover-scale"
             onClick={() => navigate('/')}
@@ -244,18 +243,14 @@ export default function SalesDetail({ initialViewAnnualSales = false }) {
             <ArrowLeft className="me-2" size={18} />
             Volver al garaje
           </button>
-
-          {/* Botón para cambiar entre modo global y por modelo */}
           <button
             className={`btn ${viewAnnualSales ? 'btn-outline-success' : 'btn-outline-primary'} d-flex align-items-center shadow-sm hover-scale`}
             onClick={() => {
               if (viewAnnualSales) {
-                // Cambiar a la vista de ventas por modelo
-                setShowModal(true);
+                setShowModal(true); // Mostrar modal para seleccionar modelo
               } else {
-                // Cambiar a la vista de ventas generales
-                setViewAnnualSales(true);
-                setSelectedModel(''); // Limpiar el modelo seleccionado
+                setViewAnnualSales(true); // Cambiar a vista general
+                setSelectedModel(''); // Limpiar modelo seleccionado
               }
             }}
           >
@@ -264,31 +259,29 @@ export default function SalesDetail({ initialViewAnnualSales = false }) {
         </div>
       </div>
 
-      {/* Botones para cambiar de gráfico */}
-      <div className="d-flex justify-content-center gap-3 mb-4">
-        {(!selectedModel && viewAnnualSales) && (
-          <>
-            <button
-              className={`btn ${activeChart === 'year' ? 'btn-primary' : 'btn-outline-primary'}`}
-              onClick={() => handleChartChange('year')}
-            >
-              Ventas Totales p/Año
-            </button>
-            <button
-              className={`btn ${activeChart === 'country' ? 'btn-primary' : 'btn-outline-primary'}`}
-              onClick={() => handleChartChange('country')}
-            >
-              Ventas Totales por País
-            </button>
-            <button
-              className={`btn ${activeChart === 'models' ? 'btn-primary' : 'btn-outline-primary'}`}
-              onClick={() => handleChartChange('models')}
-            >
-              Modelos Más Vendidos
-            </button>
-          </>
-        )}
-      </div>
+      {/* Mostrar filtros solo si no se está viendo un modelo específico */}
+      {!selectedModel && (
+        <div className="d-flex justify-content-center gap-3 mb-4">
+          <button
+            className={`btn ${activeChart === 'year' ? 'btn-primary' : 'btn-outline-primary'}`}
+            onClick={() => handleChartChange('year')}
+          >
+            Ventas Totales p/Año
+          </button>
+          <button
+            className={`btn ${activeChart === 'country' ? 'btn-primary' : 'btn-outline-primary'}`}
+            onClick={() => handleChartChange('country')}
+          >
+            Ventas Totales por País
+          </button>
+          <button
+            className={`btn ${activeChart === 'models' ? 'btn-primary' : 'btn-outline-primary'}`}
+            onClick={() => handleChartChange('models')}
+          >
+            Modelos Más Vendidos
+          </button>
+        </div>
+      )}
 
       {/* Mostrar spinner mientras se carga */}
       {loading ? (
@@ -298,7 +291,6 @@ export default function SalesDetail({ initialViewAnnualSales = false }) {
         </div>
       ) : (
         <div>
-          {/* Si se está viendo un modelo individual */}
           {!viewAnnualSales && selectedModel ? (
             <>
               <h3 className="text-secondary mb-3">Ventas del Modelo: {selectedModel}</h3>
@@ -308,7 +300,6 @@ export default function SalesDetail({ initialViewAnnualSales = false }) {
             </>
           ) : (
             <>
-              {/* Contenedor del gráfico con animación */}
               <div className={`bg-white p-4 rounded shadow ${animationClass}`}>
                 {activeChart === 'year' && <Bar data={salesByYearData} options={{ responsive: true }} />}
                 {activeChart === 'country' && <Bar data={salesByCountryData} options={{ responsive: true }} />}
