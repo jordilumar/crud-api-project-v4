@@ -103,11 +103,19 @@ export default function SalesCharts() {
     }
   };
 
-  // Llama al backend para obtener todos los modelos
+  // Modificar la función fetchAvailableModels
   const fetchAvailableModels = async () => {
     try {
-      const res = await fetch('/cars');
+      // Primero obtenemos el total de coches para saber cuántos hay
+      const initialRes = await fetch('/cars?page=1&limit=1');
+      const initialData = await initialRes.json();
+      const totalCars = initialData.total;
+
+      // Ahora hacemos la petición con un límite igual al total de coches
+      const res = await fetch(`/cars?limit=${totalCars}`);
       const data = await res.json();
+      
+      // Extraemos los modelos únicos
       const uniqueModels = [...new Set(data.data.map((car) => car.model))];
       setModels(uniqueModels);
     } catch (error) {
@@ -241,14 +249,13 @@ export default function SalesCharts() {
             className={`btn ${viewAnnualSales ? 'btn-outline-success' : 'btn-outline-primary'} d-flex align-items-center shadow-sm hover-scale`}
             onClick={() => {
               if (viewAnnualSales) {
-                // Cambiar a "Ventas por Modelo"
-                setViewAnnualSales(false);
-                setShowModal(true); // Mostrar el modal para seleccionar un modelo
+                // Mostrar el modal para seleccionar un modelo sin cambiar viewAnnualSales todavía
+                setShowModal(true);
               } else {
                 // Cambiar a "Ventas Generales"
                 setViewAnnualSales(true);
-                setSelectedModel(''); // Reiniciar el modelo seleccionado
-                fetchAnnualSales(); // Cargar datos generales
+                setSelectedModel('');
+                fetchAnnualSales();
               }
             }}
           >
@@ -336,11 +343,11 @@ export default function SalesCharts() {
                 key={model}
                 className="list-group-item list-group-item-action"
                 onClick={() => {
-                  setSelectedModel(model); // Establecer el modelo seleccionado
-                  setViewAnnualSales(false); // Cambiar a vista de modelo
-                  setShowModal(false); // Cerrar el modal
-                  fetchModelSales(model); // Cargar datos del modelo seleccionado
-                  navigate(`/annual-sales/${model}`); // Actualizar la URL con el modelo seleccionado
+                  setSelectedModel(model);
+                  setViewAnnualSales(false); // Ahora cambiamos viewAnnualSales solo cuando se selecciona un modelo
+                  setShowModal(false);
+                  fetchModelSales(model);
+                  navigate(`/annual-sales/${model}`);
                 }}
               >
                 {model}
