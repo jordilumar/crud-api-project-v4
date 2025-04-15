@@ -1,24 +1,13 @@
 [
     {
         "id": 1,
-        "make": "Mercedes-Benzzzz",
+        "make": "Mercedes-Benz",
         "model": "GLE",
         "year": 2014,
         "features": [
             "Apple CarPlay",
             "SmartSense",
             "Bose Premium Audio"
-        ]
-    },
-    {
-        "id": 2,
-        "make": "Mercedes-Benz",
-        "model": "E-Class",
-        "year": 1997,
-        "features": [
-            "Air Conditioning",
-            "Gesture Control",
-            "Ambient Lighting"
         ]
     },
     {
@@ -11549,7 +11538,7 @@
     },
     {
         "id": 1052,
-        "make": "Audi",
+        "make": "Audii",
         "model": "Rs7",
         "year": 1990,
         "features": [

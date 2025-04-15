@@ -1,6 +1,6 @@
 import CarItem from './CarItem';
 
-export default function CarList({ cars, onEdit, onDelete, animationClass, isLoading }) {
+export default function CarList({ cars, onEdit, onDelete, animationClass, isLoading, onViewSales, onRemoveFavorite }) {
   return (
     <div className={`car-list-container ${animationClass}`}>
       {isLoading ? (
@@ -18,6 +18,8 @@ export default function CarList({ cars, onEdit, onDelete, animationClass, isLoad
               index={index}
               onEdit={onEdit}
               onDelete={() => onDelete(car)}
+              onViewSales={onViewSales}
+              onRemoveFavorite={onRemoveFavorite}
             />
           ))}
         </div>

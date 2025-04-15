@@ -1,6 +1,6 @@
 // Importaciones necesarias desde React y librerías externas
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'; // Para obtener parámetros de la URL (ej. modelo)
+import { useParams, useNavigate, useLocation } from 'react-router-dom'; // Para obtener parámetros de la URL (ej. modelo)
 import { Bar } from 'react-chartjs-2'; // Componente de gráfico de barras de Chart.js
 import {
   Chart as ChartJS,
@@ -13,7 +13,6 @@ import {
 } from 'chart.js'; // Elementos que debemos registrar en Chart.js
 import { ArrowLeft } from 'lucide-react'; // Ícono de flecha
 import { createIcons, icons } from 'lucide';
-import { useNavigate } from 'react-router-dom'; // Para navegar entre rutas
 import Modal from 'react-bootstrap/Modal'; // Modal de Bootstrap
 import Button from 'react-bootstrap/Button'; // Botón de Bootstrap
 import '../styles/animations.css';
@@ -26,6 +25,8 @@ export default function SalesCharts() {
   // Extraemos el modelo desde la URL (si se pasa)
   const { model } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const returnToFavorites = location.state?.returnToFavorites;
 
   // Estados
   const [sales, setSales] = useState([]); // Ventas del modelo seleccionado
@@ -240,10 +241,18 @@ export default function SalesCharts() {
         <div className="d-flex gap-2">
           <button
             className="btn btn-outline-primary d-flex align-items-center shadow-sm hover-scale"
-            onClick={() => navigate('/')}
+            onClick={() => {
+              // Si vinimos desde favoritos, volvemos ahí
+              if (returnToFavorites) {
+                navigate('/favorites');
+              } else {
+                // Comportamiento por defecto
+                navigate('/');
+              }
+            }}
           >
             <ArrowLeft className="me-2" size={18} />
-            Volver al garaje
+            {returnToFavorites ? 'Volver a favoritos' : 'Volver al garaje'}
           </button>
           <button
             className={`btn ${viewAnnualSales ? 'btn-outline-success' : 'btn-outline-primary'} d-flex align-items-center shadow-sm hover-scale`}

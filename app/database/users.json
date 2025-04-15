@@ -1,0 +1,22 @@
+[
+    {
+        "username": "kiolo@kiolo.com",
+        "password": "scrypt:32768:8:1$oXenfdbROuHfeGFm$679bf50e97356a2e6d81f0daf5f6cb77c91170264bb5e2ac1dd8b3dd6b1f2005c860c015b71fe4cdb15c61242ee60ee5057bf0cb8b75e7dcf17204d4ee8e3cff"
+    },
+    {
+        "username": "j@j.com",
+        "password": "scrypt:32768:8:1$lUSEoKX0rszjvJFr$28777f96c4dbd63e396899637441175a1ecb8631b31297e97d0adf7dfbf6f5340bd1096a8bad3907fa5446c572ad2cc7cc3bbdbff4ed09ac73b9fa6251e7a1dd"
+    },
+    {
+        "username": "lo@lo.com",
+        "password": "scrypt:32768:8:1$evrjLMtLQ19ni7dQ$a317ee5821304089d66dcfba5def4b2efc5826b6803593aca8260b3cbff9fa84eff1cf1a79d4a169f394136d469fe0e26bebc0ba964ca839e1ed9415643d4173"
+    },
+    {
+        "username": "one@one.com",
+        "password": "scrypt:32768:8:1$1ceb8DIBgC38vSVg$7b935742279e400e8b4f2dd2b0b543f0699d19e7ba08175e4ec600085118be71b659bd28b91280b123c55096aea93330f5bc46ba86669a30060cc9b8b1bfffab"
+    },
+    {
+        "username": "jordi@jordi.com",
+        "password": "scrypt:32768:8:1$hQUnpiQS4PNzDdOD$1c8121f333abd6e32488250fe1eb261578946ec925a758edf408ac9352743cc92de5ec91cbe1a69e97e4b081a3196fd166157a31acc98e48b3bbc96e2517f88b"
+    }
+]

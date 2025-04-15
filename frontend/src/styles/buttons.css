@@ -97,3 +97,158 @@
 .btn:hover {
   transform: scale(1.05);
 }
+
+/* Estilos para el dropdown de usuario */
+.dropdown-menu {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 8px 0;
+}
+
+.dropdown-item {
+  padding: 8px 16px;
+  transition: background-color 0.2s;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+
+.dropdown-item.text-danger:hover {
+  background-color: #fff8f8;
+}
+
+.dropdown-divider {
+  margin: 6px 0;
+}
+
+.btn-outline-primary.dropdown-toggle::after {
+  margin-left: 8px;
+}
+
+/* Añadir estos estilos para el botón de cuenta de usuario */
+.dropdown-toggle#dropdown-user,
+.btn-outline-primary.account-btn {
+  min-width: 140px; /* Ancho mínimo para el botón de cuenta */
+  padding: 0.5rem 1rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Ajuste para el botón cuando está en formato desplegable */
+.dropdown-toggle#dropdown-user {
+  justify-content: center;
+}
+
+/* Asegurar que el texto y el icono se muestren correctamente */
+.btn-outline-primary.account-btn .me-2,
+.dropdown-toggle#dropdown-user .me-2 {
+  margin-right: 6px !important;
+}
+
+/* Modificar los estilos para el botón de perfil circular */
+.btn-profile-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid #0d6efd;
+  color: #0d6efd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin-left: 5px; /* Espacio a la izquierda para separarlo del botón Ventas */
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  min-width: unset; /* Eliminar cualquier ancho mínimo heredado */
+  max-width: unset; /* Eliminar cualquier ancho máximo heredado */
+  overflow: visible; /* Asegurar que nada se recorte */
+  line-height: 1; /* Normalizar la línea para evitar problemas de altura */
+  flex: 0 0 auto; /* Evitar que se estire o encoja */
+}
+
+.btn-profile-circle:hover {
+  background-color: #0d6efd;
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Asegurarse de que el ícono esté centrado y con tamaño apropiado */
+.btn-profile-circle svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Añadir estos estilos al final del archivo */
+
+/* Estilos para el contenedor del botón de perfil circular */
+.btn-profile-circle-container {
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* Eliminar el estilo dropdown-toggle que añade la flecha */
+.btn-profile-circle-container.dropdown-toggle::after {
+  display: none;
+}
+
+/* Ajustar los elementos del menú desplegable */
+.dropdown-menu .dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+}
+
+/* Estilo para el texto de cerrar sesión */
+.dropdown-item.text-danger {
+  color: #dc3545;
+}
+
+.dropdown-item.text-danger:hover {
+  background-color: #fff8f8;
+}
+
+/* Añadir estos estilos para el botón de favorito */
+
+.btn-favorite {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.btn-favorite:hover {
+  background-color: rgba(255, 215, 0, 0.1);
+  transform: scale(1.1);
+}
+
+.btn-favorite.favorite-active {
+  animation: pulse 0.5s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

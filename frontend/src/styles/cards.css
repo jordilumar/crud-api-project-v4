@@ -48,6 +48,7 @@
 .card .btn-outline-primary,
 .card .btn-outline-danger {
     width: 48%; /* Asegura que los botones "Editar" y "Borrar" ocupen la mitad del ancho */
+    border-width: 2px;
 }
   
 .card .btn-outline-success {

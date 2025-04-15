@@ -30,3 +30,126 @@
 .page-title:hover i {
   color: #198754; /* Cambia el color del icono a verde */
 }
+
+/* Estilos para la página de bienvenida */
+.welcome-container {
+  min-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.welcome-card {
+  max-width: 700px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.welcome-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.feature-item {
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-5px);
+  background-color: #f8f9fa;
+}
+
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  transition: all 0.3s ease;
+}
+
+.feature-item:hover .feature-icon {
+  transform: scale(1.1);
+}
+
+.animate-pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(13, 110, 253, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(13, 110, 253, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(13, 110, 253, 0);
+  }
+}
+
+/* Estilos para formularios compactos */
+.compact-form label {
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.compact-form .form-control-sm {
+  padding: 0.2rem 0.4rem;
+  height: 28px;
+  font-size: 0.85rem;
+}
+
+.compact-form .btn-sm {
+  padding: 0.25rem 0.4rem;
+  font-size: 0.85rem;
+}
+
+.compact-form .alert {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+.modal-sm {
+  max-width: 300px;
+}
+
+/* Estilos para la animación de elementos de favoritos */
+.car-item-container {
+  transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* Curva bezier para movimiento más natural */
+  will-change: transform, opacity; /* Optimiza la animación */
+  position: relative;
+}
+
+.car-item-container.animate-fade-out {
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+}
+
+/* Contenedor del grid con transición suave */
+.car-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  transition: all 0.6s ease-out; /* Transición más suave */
+}
+
+/* Añadir transición para el reposicionamiento */
+.car-grid > * {
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* Eliminar cualquier animación adicional para evitar parpadeos */
+.animate-fade-in, .grid-reflow {
+  animation: none !important;
+}

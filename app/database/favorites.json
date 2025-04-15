@@ -1,0 +1,31 @@
+{
+  "favorites": [
+    {
+      "username": "kiolo@kiolo.com",
+      "carIds": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "username": "lo@lo.com",
+      "carIds": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "username": "one@one.com",
+      "carIds": [
+        1052,
+        1050
+      ]
+    },
+    {
+      "username": "jordi@jordi.com",
+      "carIds": []
+    }
+  ]
+}
