@@ -5,7 +5,8 @@
       "carIds": [
         1,
         2,
-        3
+        3,
+        8
       ]
     },
     {
@@ -13,7 +14,8 @@
       "carIds": [
         1,
         2,
-        3
+        3,
+        17
       ]
     },
     {
@@ -26,6 +28,13 @@
     {
       "username": "jordi@jordi.com",
       "carIds": []
+    },
+    {
+      "username": "ein@ein.com",
+      "carIds": [
+        1047,
+        1
+      ]
     }
   ]
 }

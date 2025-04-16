@@ -66,27 +66,31 @@ function App() {
   // Añade un nuevo estado para controlar el modal del perfil
   const [showProfileModal, setShowProfileModal] = useState(false);
 
+  // Añade este nuevo estado para controlar la animación
+  const [paginationAnimation, setPaginationAnimation] = useState('');
+
   const handleLogin = (token) => {
     setToken(token);
     localStorage.setItem('token', token);
-    setShowLoginModal(false); // Cierra el modal de login
+    setShowLoginModal(false);
     
-    // Mostrar loading mientras se cargan los datos después del login
     setIsSessionLoading(true);
     
-    // Simular un tiempo de carga para mostrar el loading
-    setTimeout(() => {
-      loadCars(search);
-      setIsSessionLoading(false);
-      setShowLoginSuccessModal(true); // Muestra el modal de éxito
-    }, 1500); // 1.5 segundos de carga simulada
+    // Cargar los coches inmediatamente
+    loadCars(search)
+      .then(() => {
+        setIsSessionLoading(false);
+        setShowLoginSuccessModal(true);
+      })
+      .catch((error) => {
+        console.error('Error al cargar coches:', error);
+        setIsSessionLoading(false);
+      });
   };
 
   const handleRegister = () => {
     setShowRegisterModal(false); // Cierra el modal de registro
     setShowRegisterSuccessModal(true); // Muestra el modal de éxito de registro
-    // Opcionalmente, podemos mostrar el modal de login después del registro
-    // setShowLoginModal(true);
   };
 
   // Nueva función para manejar el logout
@@ -129,10 +133,11 @@ function App() {
     loadCars(search); // Carga los coches con el término de búsqueda actual
   }, [page, search]); // Ejecuta este efecto cuando cambie la página o el término de búsqueda
 
-  // Función para cargar coches desde la API
+  // Función para cargar coches desde la API sin mostrar loading durante la paginación
   const loadCars = async (model = search, pageToLoad = page) => {
     try {
-      setIsLoading(true);
+      setIsLoading(false);
+      
       const { data, total } = await getCars(model, pageToLoad, limit);
       setCars(data);
       setTotal(total);
@@ -142,7 +147,6 @@ function App() {
       if (username) {
         try {
           const favoritesResponse = await getUserFavorites(username);
-          // Disparar evento para actualizar el estado de favoritos en los CarItem
           window.dispatchEvent(new CustomEvent('favoritesUpdated', { 
             detail: { favoriteIds: favoritesResponse.carIds } 
           }));
@@ -152,10 +156,11 @@ function App() {
       }
     } catch (error) {
       console.error('Error cargando coches:', error);
-    } finally {
-      setIsLoading(false);
     }
   };
+
+  // Crear una versión específica para paginación que nunca muestre loading
+  const loadCarsForPagination = loadCars;
 
   const handleSearch = (text) => {
     setSearch(text);
@@ -220,15 +225,25 @@ function App() {
 
   const totalPages = Math.ceil(total / limit);
 
-  const handlePageChange = async (newPage) => {
-    if (newPage >= 1 && newPage <= totalPages) {
-      setAnimationClass('animate-fade-out'); // Aplica la animación de desvanecimiento
-
-      setTimeout(async () => {
-        await loadCars(search, newPage); // Carga los datos de la nueva página
-        setPage(newPage); // Cambia la página
-        setAnimationClass('animate-fade-in'); // Aplica la animación de aparición
-      }, 500); // Duración de la animación de desvanecimiento
+  // Función para manejar cambios de página sin mostrar loading
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages && newPage !== page) {
+      // Primero aplicamos una animación de salida
+      setPaginationAnimation('animate-fade-out');
+      
+      // Después de un breve retraso, cambiamos la página y aplicamos la animación de entrada
+      setTimeout(() => {
+        setPage(newPage);
+        loadCarsForPagination(search, newPage);
+        
+        // Cambiamos a la animación de entrada
+        setPaginationAnimation('animate-fade-in');
+        
+        // Reiniciamos la animación después de completarse para futuros cambios
+        setTimeout(() => {
+          setPaginationAnimation('');
+        }, 500);
+      }, 300);
     }
   };
 
@@ -661,7 +676,12 @@ function App() {
                         </div>
                       ) : (
                         <>
-                          <CarList cars={cars} onEdit={handleEdit} onDelete={confirmDelete} />
+                          <CarList 
+                            cars={cars} 
+                            onEdit={handleEdit} 
+                            onDelete={confirmDelete} 
+                            animationClass={paginationAnimation} 
+                          />
                           
                           {/* Botones para cambiar de pagina */}
                           <div className="pagination animate-slide-in-bottom">
@@ -788,6 +808,6 @@ function App() {
       </div>
     </Router>
   );
-}
+};
 
 export default App;

@@ -11,17 +11,6 @@
         ]
     },
     {
-        "id": 3,
-        "make": "Honda",
-        "model": "Fit",
-        "year": 2018,
-        "features": [
-            "Lane Departure Warning",
-            "Gesture Control",
-            "Air Conditioning"
-        ]
-    },
-    {
         "id": 4,
         "make": "Nissan",
         "model": "Rogue",
@@ -52,17 +41,6 @@
             "Wi-Fi Hotspot",
             "Digital Cockpit",
             "Android Auto"
-        ]
-    },
-    {
-        "id": 8,
-        "make": "Tesla",
-        "model": "Model 3",
-        "year": 2006,
-        "features": [
-            "Backup Camera",
-            "Android Auto",
-            "Cruise Control"
         ]
     },
     {

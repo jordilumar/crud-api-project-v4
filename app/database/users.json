@@ -18,5 +18,13 @@
     {
         "username": "jordi@jordi.com",
         "password": "scrypt:32768:8:1$hQUnpiQS4PNzDdOD$1c8121f333abd6e32488250fe1eb261578946ec925a758edf408ac9352743cc92de5ec91cbe1a69e97e4b081a3196fd166157a31acc98e48b3bbc96e2517f88b"
+    },
+    {
+        "username": "ein@ein.com",
+        "password": "scrypt:32768:8:1$UhqF1XwYEZEncCK4$5dbb0bf4ed2c762c0207a547a0953ed529a22ab227da95c8e038ef989a05d91e10ff75107ceb40f148aaae6f42010aedf2b19a9b432ec082fb02c5e654f66d9c"
+    },
+    {
+        "username": "fdsafda@fadsf.com",
+        "password": "scrypt:32768:8:1$WNMtTd8pRuITg2Wr$000957bf2d2a689f05f7809c5de1c6654e5ef029b6aff3fa3da2cce43a5edb0c1f57e34ec6cef62b1a14620f9f23cb035ee99f3dbc5d3bbf93a047e744dbfedc"
     }
 ]

@@ -17,7 +17,7 @@ export default function FavoritesPage() {
   const [animatingCars, setAnimatingCars] = useState({});
   
   // Añadir esto después del estado de animatingCars
-  const [gridReflow, setGridReflow] = useState(false);
+  // const [gridReflow, setGridReflow] = useState(false);
   
   // Estados para manejar la edición directamente en esta página
   const [editingCar, setEditingCar] = useState(null);
@@ -147,26 +147,23 @@ export default function FavoritesPage() {
   // Actualiza la función handleRemoveFavorite para una transición más suave
 const handleRemoveFavorite = async (carId) => {
   try {
-    // 1. Primero marcamos el elemento para la animación de salida
+    // 1. Iniciar la animación
     setAnimatingCars(prev => ({ ...prev, [carId]: true }));
     
-    // 2. Esperamos a que la animación de salida termine
-    await new Promise(resolve => setTimeout(resolve, 400));
+    // 2. Hacer la llamada API inmediatamente (sin esperar)
+    const resultPromise = removeFavorite(username, carId);
     
-    // 3. Llamamos a la API para eliminar el favorito
-    const result = await removeFavorite(username, carId);
+    // 3. Esperar el tiempo mínimo para la animación (en paralelo)
+    const animationPromise = new Promise(resolve => setTimeout(resolve, 400));
+    
+    // 4. Esperar a que ambas operaciones terminen
+    const [result] = await Promise.all([resultPromise, animationPromise]);
     
     if (result.success) {
-      // 4. Actualizamos el estado para eliminar el coche
-      // Importante: NO usar un nuevo setState mientras el DOM se está actualizando
-      setFavorites(prevFavs => {
-        return prevFavs.filter(car => car.id !== carId);
-      });
+      // Actualizar el estado
+      setFavorites(prevFavs => prevFavs.filter(car => car.id !== carId));
       
-      // 5. Importante: ya no necesitamos activar otra animación aquí
-      // El sistema de transiciones CSS se encargará del reposicionamiento suave
-      
-      // 6. Limpiamos el estado de animación después de un tiempo
+      // Limpiar estado de animación
       setTimeout(() => {
         setAnimatingCars(prev => {
           const newState = { ...prev };
@@ -175,16 +172,19 @@ const handleRemoveFavorite = async (carId) => {
         });
       }, 100);
     } else {
-      // Si falla, restauramos el estado
       setAnimatingCars(prev => {
         const newState = { ...prev };
         delete newState[carId];
         return newState;
       });
-      console.error("Error al eliminar favorito:", result.message);
     }
   } catch (error) {
     console.error("Error al eliminar favorito:", error);
+    setAnimatingCars(prev => {
+      const newState = { ...prev };
+      delete newState[carId];
+      return newState;
+    });
   }
 };
 

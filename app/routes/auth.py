@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import base64
 import json
 import os
+import re
 
 # Crear el blueprint sin prefijos
 auth_bp = Blueprint('auth', __name__)
@@ -59,6 +60,11 @@ def register():
     # Validar datos
     if not username or not password:
         return jsonify({'error': 'Se requieren nombre de usuario y contraseña'}), 400
+    
+    # Validar formato de email
+    email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    if not re.match(email_pattern, username):
+        return jsonify({'error': 'El nombre de usuario debe ser un email válido'}), 400
     
     # Cargar usuarios existentes
     users = load_users()
