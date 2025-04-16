@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Star, Edit, Trash, BarChart, Pencil } from 'lucide-react';
 import { addFavorite, removeFavorite } from '../api';
+import { useAuth } from '../context/AuthContext'; // Añadir esta importación
 
 export default function CarItem({ car, index, onEdit, onDelete, onViewSales, onRemoveFavorite }) {
   const navigate = useNavigate();
   const location = useLocation();
   const [isFavorite, setIsFavorite] = useState(false);
-  const username = localStorage.getItem('username'); // Guardamos el username al hacer login
+  const { username, token } = useAuth(); // Usar contexto en lugar de localStorage
   const isInFavoritesPage = location.pathname === '/favorites';
 
   // Cargar el estado de favorito desde la API
@@ -24,7 +25,7 @@ export default function CarItem({ car, index, onEdit, onDelete, onViewSales, onR
     }
   }, [car.id, username]);
 
-  // Añadir este useEffect al componente
+  // Este useEffect permanece igual
   useEffect(() => {
     const handleFavoritesUpdate = (event) => {
       const { favoriteIds } = event.detail;
@@ -39,10 +40,10 @@ export default function CarItem({ car, index, onEdit, onDelete, onViewSales, onR
     };
   }, [car.id]);
 
-  // Mejorar la función toggleFavorite para que funcione en cualquier página
+  // Modificar toggleFavorite para usar el contexto
   const toggleFavorite = async (e) => {
-    e.stopPropagation(); // Evitar que active otros eventos
-    e.preventDefault(); // Prevenir comportamiento por defecto
+    e.stopPropagation();
+    e.preventDefault();
     
     // Si no hay usuario logeado, mostramos un mensaje
     if (!username) {
@@ -57,9 +58,8 @@ export default function CarItem({ car, index, onEdit, onDelete, onViewSales, onR
       
       // Enviar la actualización al servidor
       if (newState) {
-        const result = await addFavorite(username, car.id);
+        const result = await addFavorite(username, car.id, token);
         if (!result.success) {
-          // Si falla, revertimos el cambio visual
           setIsFavorite(false);
           console.error("Error al añadir favorito");
         }
@@ -71,17 +71,12 @@ export default function CarItem({ car, index, onEdit, onDelete, onViewSales, onR
         }
         
         // Comportamiento normal para otras páginas
-        const result = await removeFavorite(username, car.id);
+        const result = await removeFavorite(username, car.id, token);
         if (!result.success) {
-          // Si falla, revertimos el cambio visual
           setIsFavorite(true);
           console.error("Error al eliminar favorito");
         }
       }
-      
-      // Actualizar timestamp de última modificación de favoritos
-      localStorage.setItem('lastFavoritesUpdate', Date.now().toString());
-      
     } catch (error) {
       // En caso de error, revertimos el cambio visual
       setIsFavorite(!isFavorite);

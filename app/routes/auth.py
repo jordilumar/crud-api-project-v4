@@ -49,8 +49,13 @@ def get_basic_auth_credentials():
     except Exception:
         return None, None
 
-# Clave secreta para JWT
-SECRET_KEY = "your_secret_key"
+# Clave secreta para JWT - MODIFICADO
+SECRET_KEY = os.environ.get("JWT_SECRET_KEY", "default_dev_key_CHANGE_IN_PRODUCTION")
+
+# Si no hay variable de entorno y estamos en producción, lanzar un error
+if os.environ.get("FLASK_ENV") == "production" and SECRET_KEY == "default_dev_key_CHANGE_IN_PRODUCTION":
+    import sys
+    print("ERROR: JWT_SECRET_KEY no configurada en entorno de producción", file=sys.stderr)
 
 @auth_bp.route('/register', methods=['POST'])
 def register():

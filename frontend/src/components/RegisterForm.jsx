@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useAuth } from '../context/AuthContext'; // Añadir esta importación
 
 export default function RegisterForm({ onRegister }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const { login } = useAuth(); // Usar el contexto
 
   // Función para validar formato de email
   const isValidEmail = (email) => {
@@ -40,8 +42,13 @@ export default function RegisterForm({ onRegister }) {
         throw new Error(errorData.error || `Error ${response.status}: ${response.statusText}`);
       }
       
-      await response.json();
-      onRegister(); // Llamar a la función que mostrará el modal personalizado
+      const data = await response.json();
+      
+      // En lugar de solo notificar, también hacemos login aquí
+      login(username, data.token || 'basic_auth');
+      
+      // Pasamos las credenciales al callback
+      onRegister(username, data.token || 'basic_auth');
     } catch (error) {
       console.error('Error en el registro:', error);
       setError(error.message);

@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useAuth } from '../context/AuthContext'; // Importar contexto
 
 export default function LoginForm({ onLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const { login } = useAuth(); // Usar el hook de contexto
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,7 +16,7 @@ export default function LoginForm({ onLogin }) {
       const basicAuth = btoa(`${username}:${password}`);
       
       const response = await fetch('http://localhost:5000/login', {
-        method: 'GET', // Cambiado a GET para Basic Auth
+        method: 'GET',
         headers: { 
           'Authorization': `Basic ${basicAuth}`,
           'Accept': 'application/json'
@@ -30,9 +32,12 @@ export default function LoginForm({ onLogin }) {
       }
       
       const data = await response.json();
-      // Guardar el nombre de usuario para usarlo con los favoritos
-      localStorage.setItem('username', username);
-      onLogin(data.token || 'basic_auth');
+      
+      // En lugar de almacenar en localStorage, usamos el contexto
+      login(username, data.token || 'basic_auth');
+      
+      // Pasamos los datos a la función de callback
+      onLogin(username, data.token || 'basic_auth');
     } catch (error) {
       console.error('Error en el login:', error);
       setError(error.message);

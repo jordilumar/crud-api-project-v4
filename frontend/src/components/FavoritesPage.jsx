@@ -2,32 +2,24 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, Star, Edit, Trash, Check, AlertCircle } from 'lucide-react';
 import { Modal, Button } from 'react-bootstrap';
+import { useAuth } from '../context/AuthContext'; // Añadir esta importación
 import CarList from './CarList';
 import CarForm from './CarForm';
-import CarItem from './CarItem'; // Añadir esta línea
+import CarItem from './CarItem';
 import { getCars, getUserFavorites, updateCar, deleteCar, removeFavorite } from '../api';
 
 export default function FavoritesPage() {
   const [favorites, setFavorites] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-  const username = localStorage.getItem('username');
+  const { username, token } = useAuth(); // Usar contexto en lugar de localStorage
   
-  // Añadir este nuevo estado para los coches con animación de salida
+  // Resto de estados
   const [animatingCars, setAnimatingCars] = useState({});
-  
-  // Añadir esto después del estado de animatingCars
-  // const [gridReflow, setGridReflow] = useState(false);
-  
-  // Estados para manejar la edición directamente en esta página
   const [editingCar, setEditingCar] = useState(null);
   const [showEditForm, setShowEditForm] = useState(false);
-  
-  // Estados para confirmación de eliminación
   const [carToDelete, setCarToDelete] = useState(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-
-  // Nuevos estados para modales personalizados de éxito y error
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
@@ -47,7 +39,7 @@ export default function FavoritesPage() {
       }
       
       // Obtenemos los IDs de los coches favoritos del usuario
-      const favoritesResponse = await getUserFavorites(username);
+      const favoritesResponse = await getUserFavorites(username, token);
       const favoriteIds = favoritesResponse.carIds;
       
       if (favoriteIds.length === 0) {
@@ -144,49 +136,49 @@ export default function FavoritesPage() {
     navigate(`/annual-sales/${model}`, { state: { returnToFavorites: true } });
   };
 
-  // Actualiza la función handleRemoveFavorite para una transición más suave
-const handleRemoveFavorite = async (carId) => {
-  try {
-    // 1. Iniciar la animación
-    setAnimatingCars(prev => ({ ...prev, [carId]: true }));
-    
-    // 2. Hacer la llamada API inmediatamente (sin esperar)
-    const resultPromise = removeFavorite(username, carId);
-    
-    // 3. Esperar el tiempo mínimo para la animación (en paralelo)
-    const animationPromise = new Promise(resolve => setTimeout(resolve, 400));
-    
-    // 4. Esperar a que ambas operaciones terminen
-    const [result] = await Promise.all([resultPromise, animationPromise]);
-    
-    if (result.success) {
-      // Actualizar el estado
-      setFavorites(prevFavs => prevFavs.filter(car => car.id !== carId));
+  // Actualiza la función handleRemoveFavorite para usar el contexto
+  const handleRemoveFavorite = async (carId) => {
+    try {
+      // 1. Iniciar la animación
+      setAnimatingCars(prev => ({ ...prev, [carId]: true }));
       
-      // Limpiar estado de animación
-      setTimeout(() => {
+      // 2. Hacer la llamada API inmediatamente (sin esperar)
+      const resultPromise = removeFavorite(username, carId, token);
+      
+      // 3. Esperar el tiempo mínimo para la animación (en paralelo)
+      const animationPromise = new Promise(resolve => setTimeout(resolve, 400));
+      
+      // 4. Esperar a que ambas operaciones terminen
+      const [result] = await Promise.all([resultPromise, animationPromise]);
+      
+      if (result.success) {
+        // Actualizar el estado
+        setFavorites(prevFavs => prevFavs.filter(car => car.id !== carId));
+        
+        // Limpiar estado de animación
+        setTimeout(() => {
+          setAnimatingCars(prev => {
+            const newState = { ...prev };
+            delete newState[carId];
+            return newState;
+          });
+        }, 100);
+      } else {
         setAnimatingCars(prev => {
           const newState = { ...prev };
           delete newState[carId];
           return newState;
         });
-      }, 100);
-    } else {
+      }
+    } catch (error) {
+      console.error("Error al eliminar favorito:", error);
       setAnimatingCars(prev => {
         const newState = { ...prev };
         delete newState[carId];
         return newState;
       });
     }
-  } catch (error) {
-    console.error("Error al eliminar favorito:", error);
-    setAnimatingCars(prev => {
-      const newState = { ...prev };
-      delete newState[carId];
-      return newState;
-    });
-  }
-};
+  };
 
   return (
     <div className="container py-4">

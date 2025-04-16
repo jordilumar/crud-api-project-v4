@@ -26,5 +26,13 @@
     {
         "username": "fdsafda@fadsf.com",
         "password": "scrypt:32768:8:1$WNMtTd8pRuITg2Wr$000957bf2d2a689f05f7809c5de1c6654e5ef029b6aff3fa3da2cce43a5edb0c1f57e34ec6cef62b1a14620f9f23cb035ee99f3dbc5d3bbf93a047e744dbfedc"
+    },
+    {
+        "username": "jordi@gmail.com",
+        "password": "scrypt:32768:8:1$oPDX0weCtLdndyqJ$0ed719172f97d87abef930d743bf342963b0594dcd707284a7302b996e4c2f327118b503e949b69b63c3fda7e66fc6dce13e92f02498db3eca9d69bedfcfa0f7"
+    },
+    {
+        "username": "afro@gmail.com",
+        "password": "scrypt:32768:8:1$nxHfzoNwyQsRJRRL$151d6b0afcae159c6eae0d6959e5f8ec4c12319fa5e412147128ea65ec3b3c2ea5d2ee2a9f939d7195ee933e8c726ffa30112debf0c9d3dd38dabaefe1211171"
     }
 ]
