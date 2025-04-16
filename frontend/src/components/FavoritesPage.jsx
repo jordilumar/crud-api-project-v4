@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, Star, Edit, Trash, Check, AlertCircle } from 'lucide-react';
 import { Modal, Button } from 'react-bootstrap';
 import { useAuth } from '../context/AuthContext'; // Añadir esta importación
+import { useCars } from '../context/CarsContext';
 import CarList from './CarList';
 import CarForm from './CarForm';
 import CarItem from './CarItem';
@@ -13,6 +14,7 @@ export default function FavoritesPage() {
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const { username, token } = useAuth(); // Usar contexto en lugar de localStorage
+  const { updateCarInState, deleteCarFromState, updateFavorites, favorites: globalFavorites } = useCars();
   
   // Resto de estados
   const [animatingCars, setAnimatingCars] = useState({});
@@ -33,13 +35,13 @@ export default function FavoritesPage() {
       setIsLoading(true);
       
       // Si no hay usuario logeado, redirigimos a la página principal
-      if (!username) {
+      if (!token) {
         navigate('/');
         return;
       }
       
-      // Obtenemos los IDs de los coches favoritos del usuario
-      const favoritesResponse = await getUserFavorites(username, token);
+      // Ya no pasamos el username, solo el token
+      const favoritesResponse = await getUserFavorites(token);
       const favoriteIds = favoritesResponse.carIds;
       
       if (favoriteIds.length === 0) {
@@ -76,21 +78,13 @@ export default function FavoritesPage() {
   const handleEditSubmit = async (updatedCar) => {
     try {
       await updateCar(updatedCar.id, updatedCar);
+      updateCarInState(updatedCar); // Usar función del contexto
       setShowEditForm(false);
       setEditingCar(null);
       
       // Actualizar la lista de favoritos para reflejar los cambios
       await loadFavorites();
       
-      // Guardar timestamp de última modificación para sincronizar
-      localStorage.setItem('lastCarUpdate', Date.now().toString());
-      
-      // Disparar evento personalizado para notificar cambios
-      window.dispatchEvent(new CustomEvent('carUpdated', { 
-        detail: { car: updatedCar } 
-      }));
-      
-      // Mostrar modal personalizado en lugar de alert
       setModalMessage('Coche actualizado correctamente');
       setShowSuccessModal(true);
     } catch (error) {
@@ -110,22 +104,18 @@ export default function FavoritesPage() {
     
     try {
       await deleteCar(carToDelete.id);
-      
-      // Guardar timestamp de última eliminación
-      localStorage.setItem('lastCarDelete', Date.now().toString());
-      
-      // Disparar evento personalizado para notificar eliminación
-      window.dispatchEvent(new CustomEvent('carDeleted', { 
-        detail: { carId: carToDelete.id } 
-      }));
+      deleteCarFromState(carToDelete.id); // Usar función del contexto
       
       setShowDeleteModal(false);
       setCarToDelete(null);
+      await loadFavorites(); // Recargar favoritos
       
-      // Actualizar la lista de favoritos 
-      loadFavorites();
+      setModalMessage('Coche eliminado correctamente');
+      setShowSuccessModal(true);
     } catch (error) {
       console.error("Error al eliminar el coche:", error);
+      setModalMessage('Error al eliminar el coche');
+      setShowErrorModal(true);
     }
   };
 
@@ -143,7 +133,7 @@ export default function FavoritesPage() {
       setAnimatingCars(prev => ({ ...prev, [carId]: true }));
       
       // 2. Hacer la llamada API inmediatamente (sin esperar)
-      const resultPromise = removeFavorite(username, carId, token);
+      const resultPromise = removeFavorite(carId, token);
       
       // 3. Esperar el tiempo mínimo para la animación (en paralelo)
       const animationPromise = new Promise(resolve => setTimeout(resolve, 400));
@@ -152,8 +142,11 @@ export default function FavoritesPage() {
       const [result] = await Promise.all([resultPromise, animationPromise]);
       
       if (result.success) {
-        // Actualizar el estado
+        // Actualizar el estado local
         setFavorites(prevFavs => prevFavs.filter(car => car.id !== carId));
+        
+        // Actualizar el contexto global de favoritos
+        updateFavorites(globalFavorites.filter(id => id !== carId));
         
         // Limpiar estado de animación
         setTimeout(() => {

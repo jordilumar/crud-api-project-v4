@@ -1,4 +1,3 @@
-
 // src/api.js
 const API_URL = '';
 
@@ -9,11 +8,12 @@ export const getCars = async (model = '', page = 1, limit = 5) => {
 };
 
 export const createCar = async (car) => {
-  await fetch('/cars', {
+  const response = await fetch('/cars', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(car),
   });
+  return await response.json(); // Return the created car with server-generated ID
 };
 
 export const updateCar = async (index, car) => {
@@ -38,22 +38,21 @@ export async function getSales({ model, country, year, page = 1, limit = 5 }) {
 }
 
 // Función auxiliar para agregar autenticación a las peticiones
-// La mejor solución es pasar el contexto como parámetro
-export const authHeaders = (username, token) => {
-  if (username && token) {
+export const authHeaders = (token) => {
+  if (token) {
     return {
-      'Authorization': `Basic ${btoa(`${username}:dummyPassword`)}`,
+      'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     };
   }
   return { 'Content-Type': 'application/json' };
 };
 
-// Funciones para gestionar favoritos
-export const getUserFavorites = async (username, token) => {
+// Funciones para gestionar favoritos - Ya no incluimos username en la URL
+export const getUserFavorites = async (token) => {
   try {
-    const response = await fetch(`http://localhost:5000/favorites/${username}`, {
-      headers: authHeaders(username, token)
+    const response = await fetch(`http://localhost:5000/favorites`, {
+      headers: authHeaders(token)
     });
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
@@ -65,11 +64,11 @@ export const getUserFavorites = async (username, token) => {
   }
 };
 
-export const addFavorite = async (username, carId, token) => {
+export const addFavorite = async (carId, token) => {
   try {
-    const response = await fetch(`http://localhost:5000/favorites/${username}/add/${carId}`, {
+    const response = await fetch(`http://localhost:5000/favorites/add/${carId}`, {
       method: 'POST',
-      headers: authHeaders(username, token)
+      headers: authHeaders(token)
     });
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
@@ -81,11 +80,11 @@ export const addFavorite = async (username, carId, token) => {
   }
 };
 
-export const removeFavorite = async (username, carId, token) => {
+export const removeFavorite = async (carId, token) => {
   try {
-    const response = await fetch(`http://localhost:5000/favorites/${username}/remove/${carId}`, {
+    const response = await fetch(`http://localhost:5000/favorites/remove/${carId}`, {
       method: 'DELETE',
-      headers: authHeaders(username, token)
+      headers: authHeaders(token)
     });
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);

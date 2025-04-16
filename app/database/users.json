@@ -34,5 +34,9 @@
     {
         "username": "afro@gmail.com",
         "password": "scrypt:32768:8:1$nxHfzoNwyQsRJRRL$151d6b0afcae159c6eae0d6959e5f8ec4c12319fa5e412147128ea65ec3b3c2ea5d2ee2a9f939d7195ee933e8c726ffa30112debf0c9d3dd38dabaefe1211171"
+    },
+    {
+        "username": "gol@gol.com",
+        "password": "scrypt:32768:8:1$i6QKAGHFZ4PfukuS$931c5a163fd03018f493412edb559a3d547b09be59bfe17b3f0ccdd2d7e847a839a0f2fc040fbc24a564204b2d31682a12c7b913a354d03adf526a7647d4edcb"
     }
 ]

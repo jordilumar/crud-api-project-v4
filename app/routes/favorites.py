@@ -1,10 +1,13 @@
 import json
 import os
+import jwt
 from flask import Blueprint, jsonify, request
+from functools import wraps
 
 favorites_bp = Blueprint('favorites', __name__)
 
 FAVORITES_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'database', 'favorites.json')
+SECRET_KEY = os.environ.get("JWT_SECRET_KEY", "default_dev_key_CHANGE_IN_PRODUCTION")
 
 def load_favorites():
     if not os.path.exists(FAVORITES_FILE):
@@ -19,7 +22,35 @@ def save_favorites(data):
     with open(FAVORITES_FILE, 'w') as f:
         json.dump(data, f, indent=2)
 
-@favorites_bp.route('/favorites/<username>', methods=['GET'])
+# Decorador para extraer username del token JWT
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token = None
+        auth_header = request.headers.get('Authorization')
+        
+        if auth_header and auth_header.startswith('Bearer '):
+            token = auth_header.split(' ')[1]
+        
+        if not token:
+            return jsonify({'error': 'Token requerido'}), 401
+            
+        try:
+            # Decodificar el token para obtener el username
+            payload = jwt.decode(token, SECRET_KEY, algorithms=['HS256'])
+            username = payload['username']
+        except jwt.ExpiredSignatureError:
+            return jsonify({'error': 'Token expirado'}), 401
+        except jwt.InvalidTokenError:
+            return jsonify({'error': 'Token inválido'}), 401
+            
+        return f(username, *args, **kwargs)
+    
+    return decorated
+
+# Rutas actualizadas - ya no toman username de la URL
+@favorites_bp.route('/favorites', methods=['GET'])
+@token_required
 def get_user_favorites(username):
     data = load_favorites()
     
@@ -30,7 +61,8 @@ def get_user_favorites(username):
     # Si el usuario no existe, devuelve una lista vacía
     return jsonify({"carIds": []})
 
-@favorites_bp.route('/favorites/<username>/add/<int:car_id>', methods=['POST'])
+@favorites_bp.route('/favorites/add/<int:car_id>', methods=['POST'])
+@token_required
 def add_favorite(username, car_id):
     data = load_favorites()
     
@@ -54,7 +86,8 @@ def add_favorite(username, car_id):
     save_favorites(data)
     return jsonify({"message": "Coche añadido a favoritos", "success": True})
 
-@favorites_bp.route('/favorites/<username>/remove/<int:car_id>', methods=['DELETE'])
+@favorites_bp.route('/favorites/remove/<int:car_id>', methods=['DELETE'])
+@token_required
 def remove_favorite(username, car_id):
     data = load_favorites()
     

@@ -3,42 +3,20 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { Star, Edit, Trash, BarChart, Pencil } from 'lucide-react';
 import { addFavorite, removeFavorite } from '../api';
 import { useAuth } from '../context/AuthContext'; // Añadir esta importación
+import { useCars } from '../context/CarsContext';
 
 export default function CarItem({ car, index, onEdit, onDelete, onViewSales, onRemoveFavorite }) {
   const navigate = useNavigate();
   const location = useLocation();
+  const { username, token } = useAuth();
+  const { isCarFavorite, updateFavorites, favorites } = useCars();
   const [isFavorite, setIsFavorite] = useState(false);
-  const { username, token } = useAuth(); // Usar contexto en lugar de localStorage
   const isInFavoritesPage = location.pathname === '/favorites';
 
-  // Cargar el estado de favorito desde la API
+  // Usar el estado del contexto en lugar de cargar por separado
   useEffect(() => {
-    // Solo verificamos los favoritos si hay un usuario logeado
-    if (username) {
-      const checkIfFavorite = async () => {
-        const response = await fetch(`http://localhost:5000/favorites/${username}`);
-        const data = await response.json();
-        setIsFavorite(data.carIds.includes(car.id));
-      };
-      
-      checkIfFavorite();
-    }
-  }, [car.id, username]);
-
-  // Este useEffect permanece igual
-  useEffect(() => {
-    const handleFavoritesUpdate = (event) => {
-      const { favoriteIds } = event.detail;
-      // Actualizar el estado del favorito basado en los datos más recientes
-      setIsFavorite(favoriteIds.includes(car.id));
-    };
-    
-    window.addEventListener('favoritesUpdated', handleFavoritesUpdate);
-    
-    return () => {
-      window.removeEventListener('favoritesUpdated', handleFavoritesUpdate);
-    };
-  }, [car.id]);
+    setIsFavorite(isCarFavorite(car.id));
+  }, [car.id, isCarFavorite]);
 
   // Modificar toggleFavorite para usar el contexto
   const toggleFavorite = async (e) => {
@@ -58,8 +36,11 @@ export default function CarItem({ car, index, onEdit, onDelete, onViewSales, onR
       
       // Enviar la actualización al servidor
       if (newState) {
-        const result = await addFavorite(username, car.id, token);
-        if (!result.success) {
+        const result = await addFavorite(car.id, token);
+        if (result.success) {
+          // Actualizar el contexto global después de añadir el favorito
+          updateFavorites([...favorites, car.id]);
+        } else {
           setIsFavorite(false);
           console.error("Error al añadir favorito");
         }
@@ -70,17 +51,19 @@ export default function CarItem({ car, index, onEdit, onDelete, onViewSales, onR
           return; // No continuar con el código regular
         }
         
-        // Comportamiento normal para otras páginas
-        const result = await removeFavorite(username, car.id, token);
-        if (!result.success) {
+        const result = await removeFavorite(car.id, token);
+        if (result.success) {
+          // Actualizar el contexto global después de eliminar el favorito
+          updateFavorites(favorites.filter(id => id !== car.id));
+        } else {
           setIsFavorite(true);
           console.error("Error al eliminar favorito");
         }
       }
     } catch (error) {
+      console.error("Error al actualizar favorito", error);
       // En caso de error, revertimos el cambio visual
       setIsFavorite(!isFavorite);
-      console.error("Error al actualizar favorito:", error);
     }
   };
 

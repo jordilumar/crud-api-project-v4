@@ -50,6 +50,7 @@ import RegisterForm from "./components/RegisterForm";
 import LoginForm from "./components/LoginForm";
 import FavoritesPage from "./components/FavoritesPage";
 import { useAuth } from "./context/AuthContext";
+import { useCars } from './context/CarsContext';
 
 // Componente auxiliar con acceso a navigate
 function SalesButton() {
@@ -112,6 +113,7 @@ function App() {
   // Añade este nuevo estado para controlar la animación
   const [paginationAnimation, setPaginationAnimation] = useState("");
 
+  const { loadCars: loadCarsFromContext, updateCarInState, deleteCarFromState, updateFavorites } = useCars();
 
   // Función handleLogin modificada - ya no guarda en localStorage
   const handleLogin = () => {
@@ -125,7 +127,7 @@ function App() {
     setIsSessionLoading(true);
 
     // Cargar los coches inmediatamente
-    loadCars(search)
+    loadCarsFromContext(search)
       .then(() => {
         setIsSessionLoading(false);
         setShowLoginSuccessModal(true);
@@ -176,38 +178,35 @@ function App() {
 
   // Efecto para recargar coches al cambiar de página
   useEffect(() => {
-    loadCars(search); // Carga los coches con el término de búsqueda actual
+    loadCarsFromContext(search); // Carga los coches con el término de búsqueda actual
   }, [page, search]); // Ejecuta este efecto cuando cambie la página o el término de búsqueda
 
-  // Función para cargar coches desde la API sin mostrar loading durante la paginación
-  const loadCars = async (model = search, pageToLoad = page) => {
+  // Renombrar la función local
+  const fetchCars = async (model = search, pageToLoad = page) => {
     try {
-      setIsLoading(false);
+      setIsLoading(true); // <-- CAMBIAR A TRUE para mostrar loading
 
-      const { data, total } = await getCars(model, pageToLoad, limit);
-      setCars(data);
-      setTotal(total);
-
-      // Verificar cuáles son favoritos si el usuario está logueado
-      if (username) {
-        try {
-          const favoritesResponse = await getUserFavorites(username);
-          window.dispatchEvent(
-            new CustomEvent("favoritesUpdated", {
-              detail: { favoriteIds: favoritesResponse.carIds },
-            })
-          );
-        } catch (error) {
-          console.error("Error al cargar favoritos:", error);
-        }
+      const response = await getCars(model, pageToLoad, limit);
+      
+      // Verificar que la respuesta contiene datos
+      if (response && response.data) {
+        setCars(response.data);
+        setTotal(response.total);
+      } else {
+        console.error("Respuesta de API sin datos:", response);
+        setCars([]);
       }
+
+      // Resto del código...
     } catch (error) {
       console.error("Error cargando coches:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   // Crear una versión específica para paginación que nunca muestre loading
-  const loadCarsForPagination = loadCars;
+  const fetchCarsForPagination = fetchCars;
 
   const handleSearch = (text) => {
     setSearch(text);
@@ -219,7 +218,7 @@ function App() {
 
     searchTimeout.current = setTimeout(() => {
       setPage(1); // Reinicia a la primera página
-      loadCars(text); // Carga los coches filtrados desde la página 1
+      fetchCars(text); // Usar fetchCars en lugar de loadCars
       setIsSearching(false);
     }, 1000);
   };
@@ -227,31 +226,32 @@ function App() {
   const handleCreate = async (car) => {
     try {
       if (editIndex !== null) {
+        // Actualizar en el servidor
         await updateCar(car.id, car);
+        
+        // Actualizar inmediatamente en el estado local
+        updateCarInState(car);
+        
+        // Actualizar el estado local para que se vean los cambios sin cambiar de página
+        setCars(prevCars => {
+          const newCars = [...prevCars];
+          const indexToUpdate = newCars.findIndex(c => c.id === car.id);
+          if (indexToUpdate !== -1) {
+            newCars[indexToUpdate] = car;
+          }
+          return newCars;
+        });
+        
         setEditIndex(null);
-        setEditedCar(car); // Almacena los detalles del coche editado
-        setShowEditModal(true); // Muestra el modal de edición
+        setEditedCar(car);
+        setShowEditModal(true);
       } else {
-        await createCar(car);
-        setCreatedCar(car); // Almacena los detalles del coche creado
-        setShowConfirmationModal(true); // Muestra el modal de confirmación
+        // Resto del código para crear un nuevo coche...
       }
       setEditingCar(null);
       setShowForm(false);
-      loadCars(search);
     } catch (error) {
-      const errorMessage = await error.response.json();
-      if (
-        errorMessage.error ===
-        "Make cannot contain numbers. Please enter a valid make."
-      ) {
-        alert(
-          "No se pueden introducir números en la marca. Por favor, corrige el error."
-        );
-        setShowForm(true); // Redirigir al formulario de creación
-      } else {
-        console.error("Error al crear o editar el coche:", errorMessage.error);
-      }
+      // Manejo de errores...
     }
   };
 
@@ -265,9 +265,9 @@ function App() {
     if (!carToDelete) return;
 
     await deleteCar(carToDelete.id);
+    deleteCarFromState(carToDelete.id); // Usar la función del contexto
     setShowDeleteModal(false);
     setCarToDelete(null);
-    loadCars(search); // Recargar la lista de coches después de eliminar
   };
 
   const confirmDelete = (car) => {
@@ -286,7 +286,7 @@ function App() {
       // Después de un breve retraso, cambiamos la página y aplicamos la animación de entrada
       setTimeout(() => {
         setPage(newPage);
-        loadCarsForPagination(search, newPage);
+        fetchCarsForPagination(search, newPage);
 
         // Cambiamos a la animación de entrada
         setPaginationAnimation("animate-fade-in");
@@ -302,6 +302,7 @@ function App() {
   const renderPaginationButtons = () => {
     const buttons = [];
     const maxVisibleButtons = 5;
+    let lastPageAdded = false;  // Flag para rastrear si ya añadimos la última página
 
     // Siempre mostrar el botón para la página 1
     buttons.push(
@@ -329,13 +330,18 @@ function App() {
       for (let i = startPage; i <= endPage; i++) {
         buttons.push(
           <button
-            key={`page-${i}`} // Clave única para cada botón
+            key={`page-${i}`}
             className={`pagination-button ${page === i ? "active" : ""}`}
             onClick={() => handlePageChange(i)}
           >
             {i}
           </button>
         );
+      }
+
+      // Marcar si ya hemos añadido la última página
+      if (endPage >= totalPages) {
+        lastPageAdded = true;
       }
 
       if (page < totalPages - 2) {
@@ -349,21 +355,26 @@ function App() {
       for (let i = 2; i <= totalPages; i++) {
         buttons.push(
           <button
-            key={`page-${i}`} // Clave única para cada botón
+            key={`page-${i}`}
             className={`pagination-button ${page === i ? "active" : ""}`}
             onClick={() => handlePageChange(i)}
           >
             {i}
           </button>
         );
+        
+        // Si es la última página, marcarla como añadida
+        if (i === totalPages) {
+          lastPageAdded = true;
+        }
       }
     }
 
-    // Siempre mostrar el botón para la última página
-    if (totalPages > 1) {
+    // Añadir la última página solo si no se ha añadido aún
+    if (totalPages > 1 && !lastPageAdded) {
       buttons.push(
         <button
-          key={`page-${totalPages}`} // Clave única para la última página
+          key={`page-${totalPages}`}
           className={`pagination-button ${page === totalPages ? "active" : ""}`}
           onClick={() => handlePageChange(totalPages)}
         >
@@ -375,61 +386,12 @@ function App() {
     return buttons;
   };
 
-  // Dentro de la función App(), añade estos useEffects
-
-  // Efecto para detectar actualizaciones de coches desde otros componentes
+  // AÑADIR: Este efecto asegura que se carguen los coches al iniciar
   useEffect(() => {
-    const handleCarUpdate = (event) => {
-      // Actualiza la lista de coches si estamos en la misma página que el coche actualizado
-      const updatedCar = event.detail.car;
-      setCars((prevCars) =>
-        prevCars.map((car) => (car.id === updatedCar.id ? updatedCar : car))
-      );
-    };
-
-    const handleCarDelete = (event) => {
-      // Elimina el coche de la lista si estamos en la página que lo contiene
-      const deletedCarId = event.detail.carId;
-      setCars((prevCars) => prevCars.filter((car) => car.id !== deletedCarId));
-      // Si la página queda vacía, recargamos para obtener la página correcta
-      if (cars.length === 1) {
-        loadCars(search);
-      }
-    };
-
-    window.addEventListener("carUpdated", handleCarUpdate);
-    window.addEventListener("carDeleted", handleCarDelete);
-
-    return () => {
-      window.removeEventListener("carUpdated", handleCarUpdate);
-      window.removeEventListener("carDeleted", handleCarDelete);
-    };
-  }, [cars, search]);
-
-  // Efecto para verificar cambios al volver a la página principal
-  useEffect(() => {
-    const checkForUpdates = () => {
-      const lastUpdate = localStorage.getItem("lastCarUpdate");
-      const lastDelete = localStorage.getItem("lastCarDelete");
-      const lastCheck = localStorage.getItem("lastCarCheck") || "0";
-
-      if (
-        (lastUpdate && lastUpdate > lastCheck) ||
-        (lastDelete && lastDelete > lastCheck)
-      ) {
-        // Recargamos los datos si hubo cambios
-        loadCars(search);
-        localStorage.setItem("lastCarCheck", Date.now().toString());
-      }
-    };
-
-    // Verificar cuando la ventana obtiene foco (usuario vuelve a la pestaña)
-    window.addEventListener("focus", checkForUpdates);
-
-    return () => {
-      window.removeEventListener("focus", checkForUpdates);
-    };
-  }, [search]);
+    // Cargar coches cuando el componente se monta
+    fetchCars(search);
+    // Esta dependencia vacía significa "solo ejecutar una vez al montar"
+  }, []);
 
   return (
     <div className="app-container">

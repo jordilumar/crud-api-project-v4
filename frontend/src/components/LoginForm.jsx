@@ -1,22 +1,22 @@
 import { useState } from 'react';
-import { useAuth } from '../context/AuthContext'; // Importar contexto
+import { useAuth } from '../context/AuthContext';
 
 export default function LoginForm({ onLogin }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { login } = useAuth(); // Usar el hook de contexto
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     
     try {
-      // Crear el token Basic Auth (Base64 de username:password)
+      // Solo para el proceso de login inicial
       const basicAuth = btoa(`${username}:${password}`);
       
       const response = await fetch('http://localhost:5000/login', {
-        method: 'GET',
+        method: 'POST', // Cambiado a POST para mejor seguridad
         headers: { 
           'Authorization': `Basic ${basicAuth}`,
           'Accept': 'application/json'
@@ -33,11 +33,11 @@ export default function LoginForm({ onLogin }) {
       
       const data = await response.json();
       
-      // En lugar de almacenar en localStorage, usamos el contexto
-      login(username, data.token || 'basic_auth');
+      // Almacenar token JWT en lugar de Basic Auth
+      login(username, data.token);
       
-      // Pasamos los datos a la función de callback
-      onLogin(username, data.token || 'basic_auth');
+      // Pasar datos al callback
+      onLogin(username, data.token);
     } catch (error) {
       console.error('Error en el login:', error);
       setError(error.message);

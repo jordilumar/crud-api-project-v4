@@ -241,18 +241,10 @@ export default function SalesCharts() {
         <div className="d-flex gap-2">
           <button
             className="btn btn-outline-primary d-flex align-items-center shadow-sm hover-scale"
-            onClick={() => {
-              // Si vinimos desde favoritos, volvemos ahí
-              if (returnToFavorites) {
-                navigate('/favorites');
-              } else {
-                // Comportamiento por defecto
-                navigate('/');
-              }
-            }}
+            onClick={() => navigate(-1)}
           >
             <ArrowLeft className="me-2" size={18} />
-            {returnToFavorites ? 'Volver a favoritos' : 'Volver al garaje'}
+            Volver
           </button>
           <button
             className={`btn ${viewAnnualSales ? 'btn-outline-success' : 'btn-outline-primary'} d-flex align-items-center shadow-sm hover-scale`}

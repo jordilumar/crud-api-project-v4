@@ -12,11 +12,9 @@
     {
       "username": "lo@lo.com",
       "carIds": [
-        1,
         2,
         3,
-        17,
-        5
+        4
       ]
     },
     {
@@ -39,6 +37,10 @@
     },
     {
       "username": "jordi@gmail.com",
+      "carIds": []
+    },
+    {
+      "username": "gol@gol.com",
       "carIds": []
     }
   ]

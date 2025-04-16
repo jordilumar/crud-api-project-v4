@@ -6,7 +6,8 @@ from routes.auth import auth_bp
 from routes.favorites import favorites_bp
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
+CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True,
+     methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"])
 
 # Registrar blueprints
 app.register_blueprint(cars_bp)
