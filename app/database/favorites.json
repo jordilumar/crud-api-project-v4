@@ -42,6 +42,17 @@
     {
       "username": "gol@gol.com",
       "carIds": []
+    },
+    {
+      "username": "ju@ju.com",
+      "carIds": [
+        1,
+        5
+      ]
+    },
+    {
+      "username": "lul@lul.com",
+      "carIds": []
     }
   ]
 }

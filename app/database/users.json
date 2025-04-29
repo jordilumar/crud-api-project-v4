@@ -38,5 +38,13 @@
     {
         "username": "gol@gol.com",
         "password": "scrypt:32768:8:1$i6QKAGHFZ4PfukuS$931c5a163fd03018f493412edb559a3d547b09be59bfe17b3f0ccdd2d7e847a839a0f2fc040fbc24a564204b2d31682a12c7b913a354d03adf526a7647d4edcb"
+    },
+    {
+        "username": "ju@ju.com",
+        "password": "scrypt:32768:8:1$sHEfyTi5bV9hzr9t$089c21f85ba60bee0a438fb37e6de3b21e1c2e3355ee0f5d00bf7ebea2a4f2e2f36a55d7580f263a2316db688a250c4df70b6438e990d09a1f5f959f602a23c7"
+    },
+    {
+        "username": "lul@lul.com",
+        "password": "scrypt:32768:8:1$JJnQY0s2IXpWDMTn$409a661c2c8f6a2b6b01b2567722d1cb7850c2e5a29f2e78f607aa770c9ba77a26ffc3459c57cd0bf5d52b1b2438f5f3d3a5407fde7b7195e0b41a0d5c3d298f"
     }
 ]
