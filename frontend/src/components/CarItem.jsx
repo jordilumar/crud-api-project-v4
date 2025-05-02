@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Edit, Trash, BarChart, Heart, MessageSquare, Pencil } from 'lucide-react'; // Cambiado Star por Heart
+import { Edit, Trash, BarChart, Heart, MessageSquare, Pencil } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { addFavorite, removeFavorite, getCarReviews } from '../api';
 import { useAuth } from '../context/AuthContext';
@@ -9,14 +9,13 @@ import ReviewsModal from './modals/ReviewsModal';
 export default function CarItem({ car, index, onEdit, onDelete, onViewSales, onRemoveFavorite }) {
   const navigate = useNavigate();
   const location = useLocation();
-  const { username, token } = useAuth();
+  const { username, token, isAdmin } = useAuth(); // Asegúrate de que isAdmin se está pasando desde el contexto
   const { isCarFavorite, updateFavorites, favorites } = useCars();
   const [isFavorite, setIsFavorite] = useState(false);
   const [averageRating, setAverageRating] = useState(0);
   const [reviewCount, setReviewCount] = useState(0);
   const isInFavoritesPage = location.pathname === '/favorites';
   
-  // Nuevo estado para controlar la visibilidad del modal de reseñas
   const [showReviewsModal, setShowReviewsModal] = useState(false);
 
   useEffect(() => {
@@ -97,7 +96,7 @@ export default function CarItem({ car, index, onEdit, onDelete, onViewSales, onR
 
   return (
     <div className="card car-card position-relative">
-      {/* Botón de favoritos con icono de corazón */}
+      {/* Botón de favoritos con icono de corazón - Visible para todos los usuarios */}
       <button 
         className={`btn-favorite ${isFavorite ? 'favorite-active' : ''}`}
         onClick={toggleFavorite}
@@ -116,7 +115,7 @@ export default function CarItem({ car, index, onEdit, onDelete, onViewSales, onR
           {car.make} {car.model} <span className="car-year">{car.year}</span>
         </h5>
         
-        {/* Mostrar puntuación media con estrellas */}
+        {/* Mostrar puntuación media con estrellas - Visible para todos */}
         <div className="car-rating mb-2">
           <div className="stars-container">
             {renderStars(Math.round(averageRating))}
@@ -133,37 +132,47 @@ export default function CarItem({ car, index, onEdit, onDelete, onViewSales, onR
         </p>
 
         <div className="d-flex flex-column gap-2">
-          <div className="d-flex justify-content-between">
-            <button
-              className="btn btn-outline-orange d-flex align-items-center justify-content-center w-50"
-              onClick={() => onEdit(car, index)}
-            >
-              <Pencil size={14} className="me-1" />
-              Editar
-            </button>
-            <button className="btn btn-sm btn-outline-danger w-50" onClick={(e) => {
-              e.stopPropagation();
-              onDelete(car);
-            }}>
-              <Trash size={18} /> Borrar
-            </button>
-          </div>
-          <button
-            className="btn btn-sm btn-outline-success w-100"
-            onClick={(e) => {
-              e.stopPropagation();
-              if (onViewSales) {
-                onViewSales(car.model);
-              } else {
-                navigate(`/annual-sales/${car.model}`);
-              }
-            }}
-          >
-            <BarChart size={14} />
-            <span className="ms-1">Ver Ventas</span>
-          </button>
+          {/* Botones de edición y eliminación - Solo visibles para administradores */}
+          {isAdmin && (
+            <div className="d-flex justify-content-between">
+              <button
+                className="btn btn-outline-orange d-flex align-items-center justify-content-center w-50"
+                onClick={() => onEdit(car, index)}
+              >
+                <Pencil size={14} className="me-1" />
+                Editar
+              </button>
+              <button 
+                className="btn btn-sm btn-outline-danger w-50" 
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDelete(car);
+                }}
+              >
+                <Trash size={18} /> Borrar
+              </button>
+            </div>
+          )}
           
-          {/* Reemplazar el botón de navegación con un botón para abrir el modal */}
+          {/* Botón de ver ventas - Solo visible para administradores */}
+          {isAdmin && (
+            <button
+              className="btn btn-sm btn-outline-success w-100"
+              onClick={(e) => {
+                e.stopPropagation();
+                if (onViewSales) {
+                  onViewSales(car.model);
+                } else {
+                  navigate(`/annual-sales/${car.model}`);
+                }
+              }}
+            >
+              <BarChart size={14} />
+              <span className="ms-1">Ver Ventas</span>
+            </button>
+          )}
+          
+          {/* Botón de ver reseñas - Visible para todos los usuarios */}
           <button
             className="btn btn-sm btn-outline-info w-100"
             onClick={handleOpenReviewsModal}

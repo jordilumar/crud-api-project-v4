@@ -26,7 +26,7 @@ import BookingForm from '../components/BookingForm';
 
 export default function Home() {
   const navigate = useNavigate();
-  const { token, username, logout } = useAuth();
+  const { token, username, logout, isAdmin } = useAuth(); // Added isAdmin here
   const { cars, loading: carsLoading } = useCars();
   
   const { 
@@ -148,13 +148,16 @@ export default function Home() {
           onSearch={handleSearch}
           showForm={showForm}
           onShowForm={() => {
-            setEditingCar(null);
-            setShowForm(true);
+            // Verificar si el usuario es admin antes de mostrar el formulario
+            if (isAdmin) {
+              setEditingCar(null);
+              setShowForm(true);
+            }
           }}
           onHideForm={() => setShowForm(false)}
           onLogout={handleLogout}
-          onProfileClick={token ? openProfileModal : openAuthModal}
-          onNavigateToSales={() => navigate("/annual-sales")}
+          onProfileClick={openProfileModal}
+          onNavigateToSales={isAdmin ? () => navigate('/annual-sales') : null}
           onNavigateToBookings={handleNavigateToBookings}
         />
       ) : (

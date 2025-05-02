@@ -33,10 +33,35 @@ export function AuthProvider({ children }) {
     setIsAdmin(false);
   };
 
+  // Función para decodificar el token JWT
+  const decodeToken = (token) => {
+    if (!token) return null;
+    
+    try {
+      // El token JWT tiene 3 partes separadas por puntos: header.payload.signature
+      const payload = token.split('.')[1];
+      // Decodificar el payload de base64
+      return JSON.parse(atob(payload));
+    } catch (error) {
+      console.error("Error decodificando token:", error);
+      return null;
+    }
+  };
+
+  // Determinar si el usuario es admin
+  const checkIfAdmin = (user) => {
+    if (!user) return false;
+    return user.isAdmin === true;
+  };
+
+  // Decodificar el token actual
+  const decodedUser = token ? decodeToken(token) : null;
+
   const value = {
     token,
     username,
-    isAdmin,
+    isAuthenticated: !!token,
+    isAdmin: isAdmin || (decodedUser && checkIfAdmin(decodedUser)),
     login,
     logout,
   };
