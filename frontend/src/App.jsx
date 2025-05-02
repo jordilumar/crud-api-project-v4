@@ -1,11 +1,14 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import SalesCharts from "./pages/SalesCharts";
+import AnnualSalesCharts from "./pages/SalesCharts";
 import FavoritesPage from "./components/FavoritesPage";
 import Home from "./pages/Home";
 import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
-import { useAuth } from "./context/AuthContext";
+import CarDetail from './pages/CarDetail';
+import { useAuth, AuthProvider } from "./context/AuthContext";
+import { CarsProvider } from './context/CarsContext';
 
 // Importaciones de CSS
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -24,28 +27,35 @@ function App() {
   const { token } = useAuth();
 
   return (
-    <div className="app-container">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/annual-sales/:model?" element={<SalesCharts />} />
-        <Route path="/favorites" element={<FavoritesPage />} />
-        <Route
-          path="/login"
-          element={
-            <div>
-              {!token ? (
-                <>
-                  <LoginForm onLogin={() => {}} />
-                  <RegisterForm onRegister={() => {}} />
-                </>
-              ) : (
-                <div>Bienvenido a la aplicación</div>
-              )}
-            </div>
-          }
-        />
-      </Routes>
-    </div>
+    <AuthProvider>
+      <CarsProvider>
+        <div className="app-container">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/sales/:model" element={<SalesCharts />} />
+            <Route path="/annual-sales" element={<AnnualSalesCharts />} />
+            <Route path="/annual-sales/:model" element={<AnnualSalesCharts />} />
+            <Route path="/favorites" element={<FavoritesPage />} />
+            <Route path="/cars/:carId" element={<CarDetail />} />
+            <Route
+              path="/login"
+              element={
+                <div>
+                  {!token ? (
+                    <>
+                      <LoginForm onLogin={() => {}} />
+                      <RegisterForm onRegister={() => {}} />
+                    </>
+                  ) : (
+                    <div>Bienvenido a la aplicación</div>
+                  )}
+                </div>
+              }
+            />
+          </Routes>
+        </div>
+      </CarsProvider>
+    </AuthProvider>
   );
 }
 

@@ -6,6 +6,20 @@
     padding-bottom: 3.5rem; /* espacio reservado para los botones */
 }
 
+/* Asegurar que el cuerpo de la tarjeta utilice todo el espacio disponible */
+.car-card .card-body {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding-bottom: 1rem;
+}
+
+/* Contenedor de botones con mejor estructura */
+.car-card .d-flex.flex-column.gap-2 {
+    margin-top: auto;
+    width: 100%;
+}
+
 .card .d-flex {
     margin-top: auto;
     display: flex;
@@ -54,6 +68,31 @@
 .card .btn-outline-success {
     width: 100%; /* Asegura que el botón "Ver Ventas" ocupe todo el ancho */
     margin-top: 0.5rem; /* Espaciado superior para separar de los otros botones */
+}
+
+/* Estilos específicos para botones dentro de las tarjetas */
+.car-card .btn {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0.375rem 0.5rem;
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Íconos dentro de los botones */
+.car-card .btn svg {
+    flex-shrink: 0;
+    margin-right: 0.25rem;
+    font-size: 14px;
+}
+
+/* Botón de Ver reseñas */
+.car-card .btn-outline-info {
+    width: 100%;
+    margin-top: 0.5rem;
 }
 
 

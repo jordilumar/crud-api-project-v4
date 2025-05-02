@@ -88,6 +88,14 @@ def create_car():
     write_db(cars)
     return jsonify(new_car), 201
 
+@cars_bp.route('/cars/<int:car_id>', methods=['GET'])
+def get_car(car_id):
+    cars = read_db()
+    car = next((car for car in cars if car['id'] == car_id), None)
+    if not car:
+        return jsonify({'error': 'Car not found'}), 404
+    return jsonify(car)
+
 @cars_bp.route('/cars/<int:car_id>', methods=['PUT'])
 def update_car(car_id):
     updated_car = request.json

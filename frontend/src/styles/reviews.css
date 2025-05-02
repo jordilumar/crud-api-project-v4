@@ -1,0 +1,70 @@
+/* Estilos para reseñas */
+.reviews-container {
+  margin-top: 2rem;
+  padding: 1rem;
+}
+
+.review-form-container {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.review-item {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  padding: 15px;
+  transition: all 0.2s ease;
+}
+
+.review-item:hover {
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.star-rating {
+  display: flex;
+  align-items: center;
+}
+
+.review-form-container .star-rating {
+  cursor: pointer;
+}
+
+.rating-summary {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.review-text {
+  white-space: pre-line;
+}
+
+.reviews-tab {
+  padding: 1rem 0;
+}
+
+.reviews-list {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.stars-container .star {
+  color: #d4d4d4;
+  font-size: 18px;
+  margin-right: 2px;
+}
+
+.stars-container .star.filled {
+  color: #ffd700;
+}
+
+.car-details-tab .list-group-item {
+  border-left: none;
+  border-right: none;
+  padding: 10px 15px;
+}

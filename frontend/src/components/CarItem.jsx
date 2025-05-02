@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Star, Edit, Trash, BarChart, Pencil } from 'lucide-react';
-import { addFavorite, removeFavorite } from '../api';
-import { useAuth } from '../context/AuthContext'; // Añadir esta importación
+import { Star, Edit, Trash, BarChart, MessageSquare, Pencil } from 'lucide-react';
+import { addFavorite, removeFavorite, getCarReviews } from '../api';
+import { useAuth } from '../context/AuthContext';
 import { useCars } from '../context/CarsContext';
+import ReviewsModal from './modals/ReviewsModal';
 
 export default function CarItem({ car, index, onEdit, onDelete, onViewSales, onRemoveFavorite }) {
   const navigate = useNavigate();
@@ -11,60 +12,87 @@ export default function CarItem({ car, index, onEdit, onDelete, onViewSales, onR
   const { username, token } = useAuth();
   const { isCarFavorite, updateFavorites, favorites } = useCars();
   const [isFavorite, setIsFavorite] = useState(false);
+  const [averageRating, setAverageRating] = useState(0);
+  const [reviewCount, setReviewCount] = useState(0);
   const isInFavoritesPage = location.pathname === '/favorites';
+  
+  // Nuevo estado para controlar la visibilidad del modal de reseñas
+  const [showReviewsModal, setShowReviewsModal] = useState(false);
 
-  // Usar el estado del contexto en lugar de cargar por separado
   useEffect(() => {
     setIsFavorite(isCarFavorite(car.id));
+    
+    const loadReviews = async () => {
+      try {
+        const reviewsData = await getCarReviews(car.id);
+        if (reviewsData && Array.isArray(reviewsData)) {
+          if (reviewsData.length > 0) {
+            const totalRating = reviewsData.reduce((sum, review) => sum + review.rating, 0);
+            setAverageRating(totalRating / reviewsData.length);
+            setReviewCount(reviewsData.length);
+          }
+        } else if (reviewsData && reviewsData.reviews) {
+          setAverageRating(reviewsData.avgRating || 0);
+          setReviewCount(reviewsData.total || 0);
+        }
+      } catch (error) {
+        console.error("Error al cargar reseñas:", error);
+      }
+    };
+    
+    loadReviews();
   }, [car.id, isCarFavorite]);
 
-  // Modificar toggleFavorite para usar el contexto
   const toggleFavorite = async (e) => {
     e.stopPropagation();
-    e.preventDefault();
     
-    // Si no hay usuario logeado, mostramos un mensaje
-    if (!username) {
-      alert('Debes iniciar sesión para guardar favoritos');
+    if (!token) {
+      alert("Debes iniciar sesión para añadir favoritos");
       return;
     }
-    
+
     try {
-      // Cambiar de manera optimista el estado local para mejorar UX
-      const newState = !isFavorite;
-      setIsFavorite(newState);
-      
-      // Enviar la actualización al servidor
-      if (newState) {
-        const result = await addFavorite(car.id, token);
-        if (result.success) {
-          // Actualizar el contexto global después de añadir el favorito
-          updateFavorites([...favorites, car.id]);
-        } else {
-          setIsFavorite(false);
-          console.error("Error al añadir favorito");
-        }
-      } else {
-        // Si estamos en la página de favoritos, usar la función especial
-        if (isInFavoritesPage && onRemoveFavorite) {
-          onRemoveFavorite(car.id);
-          return; // No continuar con el código regular
-        }
-        
+      if (isFavorite) {
+        // Eliminar de favoritos
         const result = await removeFavorite(car.id, token);
         if (result.success) {
-          // Actualizar el contexto global después de eliminar el favorito
+          setIsFavorite(false);
           updateFavorites(favorites.filter(id => id !== car.id));
-        } else {
+          
+          if (isInFavoritesPage && onRemoveFavorite) {
+            onRemoveFavorite(car.id);
+          }
+        }
+      } else {
+        // Añadir a favoritos
+        const result = await addFavorite(car.id, token);
+        if (result.success) {
           setIsFavorite(true);
-          console.error("Error al eliminar favorito");
+          updateFavorites([...favorites, car.id]);
         }
       }
     } catch (error) {
-      console.error("Error al actualizar favorito", error);
-      // En caso de error, revertimos el cambio visual
-      setIsFavorite(!isFavorite);
+      console.error("Error al cambiar favorito:", error);
     }
+  };
+
+  // Función para renderizar estrellas según la puntuación media
+  const renderStars = (rating) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <span key={i} className={`star ${i <= rating ? 'filled' : 'empty'}`}>
+          ★
+        </span>
+      );
+    }
+    return stars;
+  };
+
+  // Función para abrir el modal de reseñas
+  const handleOpenReviewsModal = (e) => {
+    e.stopPropagation();
+    setShowReviewsModal(true);
   };
 
   return (
@@ -87,36 +115,70 @@ export default function CarItem({ car, index, onEdit, onDelete, onViewSales, onR
         <h5 className="card-title">
           {car.make} {car.model} <span className="car-year">{car.year}</span>
         </h5>
+        
+        {/* Mostrar puntuación media con estrellas */}
+        <div className="car-rating mb-2">
+          <div className="stars-container">
+            {renderStars(Math.round(averageRating))}
+            <span className="rating-text ms-2">
+              {averageRating > 0 ? 
+                `${averageRating.toFixed(1)} (${reviewCount})` : 
+                'Sin reseñas'}
+            </span>
+          </div>
+        </div>
+        
         <p className="card-text features-preview">
           <strong>Características:</strong> {car.features?.join(', ')}
         </p>
 
         <div className="d-flex flex-column gap-2">
           <div className="d-flex justify-content-between">
-            <button className="btn btn-sm btn-outline-primary w-50" onClick={() => onEdit(car, index)}>
-              <Pencil size={18} />  Editar
+            <button className="btn btn-sm btn-outline-primary w-50" onClick={(e) => {
+              e.stopPropagation();
+              onEdit(car, index);
+            }}>
+              <Pencil size={18} /> Editar
             </button>
-            <button className="btn btn-sm btn-outline-danger w-50" onClick={() => onDelete(car)}>
+            <button className="btn btn-sm btn-outline-danger w-50" onClick={(e) => {
+              e.stopPropagation();
+              onDelete(car);
+            }}>
               <Trash size={18} /> Borrar
             </button>
           </div>
           <button
             className="btn btn-sm btn-outline-success w-100"
-            onClick={() => {
-              // Si nos pasaron una función específica para ver ventas, la usamos
+            onClick={(e) => {
+              e.stopPropagation();
               if (onViewSales) {
                 onViewSales(car.model);
               } else {
-                // Comportamiento por defecto (igual que antes)
                 navigate(`/annual-sales/${car.model}`);
               }
             }}
           >
-            <BarChart size={16} className="me-1" />
-            Ver Ventas
+            <BarChart size={14} />
+            <span className="ms-1">Ver Ventas</span>
+          </button>
+          
+          {/* Reemplazar el botón de navegación con un botón para abrir el modal */}
+          <button
+            className="btn btn-sm btn-outline-info w-100"
+            onClick={handleOpenReviewsModal}
+          >
+            <MessageSquare size={14} />
+            <span className="ms-1">Ver reseñas</span>
           </button>
         </div>
       </div>
+      
+      {/* Modal de reseñas */}
+      <ReviewsModal 
+        show={showReviewsModal} 
+        onHide={() => setShowReviewsModal(false)} 
+        carId={car.id}
+      />
     </div>
   );
 }

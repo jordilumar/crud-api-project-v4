@@ -46,5 +46,17 @@
     {
         "username": "lul@lul.com",
         "password": "scrypt:32768:8:1$JJnQY0s2IXpWDMTn$409a661c2c8f6a2b6b01b2567722d1cb7850c2e5a29f2e78f607aa770c9ba77a26ffc3459c57cd0bf5d52b1b2438f5f3d3a5407fde7b7195e0b41a0d5c3d298f"
+    },
+    {
+        "username": "kolo@kolo.com",
+        "password": "scrypt:32768:8:1$1LWIRmOcVLBu9X4H$8fad5966546ba9298ce1d0a456e93e2401237ae80e2809945512bc34548b4f2463ab267d25fe97095765877a6be030142fcfff5eb68c2055dfd2bedd05c2890d"
+    },
+    {
+        "username": "po@po.com",
+        "password": "scrypt:32768:8:1$61RZaNOkIjuVrMlJ$8ceca20814399bc733c98eaa74ec55dd9edd7822975a6c4b88c75473297c85e70f8a5aa71cbc1ae0ad25c5698790bfd7762c0a5809f8353d0884c564748a5fd8"
+    },
+    {
+        "username": "pu@pu.com",
+        "password": "scrypt:32768:8:1$pgefeFQJ1IQMrru0$30628b984ea5c7fd13e001d3dbb88b6dc6e45159f76f62015c8414045a46025c08eff8e77f8327f875abaaffcb7ff9d95a3d7088e0420dbffa24b5e96bd37819"
     }
 ]

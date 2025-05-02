@@ -95,3 +95,104 @@ export const removeFavorite = async (carId, token) => {
     return { success: false };
   }
 };
+
+export const getCar = async (carId) => {
+  try {
+    const response = await fetch(`http://localhost:5000/cars/${carId}`);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error(`Error al obtener coche #${carId}:`, error);
+    return null;
+  }
+};
+
+// Funciones para gestionar reseñas
+export const getReviews = async (carId) => {
+  try {
+    const response = await fetch(`http://localhost:5000/reviews/${carId}`);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error al obtener reseñas:", error);
+    return { reviews: [], avgRating: 0, total: 0 };
+  }
+};
+
+export const addReview = async (review, token) => {
+  try {
+    const response = await fetch(`http://localhost:5000/reviews`, {
+      method: 'POST',
+      headers: authHeaders(token),
+      body: JSON.stringify(review)
+    });
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error al añadir reseña:", error);
+    return { success: false };
+  }
+};
+
+export const updateReview = async (reviewId, review, token) => {
+  try {
+    const response = await fetch(`http://localhost:5000/reviews/${reviewId}`, {
+      method: 'PUT',
+      headers: authHeaders(token),
+      body: JSON.stringify(review)
+    });
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error al actualizar reseña:", error);
+    return { success: false };
+  }
+};
+
+export const deleteReview = async (reviewId, token) => {
+  try {
+    const response = await fetch(`http://localhost:5000/reviews/${reviewId}`, {
+      method: 'DELETE',
+      headers: authHeaders(token)
+    });
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error al eliminar reseña:", error);
+    return { success: false };
+  }
+};
+
+export const getCarAverageRating = async (carId) => {
+  try {
+    const response = await fetch(`http://localhost:5000/cars/${carId}/average-rating`);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error al obtener puntuación media:", error);
+    return { avgRating: 0, total: 0 };
+  }
+};
+
+// Uso alias para mantener compatibilidad con CarItem.jsx
+export const getCarReviews = async (carId) => {
+  try {
+    const data = await getReviews(carId);
+    return data.reviews || [];
+  } catch (error) {
+    console.error("Error al obtener reseñas del coche:", error);
+    return [];
+  }
+};
