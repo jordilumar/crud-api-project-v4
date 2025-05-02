@@ -86,7 +86,18 @@ def register():
     # Guardar en el archivo JSON
     save_users(users)
     
-    return jsonify({'message': 'Usuario registrado exitosamente'}), 201
+    # Generar token JWT (igual que en el login)
+    token_payload = {
+        'username': username,
+        'exp': datetime.utcnow() + timedelta(hours=24)
+    }
+    token = jwt.encode(token_payload, SECRET_KEY, algorithm='HS256')
+    
+    return jsonify({
+        'message': 'Usuario registrado exitosamente',
+        'token': token,
+        'username': username
+    }), 201
 
 @auth_bp.route('/login', methods=['POST'])
 def login():

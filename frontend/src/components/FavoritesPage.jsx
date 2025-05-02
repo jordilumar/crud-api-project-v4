@@ -42,7 +42,9 @@ export default function FavoritesPage() {
       
       // Ya no pasamos el username, solo el token
       const favoritesResponse = await getUserFavorites(token);
-      const favoriteIds = favoritesResponse.carIds;
+      
+      // Usar operador de nullish coalescing para garantizar un array
+      const favoriteIds = favoritesResponse?.carIds || [];
       
       if (favoriteIds.length === 0) {
         setFavorites([]);
@@ -132,44 +134,40 @@ export default function FavoritesPage() {
       // 1. Iniciar la animación
       setAnimatingCars(prev => ({ ...prev, [carId]: true }));
       
-      // 2. Hacer la llamada API inmediatamente (sin esperar)
-      const resultPromise = removeFavorite(carId, token);
+      // 2. Realizar la petición a la API
+      const result = await removeFavorite(carId, token);
       
-      // 3. Esperar el tiempo mínimo para la animación (en paralelo)
-      const animationPromise = new Promise(resolve => setTimeout(resolve, 400));
+      // 3. Importante: Actualizar el estado local INDEPENDIENTEMENTE del resultado
+      // Esperar a que termine la animación
+      await new Promise(resolve => setTimeout(resolve, 400));
       
-      // 4. Esperar a que ambas operaciones terminen
-      const [result] = await Promise.all([resultPromise, animationPromise]);
+      // 4. Actualizar el estado y eliminar el coche de la lista
+      setFavorites(prevFavs => prevFavs.filter(car => car.id !== carId));
       
-      if (result.success) {
-        // Actualizar el estado local
-        setFavorites(prevFavs => prevFavs.filter(car => car.id !== carId));
-        
-        // Actualizar el contexto global de favoritos
-        updateFavorites(globalFavorites.filter(id => id !== carId));
-        
-        // Limpiar estado de animación
-        setTimeout(() => {
-          setAnimatingCars(prev => {
-            const newState = { ...prev };
-            delete newState[carId];
-            return newState;
-          });
-        }, 100);
-      } else {
-        setAnimatingCars(prev => {
-          const newState = { ...prev };
-          delete newState[carId];
-          return newState;
-        });
+      // 5. Actualizar el contexto global
+      updateFavorites(globalFavorites.filter(id => id !== carId));
+      
+      // 6. Si hubo un error específico pero ya no queremos mostrar el coche, solo log
+      if (!result.success) {
+        console.log("Nota:", result.message);
       }
     } catch (error) {
       console.error("Error al eliminar favorito:", error);
+      // Revertir la animación en caso de error grave
       setAnimatingCars(prev => {
         const newState = { ...prev };
         delete newState[carId];
         return newState;
       });
+    } finally {
+      // Limpiar el estado de animación después de un tiempo
+      setTimeout(() => {
+        setAnimatingCars(prev => {
+          const newState = { ...prev };
+          delete newState[carId];
+          return newState;
+        });
+      }, 500); // Un poco más de tiempo que la animación
     }
   };
 

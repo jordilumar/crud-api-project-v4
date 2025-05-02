@@ -44,11 +44,16 @@ export default function RegisterForm({ onRegister }) {
       
       const data = await response.json();
       
-      // En lugar de solo notificar, también hacemos login aquí
-      login(username, data.token || 'basic_auth');
+      // Verificar si tenemos un token
+      if (!data.token) {
+        throw new Error('No se recibió un token de autenticación');
+      }
       
-      // Pasamos las credenciales al callback
-      onRegister(username, data.token || 'basic_auth');
+      // Iniciar sesión con el token recibido
+      login(username, data.token);
+      
+      // Pasar las credenciales al callback
+      onRegister(username, data.token);
     } catch (error) {
       console.error('Error en el registro:', error);
       setError(error.message);

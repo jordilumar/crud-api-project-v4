@@ -31,6 +31,14 @@
             "text": "Bastante bien no hagan caso a las criticas",
             "rating": 5,
             "date": "2025-05-02T08:39:22.665299"
+        },
+        {
+            "id": 6,
+            "car_id": 5,
+            "username": "pol@pol.com",
+            "text": "cvzxvcxz",
+            "rating": 1,
+            "date": "2025-05-02T09:13:24.052881"
         }
     ]
 }

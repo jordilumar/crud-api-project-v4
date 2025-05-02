@@ -60,6 +60,16 @@
         7,
         1
       ]
+    },
+    {
+      "username": "pol@pol.com",
+      "carIds": [
+        5
+      ]
+    },
+    {
+      "username": "ki@ki.com",
+      "carIds": []
     }
   ]
 }

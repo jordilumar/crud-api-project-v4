@@ -51,13 +51,29 @@ export const authHeaders = (token) => {
 // Funciones para gestionar favoritos - Ya no incluimos username en la URL
 export const getUserFavorites = async (token) => {
   try {
+    // Si no hay token, devolver un objeto con array vacío
+    if (!token) {
+      console.warn('No hay token para obtener favoritos');
+      return { carIds: [] };
+    }
+
     const response = await fetch(`http://localhost:5000/favorites`, {
+      method: 'GET',
       headers: authHeaders(token)
     });
+    
+    if (response.status === 401) {
+      console.warn('Sesión expirada o token inválido');
+      return { carIds: [] };
+    }
+    
     if (!response.ok) {
       throw new Error(`Error: ${response.status}`);
     }
-    return await response.json();
+    
+    const data = await response.json();
+    // Asegurarnos de que devolvemos un objeto con carIds como array
+    return { carIds: data.carIds || [] };
   } catch (error) {
     console.error("Error al obtener favoritos:", error);
     return { carIds: [] };

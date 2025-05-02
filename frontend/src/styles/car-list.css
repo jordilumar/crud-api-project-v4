@@ -100,3 +100,17 @@
 .car-card .btn-sm {
   margin-top: 0.25rem;
 }
+
+/* Añadir esta clase de animación si no existe */
+
+.car-item-container {
+  transition: all 0.4s ease-out;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.car-item-container.animate-fade-out {
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+}

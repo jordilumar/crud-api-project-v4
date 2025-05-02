@@ -58,5 +58,13 @@
     {
         "username": "pu@pu.com",
         "password": "scrypt:32768:8:1$pgefeFQJ1IQMrru0$30628b984ea5c7fd13e001d3dbb88b6dc6e45159f76f62015c8414045a46025c08eff8e77f8327f875abaaffcb7ff9d95a3d7088e0420dbffa24b5e96bd37819"
+    },
+    {
+        "username": "pol@pol.com",
+        "password": "scrypt:32768:8:1$UrFDesCB6Z6yiaOk$78fa356912fba9870ee0bc221c6faa8646603b437f1177d653ce9c2e5946434374b6daeb79fc04b81302d7b3f57828c4694da3be6f226342e8fb1c286fba29da"
+    },
+    {
+        "username": "ki@ki.com",
+        "password": "scrypt:32768:8:1$c2EMzEidCPYkOtw1$68140cff41e563ea0e63216a2b6709107d4dc0212d7e5b4c9b0e800f51faf7ded82be91f2f5ac19c0c4dfb4cf8ede021c30234727bf618b204d825011ee05af8"
     }
 ]
