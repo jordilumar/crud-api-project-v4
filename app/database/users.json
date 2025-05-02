@@ -1,70 +1,12 @@
 [
     {
-        "username": "kiolo@kiolo.com",
-        "password": "scrypt:32768:8:1$oXenfdbROuHfeGFm$679bf50e97356a2e6d81f0daf5f6cb77c91170264bb5e2ac1dd8b3dd6b1f2005c860c015b71fe4cdb15c61242ee60ee5057bf0cb8b75e7dcf17204d4ee8e3cff"
+        "username": "admin@admin.com",
+        "password": "scrypt:32768:8:1$eBLA7lgyUGp1RksE$e2e10d133f44e1443ba60322ea76140bf32b2c9077335626eb98c9cb868896147de53f1348f7de8109a54575f2733a0c2ca90e617826f0d1b5e2b183a26beca7",
+        "is_admin": true
     },
     {
-        "username": "j@j.com",
-        "password": "scrypt:32768:8:1$lUSEoKX0rszjvJFr$28777f96c4dbd63e396899637441175a1ecb8631b31297e97d0adf7dfbf6f5340bd1096a8bad3907fa5446c572ad2cc7cc3bbdbff4ed09ac73b9fa6251e7a1dd"
-    },
-    {
-        "username": "lo@lo.com",
-        "password": "scrypt:32768:8:1$evrjLMtLQ19ni7dQ$a317ee5821304089d66dcfba5def4b2efc5826b6803593aca8260b3cbff9fa84eff1cf1a79d4a169f394136d469fe0e26bebc0ba964ca839e1ed9415643d4173"
-    },
-    {
-        "username": "one@one.com",
-        "password": "scrypt:32768:8:1$1ceb8DIBgC38vSVg$7b935742279e400e8b4f2dd2b0b543f0699d19e7ba08175e4ec600085118be71b659bd28b91280b123c55096aea93330f5bc46ba86669a30060cc9b8b1bfffab"
-    },
-    {
-        "username": "jordi@jordi.com",
-        "password": "scrypt:32768:8:1$hQUnpiQS4PNzDdOD$1c8121f333abd6e32488250fe1eb261578946ec925a758edf408ac9352743cc92de5ec91cbe1a69e97e4b081a3196fd166157a31acc98e48b3bbc96e2517f88b"
-    },
-    {
-        "username": "ein@ein.com",
-        "password": "scrypt:32768:8:1$UhqF1XwYEZEncCK4$5dbb0bf4ed2c762c0207a547a0953ed529a22ab227da95c8e038ef989a05d91e10ff75107ceb40f148aaae6f42010aedf2b19a9b432ec082fb02c5e654f66d9c"
-    },
-    {
-        "username": "fdsafda@fadsf.com",
-        "password": "scrypt:32768:8:1$WNMtTd8pRuITg2Wr$000957bf2d2a689f05f7809c5de1c6654e5ef029b6aff3fa3da2cce43a5edb0c1f57e34ec6cef62b1a14620f9f23cb035ee99f3dbc5d3bbf93a047e744dbfedc"
-    },
-    {
-        "username": "jordi@gmail.com",
-        "password": "scrypt:32768:8:1$oPDX0weCtLdndyqJ$0ed719172f97d87abef930d743bf342963b0594dcd707284a7302b996e4c2f327118b503e949b69b63c3fda7e66fc6dce13e92f02498db3eca9d69bedfcfa0f7"
-    },
-    {
-        "username": "afro@gmail.com",
-        "password": "scrypt:32768:8:1$nxHfzoNwyQsRJRRL$151d6b0afcae159c6eae0d6959e5f8ec4c12319fa5e412147128ea65ec3b3c2ea5d2ee2a9f939d7195ee933e8c726ffa30112debf0c9d3dd38dabaefe1211171"
-    },
-    {
-        "username": "gol@gol.com",
-        "password": "scrypt:32768:8:1$i6QKAGHFZ4PfukuS$931c5a163fd03018f493412edb559a3d547b09be59bfe17b3f0ccdd2d7e847a839a0f2fc040fbc24a564204b2d31682a12c7b913a354d03adf526a7647d4edcb"
-    },
-    {
-        "username": "ju@ju.com",
-        "password": "scrypt:32768:8:1$sHEfyTi5bV9hzr9t$089c21f85ba60bee0a438fb37e6de3b21e1c2e3355ee0f5d00bf7ebea2a4f2e2f36a55d7580f263a2316db688a250c4df70b6438e990d09a1f5f959f602a23c7"
-    },
-    {
-        "username": "lul@lul.com",
-        "password": "scrypt:32768:8:1$JJnQY0s2IXpWDMTn$409a661c2c8f6a2b6b01b2567722d1cb7850c2e5a29f2e78f607aa770c9ba77a26ffc3459c57cd0bf5d52b1b2438f5f3d3a5407fde7b7195e0b41a0d5c3d298f"
-    },
-    {
-        "username": "kolo@kolo.com",
-        "password": "scrypt:32768:8:1$1LWIRmOcVLBu9X4H$8fad5966546ba9298ce1d0a456e93e2401237ae80e2809945512bc34548b4f2463ab267d25fe97095765877a6be030142fcfff5eb68c2055dfd2bedd05c2890d"
-    },
-    {
-        "username": "po@po.com",
-        "password": "scrypt:32768:8:1$61RZaNOkIjuVrMlJ$8ceca20814399bc733c98eaa74ec55dd9edd7822975a6c4b88c75473297c85e70f8a5aa71cbc1ae0ad25c5698790bfd7762c0a5809f8353d0884c564748a5fd8"
-    },
-    {
-        "username": "pu@pu.com",
-        "password": "scrypt:32768:8:1$pgefeFQJ1IQMrru0$30628b984ea5c7fd13e001d3dbb88b6dc6e45159f76f62015c8414045a46025c08eff8e77f8327f875abaaffcb7ff9d95a3d7088e0420dbffa24b5e96bd37819"
-    },
-    {
-        "username": "pol@pol.com",
-        "password": "scrypt:32768:8:1$UrFDesCB6Z6yiaOk$78fa356912fba9870ee0bc221c6faa8646603b437f1177d653ce9c2e5946434374b6daeb79fc04b81302d7b3f57828c4694da3be6f226342e8fb1c286fba29da"
-    },
-    {
-        "username": "ki@ki.com",
-        "password": "scrypt:32768:8:1$c2EMzEidCPYkOtw1$68140cff41e563ea0e63216a2b6709107d4dc0212d7e5b4c9b0e800f51faf7ded82be91f2f5ac19c0c4dfb4cf8ede021c30234727bf618b204d825011ee05af8"
+        "username": "yu@yu.com",
+        "password": "scrypt:32768:8:1$UeoGdkKlqn7Nv31k$4af6e05ed90a23b6ceb1ef03bfa58d1a5f99cf8d0c24c8d63d63da101de62fb24e7cde3206bd9bb9e98da7e2cc6fef80aaa83af6250419c5feed85578c2b29fe",
+        "is_admin": false
     }
 ]

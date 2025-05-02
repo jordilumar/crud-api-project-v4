@@ -233,7 +233,7 @@
 }
 
 .btn-favorite:hover {
-  background-color: rgba(255, 215, 0, 0.1);
+  background-color: rgba(255, 90, 95, 0.1); /* Nuevo color para hover */
   transform: scale(1.1);
 }
 
@@ -251,4 +251,42 @@
   100% {
     transform: scale(1);
   }
+}
+
+/* Botón naranja personalizado */
+.btn-orange {
+  background-color: #FF7F2A; /* Un naranja vibrante */
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-orange:hover {
+  background-color: #E67422; /* Naranja más oscuro al pasar el cursor */
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Versión outline del botón naranja para opciones alternativas */
+.btn-outline-orange {
+  border: 2px solid #FF7F2A;
+  color: #FF7F2A;
+  background-color: transparent;
+  transition: all 0.3s ease;
+  font-size: 0.875rem;
+  padding: 0.375rem 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-outline-orange:hover {
+  background-color: #FF7F2A;
+  color: white;
+}
+
+.btn-outline-orange:active {
+  background-color: #E67422;
+  color: white;
+  border-color: #E67422;
 }

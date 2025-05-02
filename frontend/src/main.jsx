@@ -11,7 +11,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Router>
       <AuthProvider>
-        <CarsProvider> {/* ¿Está presente? */}
+        <CarsProvider>
           <App />
         </CarsProvider>
       </AuthProvider>

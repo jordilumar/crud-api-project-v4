@@ -93,6 +93,12 @@
 .car-card .btn-outline-info {
     width: 100%;
     margin-top: 0.5rem;
+    border: solid 2px;
+}
+
+.car-card .btn-outline-info:hover {
+    color: white;
+    border-color: white;
 }
 
 

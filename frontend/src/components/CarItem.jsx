@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Edit, Trash, BarChart, Heart, MessageSquare, Pencil } from 'lucide-react'; // Cambiado Star por Heart
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Star, Edit, Trash, BarChart, MessageSquare, Pencil } from 'lucide-react';
 import { addFavorite, removeFavorite, getCarReviews } from '../api';
 import { useAuth } from '../context/AuthContext';
 import { useCars } from '../context/CarsContext';
@@ -97,17 +97,17 @@ export default function CarItem({ car, index, onEdit, onDelete, onViewSales, onR
 
   return (
     <div className="card car-card position-relative">
-      {/* Botón de favoritos */}
+      {/* Botón de favoritos con icono de corazón */}
       <button 
         className={`btn-favorite ${isFavorite ? 'favorite-active' : ''}`}
         onClick={toggleFavorite}
         aria-label={isFavorite ? "Quitar de favoritos" : "Añadir a favoritos"}
         title={isFavorite ? "Quitar de favoritos" : "Añadir a favoritos"}
       >
-        <Star 
+        <Heart 
           size={22} 
-          fill={isFavorite ? "#FFD700" : "none"} 
-          stroke={isFavorite ? "#FFD700" : "currentColor"} 
+          fill={isFavorite ? "#FF5A5F" : "none"} 
+          stroke={isFavorite ? "#FF5A5F" : "currentColor"} 
         />
       </button>
 
@@ -134,11 +134,12 @@ export default function CarItem({ car, index, onEdit, onDelete, onViewSales, onR
 
         <div className="d-flex flex-column gap-2">
           <div className="d-flex justify-content-between">
-            <button className="btn btn-sm btn-outline-primary w-50" onClick={(e) => {
-              e.stopPropagation();
-              onEdit(car, index);
-            }}>
-              <Pencil size={18} /> Editar
+            <button
+              className="btn btn-outline-orange d-flex align-items-center justify-content-center w-50"
+              onClick={() => onEdit(car, index)}
+            >
+              <Pencil size={14} className="me-1" />
+              Editar
             </button>
             <button className="btn btn-sm btn-outline-danger w-50" onClick={(e) => {
               e.stopPropagation();

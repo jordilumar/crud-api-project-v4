@@ -1,21 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Car, BarChart, User, LogOut, Star, Search, ArrowLeft } from 'lucide-react';
-import Dropdown from 'react-bootstrap/Dropdown';
-
-// Componente auxiliar con acceso a navigate
-export function SalesButton({ onClick }) {
-  return (
-    <button className="btn btn-success d-flex align-items-center" onClick={onClick}>
-      <BarChart className="me-2" size={20} />
-      Ventas
-    </button>
-  );
-}
+import { Search, User, LogOut, Car, Calendar, Heart, BarChart, Shield } from 'lucide-react';
+import { Dropdown } from 'react-bootstrap';
+import SalesButton from './SalesButton';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function Navbar({ 
-  token, 
-  username, 
+  token,
+  username,
   search, 
   showForm, 
   onSearch, 
@@ -23,103 +15,112 @@ export default function Navbar({
   onProfileClick, 
   onShowForm, 
   onHideForm,
-  onNavigateToSales
+  onNavigateToSales,
+  onNavigateToBookings
 }) {
+  const navigate = useNavigate();
+  const { isAdmin } = useAuth();
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top animate-slide-in-top">
       <div className="container-fluid px-4 d-flex justify-content-between align-items-center position-relative">
-        {/* Izquierda: Título + icono */}
+        {/* Logo y búsqueda */}
         <div className="d-flex align-items-center">
-          <Car className="me-2 text-primary" size={24} />
-          <span className="fw-bold text-primary fs-5">
+          <a className="navbar-brand text-primary d-flex align-items-center" href="/">
+            <Car className="me-2" />
             Tu Garaje Virtual
-          </span>
+          </a>
+          
+          <div className="search-bar ms-4">
+            <input
+              type="text"
+              className="form-control search-input"
+              placeholder="Buscar por modelo..."
+              value={search}
+              onChange={(e) => onSearch(e.target.value)}
+            />
+            <Search className="search-icon" />
+          </div>
         </div>
-
-        {/* Centro absoluto: Buscador (solo si hay sesión) */}
-        {token && !showForm && (
-          <form
-            className="search-bar-container"
-            style={{ width: "500px", margin: "0 auto" }}
-            onSubmit={e => e.preventDefault()}
-          >
-            <div className="input-group shadow-sm">
-              <span className="input-group-text bg-light">
-                <Search size={18} className="text-muted" />
-              </span>
-              <input
-                type="text"
-                className="form-control search-bar"
-                placeholder="Buscar por modelo..."
-                value={search}
-                onChange={(e) => onSearch(e.target.value)}
-              />
-            </div>
-          </form>
-        )}
 
         {/* Derecha: Botones dinámicos */}
         <div className="d-flex gap-2 animate-pop">
           {token && showForm ? (
             <button
-              className="btn btn-outline-secondary d-flex align-items-center"
+              className="btn btn-outline-primary btn-sm"
               onClick={onHideForm}
             >
-              <ArrowLeft className="me-2" />
+              <Search className="me-1" size={16} />
               Volver a búsqueda
             </button>
           ) : (
             token && (
               <>
+                {/* Solo mostrar estos botones si el usuario es admin */}
+                {isAdmin && (
+                  <button
+                    className="btn btn-orange d-flex align-items-center justify-content-center text-white"
+                    onClick={onShowForm}
+                  >
+                    <Car className="me-2" size={18} />
+                    Crea tu Coche
+                  </button>
+                )}
+                
+                {isAdmin && (
+                  <SalesButton onClick={onNavigateToSales} />
+                )}
+                
+                {/* El botón de reservas lo ve cualquier usuario */}
                 <button
-                  className="btn btn-primary d-flex align-items-center justify-content-center"
-                  onClick={onShowForm}
+                  className="btn btn-primary d-flex align-items-center text-white"
+                  onClick={onNavigateToBookings}
                 >
-                  Crea tu Coche
+                  <Calendar className="me-2" size={18} />
+                  Reservas
                 </button>
-                <SalesButton onClick={onNavigateToSales} />
               </>
             )
           )}
 
-          {/* Botón de perfil circular con menú desplegable (siempre visible) */}
-          <Dropdown align="end">
-            <Dropdown.Toggle
-              as="div"
-              className="btn-profile-circle-container"
-            >
-              <button
-                className="btn-profile-circle"
-                title={token ? "Mi Cuenta" : "Login / Registro"}
-              >
-                <User size={20} />
-              </button>
-            </Dropdown.Toggle>
-
-            {token ? (
-              <Dropdown.Menu>
+          {/* Perfil y Logout */}
+          {token && (
+            <Dropdown>
+              <Dropdown.Toggle variant="outline-secondary" id="dropdown-user">
+                <User size={18} />
+                <span className="ms-2">{username}</span>
+                {isAdmin && <Shield size={14} className="ms-1 text-primary" />}
+              </Dropdown.Toggle>
+              <Dropdown.Menu align="end">
                 <Dropdown.Item onClick={onProfileClick}>
-                  <User size={16} className="me-2" /> Ver Perfil
+                  <User className="me-2" size={16} />
+                  Perfil
                 </Dropdown.Item>
-                <Dropdown.Item as={Link} to="/favorites">
-                  <Star size={16} className="me-2" /> Favoritos
-                </Dropdown.Item>
+                
+                {/* Solo mostrar favoritos para usuarios normales */}
+                {!isAdmin && (
+                  <Dropdown.Item onClick={() => navigate('/favorites')}>
+                    <Heart className="me-2" size={16} fill="#FF5A5F" stroke="#FF5A5F" />
+                    Favoritos
+                  </Dropdown.Item>
+                )}
+                
+                {/* Solo mostrar admin panel para admins */}
+                {isAdmin && (
+                  <Dropdown.Item onClick={() => navigate('/admin/bookings')}>
+                    <Shield className="me-2" size={16} />
+                    Panel de Admin
+                  </Dropdown.Item>
+                )}
+                
                 <Dropdown.Divider />
-                <Dropdown.Item
-                  className="text-danger"
-                  onClick={onLogout}
-                >
-                  <LogOut size={16} className="me-2" /> Cerrar Sesión
+                <Dropdown.Item onClick={onLogout}>
+                  <LogOut className="me-2" size={16} />
+                  Cerrar Sesión
                 </Dropdown.Item>
               </Dropdown.Menu>
-            ) : (
-              <Dropdown.Menu>
-                <Dropdown.Item onClick={onProfileClick}>
-                  <User size={16} className="me-2" /> Login / Registro
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            )}
-          </Dropdown>
+            </Dropdown>
+          )}
         </div>
       </div>
     </nav>

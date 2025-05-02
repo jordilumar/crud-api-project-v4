@@ -85,7 +85,7 @@ export default function SalesCharts() {
             className={`btn ${!isViewingModel ? 'btn-outline-success' : 'btn-outline-primary'} shadow-sm hover-scale`}
             onClick={isViewingModel ? handleResetModel : () => setShowModal(true)}
           >
-            {isViewingModel ? 'Ventas Generales' : 'Ver Ventas por Modelo'}
+            {isViewingModel ? 'Ventas Generales' : 'Ventas por Modelo'}
           </button>
         </div>
       </div>

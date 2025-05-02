@@ -16,7 +16,7 @@ export default function LoginForm({ onLogin }) {
       const basicAuth = btoa(`${username}:${password}`);
       
       const response = await fetch('http://localhost:5000/login', {
-        method: 'POST', // Cambiado a POST para mejor seguridad
+        method: 'POST',
         headers: { 
           'Authorization': `Basic ${basicAuth}`,
           'Accept': 'application/json'
@@ -33,8 +33,8 @@ export default function LoginForm({ onLogin }) {
       
       const data = await response.json();
       
-      // Almacenar token JWT en lugar de Basic Auth
-      login(username, data.token);
+      // Almacenar token JWT y rol de usuario
+      login(username, data.token, data.is_admin);
       
       // Pasar datos al callback
       onLogin(username, data.token);

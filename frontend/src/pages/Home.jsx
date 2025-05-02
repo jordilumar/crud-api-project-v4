@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Car, BarChart, Star, User } from 'lucide-react';
+import { Car, BarChart, Star, User, Calendar } from 'lucide-react';
 import Button from 'react-bootstrap/Button';
 import Navbar from '../components/Navbar';
 import CarForm from '../components/CarForm';
-import CarList from '../components/CarList';
+import CarsList from '../components/CarList';
 import Pagination from '../components/Pagination';
 import useCarManagement from '../hooks/useCarManagement';
 import { useAuth } from '../context/AuthContext';
+import { useCars } from '../context/CarsContext';
 import { 
   LoginModal, 
   RegisterModal, 
@@ -21,13 +22,14 @@ import {
   CarCreationModal, 
   CarEditModal 
 } from '../components/modals/CarModals';
+import BookingForm from '../components/BookingForm';
 
 export default function Home() {
   const navigate = useNavigate();
   const { token, username, logout } = useAuth();
+  const { cars, loading: carsLoading } = useCars();
   
   const { 
-    cars, 
     search, 
     isLoading, 
     page, 
@@ -44,6 +46,7 @@ export default function Home() {
   const [editIndex, setEditIndex] = useState(null);
   const [isSessionLoading, setIsSessionLoading] = useState(false);
   const [animationClass, setAnimationClass] = useState("");
+  const [showBookingForm, setShowBookingForm] = useState(false);
 
   // Estados para modales
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -80,6 +83,8 @@ export default function Home() {
   const handleLogout = () => {
     logout();
     setShowLogoutModal(true);
+    // Force a re-render after logout
+    navigate('/');
   };
 
   // Manejadores para modales
@@ -126,30 +131,57 @@ export default function Home() {
     setShowDeleteModal(true);
   };
 
+  const handleNavigateToBookings = () => {
+    navigate('/bookings');
+  };
+
   const totalPages = Math.ceil(total / limit);
 
   return (
     <div className="app-container">
-      <Navbar 
-        token={token}
-        username={username}
-        search={search}
-        showForm={showForm}
-        onSearch={handleSearch}
-        onLogout={handleLogout}
-        onProfileClick={token ? openProfileModal : openAuthModal}
-        onShowForm={() => {
-          setEditingCar(null);
-          setShowForm(true);
-        }}
-        onHideForm={() => setShowForm(false)}
-        onNavigateToSales={() => navigate("/annual-sales")}
-      />
+      {/* Only render the Navbar if user is authenticated */}
+      {token ? (
+        <Navbar 
+          token={token}
+          username={username}
+          search={search}
+          onSearch={handleSearch}
+          showForm={showForm}
+          onShowForm={() => {
+            setEditingCar(null);
+            setShowForm(true);
+          }}
+          onHideForm={() => setShowForm(false)}
+          onLogout={handleLogout}
+          onProfileClick={token ? openProfileModal : openAuthModal}
+          onNavigateToSales={() => navigate("/annual-sales")}
+          onNavigateToBookings={handleNavigateToBookings}
+        />
+      ) : (
+        // Simple header for non-authenticated users
+        <div className="navbar navbar-light bg-white shadow-sm fixed-top animate-slide-in-top">
+          <div className="container-fluid px-4 d-flex justify-content-between align-items-center">
+            <a className="navbar-brand text-primary d-flex align-items-center" href="/">
+              <Car className="me-2" />
+              Tu Garaje Virtual
+            </a>
+          </div>
+        </div>
+      )}
 
       <div className={`content-container mt-5 pt-4 ${animationClass}`}>
+
         {token && showForm ? (
           <div className="form-container animate-bounce">
             <CarForm onSubmit={handleCreate} editingCar={editingCar} />
+          </div>
+        ) : token && showBookingForm ? (
+          <div className="form-container animate-bounce">
+            <BookingForm onBookingCreated={() => {
+              setTimeout(() => {
+                setShowBookingForm(false);
+              }, 3000);
+            }} />
           </div>
         ) : (
           <div className={`animate-fade-up ${animationClass}`}>
@@ -239,7 +271,7 @@ export default function Home() {
               </div>
             ) : (
               <>
-                <CarList
+                <CarsList
                   cars={cars}
                   onEdit={handleEdit}
                   onDelete={confirmDelete}
@@ -256,6 +288,7 @@ export default function Home() {
                 />
               </>
             )}
+
           </div>
         )}
       </div>
@@ -315,6 +348,17 @@ export default function Home() {
         onHide={() => setShowEditModal(false)}
         car={editedCar}
       />
+
+      {token && !showForm && !showBookingForm && (
+        <button 
+          className="floating-book-button"
+          onClick={() => setShowBookingForm(true)}
+          title="Reservar un coche"
+        >
+          <Calendar size={22} />
+            <span> Reservar</span>
+        </button>
+      )}
     </div>
   );
 }

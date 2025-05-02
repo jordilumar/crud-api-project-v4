@@ -57,6 +57,7 @@ def get_basic_auth_credentials():
     except Exception:
         return None, None
 
+# Añadir campo "is_admin" al registrar usuarios
 @auth_bp.route('/register', methods=['POST'])
 def register():
     # Obtener credenciales de la autenticación básica
@@ -80,15 +81,21 @@ def register():
     
     # Crear nuevo usuario con contraseña encriptada
     hashed_password = generate_password_hash(password)
-    new_user = {'username': username, 'password': hashed_password}
+    # Por defecto, los nuevos usuarios no son administradores
+    new_user = {
+        'username': username, 
+        'password': hashed_password,
+        'is_admin': False  # Añadimos este campo
+    }
     users.append(new_user)
     
     # Guardar en el archivo JSON
     save_users(users)
     
-    # Generar token JWT (igual que en el login)
+    # Generar token JWT incluyendo el rol de usuario
     token_payload = {
         'username': username,
+        'is_admin': False,  # Incluir el rol en el token
         'exp': datetime.utcnow() + timedelta(hours=24)
     }
     token = jwt.encode(token_payload, SECRET_KEY, algorithm='HS256')
@@ -96,7 +103,8 @@ def register():
     return jsonify({
         'message': 'Usuario registrado exitosamente',
         'token': token,
-        'username': username
+        'username': username,
+        'is_admin': False
     }), 201
 
 @auth_bp.route('/login', methods=['POST'])
@@ -115,16 +123,21 @@ def login():
     if not user or not check_password_hash(user['password'], password):
         return jsonify({'error': 'Usuario o contraseña inválidos'}), 401
     
-    # Generar token JWT
+    # Verificar si el usuario es admin (si no tiene el campo, asumimos False)
+    is_admin = user.get('is_admin', False)
+    
+    # Generar token JWT con información de rol
     token_payload = {
         'username': username,
+        'is_admin': is_admin,  # Incluir el rol en el token
         'exp': datetime.utcnow() + timedelta(hours=24)
     }
     token = jwt.encode(token_payload, SECRET_KEY, algorithm='HS256')
     
     return jsonify({
         'token': token,
-        'username': username
+        'username': username,
+        'is_admin': is_admin
     }), 200
 
 # Nueva función para verificar tokens JWT

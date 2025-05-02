@@ -153,3 +153,408 @@
 .animate-fade-in, .grid-reflow {
   animation: none !important;
 }
+
+/* Estilos para el sistema de reservas */
+.booking-form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.reservation-summary {
+  border-left: 4px solid #0d6efd;
+  padding: 15px;
+  background-color: #f0f7ff;
+}
+
+.my-bookings-container,
+.admin-bookings-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 20px 20px;
+}
+
+/* Mejora visual para las tarjetas de reservas */
+.my-bookings-container .card {
+  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.my-bookings-container .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.my-bookings-container .card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+/* Estilos para la tabla de admin */
+.admin-bookings-container .table {
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.admin-bookings-container .table-primary {
+  background-color: #e9f0fd;
+}
+
+.admin-bookings-container .table-hover tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Estilos mejorados para Mis Reservas - Diseño Responsive */
+
+/* Contenedor principal */
+.my-bookings-container {
+  max-width: 1400px; /* Aumentado de 1200px para aprovechar pantallas más grandes */
+  margin: 0 auto;
+  padding: 50px 60px; /* Padding más amplio */
+  background-color: rgba(255, 255, 255, 0.9); /* Fondo más opaco */
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); /* Sombra más pronunciada */
+  min-height: 500px; /* Altura mínima para contenido escaso */
+  min-height: 600px; /* Ensures consistent height even when loading */
+  min-width: 80%;    /* Ensures consistent width */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cabecera con título y botón de volver */
+.my-bookings-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+  position: relative;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e9f0fd;
+}
+
+.my-bookings-header h2 {
+  font-size: 36px; /* Título más grande */
+  font-weight: 600;
+  color: #333;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.btn-back {
+  position: absolute;
+  left: 0;
+  display: flex;
+  align-items: center;
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(13, 110, 253, 0.3);
+}
+
+.btn-back:hover {
+  background-color: #0b5ed7;
+  transform: translateX(-3px);
+}
+
+.btn-back svg {
+  margin-right: 8px;
+}
+
+/* Grid de reservas - Diseño responsive */
+.bookings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas en pantallas grandes */
+  gap: 35px; /* Separación aumentada entre tarjetas */
+  margin-top: 40px;
+}
+
+/* Tarjeta de reserva */
+.booking-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 360px; /* Altura mínima definida para consistencia visual */
+  height: 100%;
+}
+
+.booking-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Sección de fecha */
+.booking-date {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  text-align: center;
+}
+
+.booking-date-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+/* Información del coche */
+.car-info {
+  padding: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.car-model {
+  font-size: 22px;
+  font-weight: 600;
+  color: #0d6efd;
+  margin-bottom: 5px;
+}
+
+.car-year {
+  display: inline-block;
+  background-color: #e9f0fd;
+  color: #0d6efd;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
+/* Secciones de recogida y devolución */
+.booking-times {
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.pickup-info, .return-info {
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.pickup-info {
+  background-color: #e9f0fd;
+  border-left: 4px solid #0d6efd;
+}
+
+.return-info {
+  background-color: #e6f8e6;
+  border-left: 4px solid #198754;
+}
+
+.time-label {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.time-label svg {
+  margin-right: 10px;
+}
+
+.time-value {
+  font-size: 16px;
+  color: #444;
+  margin-left: 30px;
+}
+
+/* Botón de cancelar reserva */
+.booking-card-footer {
+  padding: 20px;
+  background-color: #f8f9fa;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-cancel {
+  background-color: #fff;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+}
+
+.btn-cancel:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-cancel svg {
+  margin-right: 8px;
+}
+
+/* Mensaje cuando no hay reservas */
+.no-bookings {
+  text-align: center;
+  padding: 60px 0;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.no-bookings svg {
+  color: #0d6efd;
+  margin-bottom: 20px;
+  font-size: 48px;
+}
+
+.no-bookings-text {
+  font-size: 20px;
+  color: #666;
+}
+
+/* Estilos responsive para diferentes tamaños de pantalla */
+@media (max-width: 1400px) {
+  .bookings-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets grandes */
+  }
+}
+
+@media (max-width: 1200px) {
+  .bookings-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets grandes */
+  }
+}
+
+@media (max-width: 992px) {
+  .my-bookings-container {
+    padding: 30px;
+  }
+  
+  .my-bookings-header h2 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .bookings-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en tablets pequeñas */
+    gap: 20px;
+  }
+  
+  .booking-date-text {
+    font-size: 16px;
+  }
+  
+  .car-model {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .my-bookings-container {
+    padding: 20px 15px;
+  }
+  
+  .my-bookings-header h2 {
+    font-size: 24px;
+  }
+  
+  .bookings-grid {
+    grid-template-columns: 1fr; /* 1 columna en móviles */
+  }
+  
+  .time-label {
+    font-size: 14px;
+  }
+  
+  .time-value {
+    font-size: 14px;
+    margin-left: 25px;
+  }
+}
+
+/* Estilos responsive */
+@media (max-width: 768px) {
+  .my-bookings-container {
+    padding: 20px 15px;
+  }
+  
+  .my-bookings-header h2 {
+    font-size: 22px;
+  }
+  
+  .bookings-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Botón flotante de reservas */
+.floating-book-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0d6efd; /* Color azul primario de Bootstrap */
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 25px;
+  box-shadow: 0 4px 15px rgba(13, 110, 253, 0.4);
+  z-index: 1000;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.floating-book-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(13, 110, 253, 0.5);
+}
+
+/* Estilo para el spinner de carga */
+.loading-spinner-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  text-align: center;
+}
+
+.loading-spinner-container p {
+  margin-top: 15px;
+  color: #6c757d;
+  font-size: 16px;
+}
+
+.loading-spinner-container .spinner-border {
+  width: 3rem;
+  height: 3rem;
+  border-width: 0.25em;
+  color: #0d6efd;
+}
+
+/* Style the loading state specifically */
+.my-bookings-container .loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  height: 100%;
+  padding: 50px 0;
+}
+
+/* Make the spinner more prominent */
+.loading-container .spinner-border {
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1rem;
+}

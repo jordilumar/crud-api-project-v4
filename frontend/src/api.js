@@ -48,6 +48,26 @@ export const authHeaders = (token) => {
   return { 'Content-Type': 'application/json' };
 };
 
+// Función para decodificar el token JWT y extraer el ID de usuario
+export const getUserIdFromToken = (token) => {
+  if (!token) return null;
+  
+  try {
+    // El token JWT tiene 3 partes separadas por puntos: header.payload.signature
+    // Necesitamos decodificar la parte del payload (segunda parte)
+    const payload = token.split('.')[1];
+    
+    // Decodificar el payload de base64
+    const decodedPayload = JSON.parse(atob(payload));
+    
+    // Comprobar si el payload tiene un campo 'id' o 'sub' (subject) que normalmente contiene el ID
+    return decodedPayload.id || decodedPayload.sub || decodedPayload.username;
+  } catch (error) {
+    console.error("Error al decodificar token:", error);
+    return null;
+  }
+};
+
 // Funciones para gestionar favoritos - Ya no incluimos username en la URL
 export const getUserFavorites = async (token) => {
   try {
@@ -210,5 +230,126 @@ export const getCarReviews = async (carId) => {
   } catch (error) {
     console.error("Error al obtener reseñas del coche:", error);
     return [];
+  }
+};
+
+// Funciones para gestionar reservas
+export const getBookings = async (token) => {
+  try {
+    if (!token) {
+      console.error("No hay token disponible");
+      return [];
+    }
+    
+    console.log("Usando token:", token.substring(0, 15) + "...");
+    
+    // Modificar para usar el endpoint correcto
+    const response = await fetch('http://localhost:5000/user/bookings', {
+      method: 'GET',
+      headers: authHeaders(token)
+    });
+    
+    console.log("Respuesta del servidor:", response.status);
+    
+    if (response.status === 401) {
+      console.warn('Sesión expirada o token inválido');
+      return [];
+    }
+    
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    console.log("Datos recibidos:", data);
+    return data;
+  } catch (error) {
+    console.error("Error al obtener reservas:", error);
+    return [];
+  }
+};
+
+export const createBooking = async (bookingData, token) => {
+  try {
+    console.log("Datos de reserva a enviar:", bookingData);
+    console.log("Token disponible:", !!token);
+    
+    const formattedData = {
+      ...bookingData,
+      user_id: getUserIdFromToken(token), // Asegúrate de tener esta función
+      // Otras propiedades
+      start_date: bookingData.date + 'T' + bookingData.time + ':00',
+      end_date: bookingData.return_date + 'T' + bookingData.return_time + ':00',
+    };
+    
+    const response = await fetch('http://localhost:5000/bookings', {
+      method: 'POST',
+      headers: authHeaders(token),
+      body: JSON.stringify(formattedData)
+    });
+    
+    console.log("Estado de respuesta:", response.status);
+    
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => 
+        ({ error: "Error al procesar la respuesta" }));
+      console.error("Error detallado:", errorData);
+      throw new Error(errorData.error || `Error: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    console.log("Reserva creada:", data);
+    return data;
+  } catch (error) {
+    console.error("Error al crear reserva:", error);
+    throw error;
+  }
+};
+
+export const deleteBooking = async (bookingId, token) => {
+  try {
+    console.log(`Intentando eliminar reserva ${bookingId}...`);
+    
+    const response = await fetch(`http://localhost:5000/bookings/${bookingId}`, {
+      method: 'DELETE',
+      headers: authHeaders(token)
+    });
+    
+    console.log(`Respuesta del servidor: ${response.status}`);
+    
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({ error: "Error desconocido" }));
+      console.error("Error detallado:", errorData);
+      throw new Error(errorData.error || `Error: ${response.status}`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.error("Error al eliminar reserva:", error);
+    throw error;
+  }
+};
+
+// Solo para admins
+export const getAllBookings = async (token) => {
+  try {
+    const response = await fetch('http://localhost:5000/admin/bookings', {
+      method: 'GET',
+      headers: authHeaders(token)
+    });
+    
+    if (response.status === 403) {
+      console.warn('Acceso denegado: se requiere permiso de administrador');
+      return { error: 'Acceso denegado', bookings: [] };
+    }
+    
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    
+    return { bookings: await response.json() };
+  } catch (error) {
+    console.error("Error al obtener todas las reservas:", error);
+    return { error: error.message, bookings: [] };
   }
 };

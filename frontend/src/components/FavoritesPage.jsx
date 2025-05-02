@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronLeft, Star, Edit, Trash, Check, AlertCircle } from 'lucide-react';
+import { ChevronLeft, Heart, Edit, Trash, Check, AlertCircle } from 'lucide-react'; // Cambiado Star por Heart
 import { Modal, Button } from 'react-bootstrap';
 import { useAuth } from '../context/AuthContext'; // Añadir esta importación
 import { useCars } from '../context/CarsContext';
@@ -175,7 +175,7 @@ export default function FavoritesPage() {
     <div className="container py-4">
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2 className="mb-0">
-          <Star className="me-2" fill="#FFD700" stroke="#FFD700" /> 
+          <Heart className="me-2" fill="#FF5A5F" stroke="#FF5A5F" /> 
           Mis Coches Favoritos
         </h2>
         <button 

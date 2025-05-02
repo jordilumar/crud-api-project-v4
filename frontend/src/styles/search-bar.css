@@ -6,10 +6,10 @@
   align-items: center;
   margin-top: 1rem;
   width: 100%;
-  max-width: 600px;
+  max-width: none;
 }
 
-/* Input de búsqueda */
+/* Estilos mejorados para la barra de búsqueda */
 .search-bar {
   border: 2px solid #0d6efd; /* Borde azul */
   border-radius: 0 0.5rem 0.5rem 0; /* Bordes redondeados a la derecha */
@@ -17,6 +17,9 @@
   font-size: 1rem; /* Tamaño de fuente */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
   transition: all 0.3s ease-in-out;
+  position: relative;
+  width: 600px; /* Aumentado de 400px a 600px */
+  margin: 0 auto; /* Centrar la barra */
 }
 
 /* Placeholder del input */
@@ -50,10 +53,11 @@
 }
 
 .input-group {
-  max-width: 600px;
+  max-width: none;
   margin: 0 auto; /* Centrar horizontalmente */
   display: flex;
   justify-content: center;
+  width: auto;
 }
 
 .input-group .form-control {
@@ -67,4 +71,40 @@
 .input-group .form-control:focus {
   box-shadow: 0 0 8px rgba(13, 110, 253, 0.5); /* Sombra azul */
   border-color: #0d6efd;
+}
+
+.search-input {
+  height: 44px !important; /* Aumentado de 38px */
+  padding: 0.5rem 2.5rem 0.5rem 1rem !important; /* Padding ajustado */
+  font-size: 1rem !important; /* Fuente más grande */
+  border-radius: 6px !important; /* Bordes más redondeados */
+  border: 1px solid #dee2e6;
+  transition: all 0.2s ease;
+  width: 100%;
+  padding-right: 40px !important; /* Aumentar padding derecho */
+  padding-left: 4px !important;
+}
+
+/* Estilo para el placeholder más visible */
+.search-input::placeholder {
+  color: #adb5bd;
+  font-size: 1rem;
+}
+
+.search-input:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.2);
+}
+
+/* Ajuste de la posición del icono de búsqueda */
+.search-icon {
+  position: absolute;
+  right: 15px; /* Mantener la posición desde la derecha */
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  z-index: 3;
 }

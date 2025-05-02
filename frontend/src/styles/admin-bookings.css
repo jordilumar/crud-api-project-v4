@@ -1,0 +1,236 @@
+/* Estilos para la página de Administración de Reservas */
+
+/* Fondo con gradiente suave */
+body {
+  background: linear-gradient(135deg, #e6f0ff, #f0f7ff);
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Contenedor principal */
+.admin-bookings-container {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* Header con mejor organización */
+.admin-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+/* Título más prominente */
+.admin-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 auto;
+}
+
+/* Botón de volver rediseñado y más compacto */
+.btn-back {
+  position: absolute;
+  left: 0;
+  font-size: 14px;
+  padding: 6px 12px;
+  background-color: #f0f0f0;
+  color: #444;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.btn-back:hover {
+  background-color: #e6e6e6;
+  color: #333;
+}
+
+.btn-back svg {
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+}
+
+/* Barra de búsqueda mejorada */
+.search-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.search-container input {
+  width: 100%;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.search-container input:focus {
+  border-color: #0d6efd;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
+}
+
+.search-container input::placeholder {
+  color: #adb5bd;
+  font-style: italic;
+}
+
+.search-container .search-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+}
+
+/* Tabla de reservas */
+.bookings-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.bookings-table th {
+  background-color: #f0f7ff;
+  color: #0d6efd;
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.bookings-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #e9ecef;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.bookings-table tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Estados de las reservas */
+.badge {
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.badge-active {
+  background-color: #e6f4ea;
+  color: #198754;
+}
+
+.badge-completed {
+  background-color: #e8eaed;
+  color: #6c757d;
+}
+
+.badge-canceled {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+  border: 1px solid rgba(220, 53, 69, 0.2);
+}
+
+/* Iconos en la tabla */
+.car-icon, .user-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Mensaje de no resultados */
+.no-results {
+  background-color: #f0f7ff;
+  border-left: 4px solid #0d6efd;
+  padding: 15px;
+  margin: 15px 0;
+  color: #444;
+  border-radius: 4px;
+}
+
+/* Mensaje cuando no hay reservas */
+.no-bookings-message {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px dashed #dee2e6;
+  margin-top: 20px;
+}
+
+.no-bookings-message i {
+  font-size: 48px;
+  color: #adb5bd;
+  margin-bottom: 15px;
+}
+
+.no-bookings-message p {
+  color: #6c757d;
+  font-size: 16px;
+}
+
+/* Animaciones */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Diseño responsivo */
+@media (max-width: 992px) {
+  .admin-bookings-container {
+    padding: 20px;
+    margin: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .bookings-table {
+    display: block;
+    overflow-x: auto;
+  }
+  
+  .admin-header h2 {
+    font-size: 24px;
+  }
+  
+  .search-container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .btn-back {
+    position: relative;
+    margin-bottom: 15px;
+    align-self: flex-start;
+  }
+  
+  .admin-header {
+    margin-bottom: 20px;
+  }
+}
